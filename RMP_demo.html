@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #school-bus {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={your api key}"></script>
+    <script src="jquery/jquery-3.2.1.min.js"school-bus"></div>
+<script>
+    var schoolBus = (function () {
+        var stops, school, buses, startsClock, startsAnti, iconSize = new BMap.Size(30, 34), iconClock = new BMap.Icon("img/green-bus.png", iconSize), iconAnti = new BMap.Icon("img/red-bus.png", iconSize), SECONDS_IN_HOUR = 3600, SECONDS_IN_MINUTE = 60, intervalRun, intervalUpdate, notEnumerableProperty = function (value) {
+            return {
+                value: value,
+                writable: true,
+                enumerable: false,
+                configurable: true
+            }
+        }, updateSchool = function (callback) {
+            $.ajax({
+                url: "http://localhost:8080/Entity/U1b3f54782445b8/bus/School/1446599382578?userid=79015056659488",
+                contentType: "application/json",
+                type: "PUT",
+                data: JSON.stringify(school),
+                headers: {passwd: "test"},
+                success: callback
+            });
+        }, updateBusIndex = 0, updateBuses = function () {
+            var bus = buses[updateBusIndex % 4];
+            updateBusIndex++;
+            var data = JSON.stringify(bus);
+            $.ajax({
+                url: "http://localhost:8080/Entity/U1b3f54782445b8/bus/Bus/" + bus.id,
+                contentType: "application/json",
+                type: "PUT",
+                data: data,
+                error: function () {
+                    console.log(data);
+                }
+            });
+        }, drawBuses = function () {
+            buses.forEach(function (bus) {
+                bus.marker.setPosition(new BMap.Point(bus.longitude, bus.latitude));
+            });
+        }, runBuses = function (callback) {
+            var currentDate = new Date(), current = currentDate.getHours() * SECONDS_IN_HOUR + currentDate.getMinutes() * SECONDS_IN_MINUTE + currentDate.getSeconds(), num = startsClock.reduce(function (num, start) {
+                if (start < current && start + school.length * SECONDS_IN_MINUTE > current) {
+                    var bus = buses[num], i = 1;
+                    for (; i < stops.length; i++) {
+                        if (start + stops[i].extra * SECONDS_IN_MINUTE > current) {
+                            break;
+                        }
+                    }
+                    var timeBefore = start + stops[i - 1].extra * SECONDS_IN_MINUTE, timeAfter = start + (i == stops.length ? school.length : stops[i].extra) * SECONDS_IN_MINUTE, percentage = (current - timeBefore) / (timeAfter - timeBefore);
+                    buses[num].longitude = stops[i - 1].longitude + percentage * (stops[i == stops.length ? 0 : i].longitude - stops[i - 1].longitude);
+                    buses[num].latitude = stops[i - 1].latitude + percentage * (stops[i == stops.length ? 0 : i].latitude - stops[i - 1].latitude);
+                    num++;
+                }
+                return num;
+            }, 0);
+            for (; num < 2; num++) {
+                buses[num].longitude = stops[0].longitude;
+                buses[num].latitude = stops[0].latitude;
+            }
+            num = startsAnti.reduce(function (num, start) {
+                if (start < current && start + school.length * SECONDS_IN_MINUTE > current) {
+                    var bus = buses[num], i = stops.length - 1;
+                    for (; i >= 0; i--) {
+                        if (start + (school.length - stops[i].extra) * SECONDS_IN_MINUTE > current) {
+                            break;
+                        }
+                    }
+                    var timeBefore = start + (i == stops.length - 1 ? 0 : school.length - stops[i + 1].extra) * SECONDS_IN_MINUTE, timeAfter = start + (school.length - stops[i].extra) * SECONDS_IN_MINUTE, percentage = (current - timeBefore) / (timeAfter - timeBefore);
+                    buses[num].longitude = stops[i == stops.length - 1 ? 0 : i + 1].longitude + percentage * (stops[i].longitude - stops[i == stops.length - 1 ? 0 : i + 1].longitude);
+                    buses[num].latitude = stops[i == stops.length - 1 ? 0 : i + 1].latitude + percentage * (stops[i].latitude - stops[i == stops.length - 1 ? 0 : i + 1].latitude);
+                    num++;
+                }
+                return num;
+            }, num);
+            for (; num < 4; num++) {
+                buses[num].longitude = stops[0].longitude;
+                buses[num].latitude = stops[0].latitude;
+            }
+            drawBuses();
+            if (callback) {
+                callback();
+            }
+        }, initialModule = function (id) {
+            var map = new BMap.Map(id);
+            map.centerAndZoom(new BMap.Point(121.443235, 31.031303), 17);
+            $.ajax({
+                url: "http://localhost:8080/Entity/U1b3f54782445b8/bus/School/1446599382578", success: function (data) {
+                    school = data;
+                    stops = school.stops;
+                    stops.sort(function (a, b) {
+                        return a.extra - b.extra;
+                    });
+                    stops.forEach(function (stop) {
+                        var point = new BMap.Point(stop.longitude, stop.latitude);
+                        Object.defineProperty(stop, 'point', notEnumerableProperty(point));
+                        var marker = new BMap.Marker(point, {title: stop.name});
+                        map.addOverlay(marker);
+                    });
+                    var points = stops.map(function (stop) {
+                        return stop.point;
+                    });
+                    points.push(stops[0].point);
+                    var polyline = new BMap.Polyline(points, {
+                        strokeColor: "blue",
+                        strokeWeight: 4,
+                        strokeOpacity: 0.5,
+                    });
+                    map.addOverlay(polyline);
+                    var clockh = new Array(), clockm = new Array(), antih = new Array(), antim = new Array();
+                    for (var prop in school) {
+                        if (prop.indexOf("clockh") == 0) {
+                            clockh[Number(prop.substring("clockh".length)) - 1] = school[prop];
+                        } else if (prop.indexOf("clockm") == 0) {
+                            clockm[Number(prop.substring("clockm".length)) - 1] = school[prop];
+                        } else if (prop.indexOf("antih") == 0) {
+                            antih[Number(prop.substring("antih".length)) - 1] = school[prop];
+                        } else if (prop.indexOf("antim") == 0) {
+                            antim[Number(prop.substring("antim".length)) - 1] = school[prop];
+                        }
+                    }
+                    startsClock = clockh.map(function (hour, i) {
+                        return hour * SECONDS_IN_HOUR + clockm[i] * SECONDS_IN_MINUTE;
+                    });
+                    startsAnti = antih.map(function (hour, i) {
+                        return hour * SECONDS_IN_HOUR + antim[i] * SECONDS_IN_MINUTE;
+                    });
+                    school.buses = new Array();
+                    var counter = 0;
+                    for (var i = 0; i < 4; i++) {
+                        var bus = {
+                            type: "Bus",
+                            code: "交A0000" + (i + 1),
+                            longitude: stops[0].longitude,
+                            latitude: stops[0].latitude
+                        };
+                        $.ajax({
+                            url: "http://localhost:8080/Entity/U1b3f54782445b8/bus/Bus?userid=79015056659488",
+                            contentType: "application/json",
+                            type: "POST",
+                            data: JSON.stringify(bus),
+                            headers: {passwd: "test"},
+                            success: function (data) {
+                                var index = Number(data.code.substring("交A0000".length)) - 1;
+                                school.buses[index] = data;
+                                counter++;
+                                if (counter == 4) {
+                                    updateSchool(function () {
+                                        buses = school.buses;
+                                        buses.forEach(function (bus, idx) {
+                                            var marker = new BMap.Marker(new BMap.Point(bus.longitude, bus.latitude), {icon: idx < 2 ? iconClock : iconAnti});
+                                            map.addOverlay(marker);
+                                            Object.defineProperty(bus, "marker", notEnumerableProperty(marker));
+                                        });
+                                        drawBuses();
+                                        intervalRun = setInterval(runBuses, 500);
+                                        intervalUpdate = setInterval(function () {
+                                            runBuses(function () {
+                                                updateBuses();
+                                            });
+                                        }, 4000);
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }, removeModule = function () {
+            clearInterval(intervalRun);
+            clearInterval(intervalUpdate);
+            delete school.buses;
+            updateSchool(function () {
+                buses.forEach(function (bus, i) {
+                    $.ajax({
+                        url: "http://localhost:8080/Entity/U1b3f54782445b8/bus/Bus/" + bus.id,
+                        type: "DELETE",
+                        success: function () {
+                            delete buses[i];
+                        }
+                    });
+                });
+            });
+        };
+        return {initialModule: initialModule, removeModule: removeModule};
+    }());
+    $(function ($) {
+        schoolBus.initialModule('school-bus');
+        window.onbeforeunload = function () {
+            schoolBus.removeModule();
+            return window.confirm("关闭窗口?");
+        };
+    }(jQuery));
+</script>
+</body>
+</html>

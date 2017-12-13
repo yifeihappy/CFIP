@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>signup</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="../../css/dyf/signup.css" rel="stylesheet">
+		<script src="../../js/vue.js"></script>
+	</head>
+
+	<body>
+
+		<div class="container">
+			<form class="form-signup">
+				<h2 class="form-signup-heading">Please sign up</h2>
+				<label for="userName" class="sr-only">Name</label>
+				<input type="text" id="userName" class="form-control" placeholder="Student Name" required autofocus>
+				<label for="inputStudentNumber" class="sr-only">学号</label>
+				<input type="text" id="inputStudentNumber" class="form-control" placeholder="Student Number" required autofocus>
+				<label for="telephone" class="sr-only">手机号</label>
+				<input type="text" id="telephone" class="form-control" placeholder="Telephone Number" required>
+				<label for="inputPassword" class="sr-only">Password</label>
+				<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+				<label for="confirmPassword" class="sr-only">Confirm Password</label>
+				<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+				<div id="submit">
+					<button  @click="signUpClick" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+					<p>The button above has been clicked {{ counter1 }} times.</p>
+				</div>
+			</form>
+		</div>
+
+		<!-- /container -->
+		<script>
+			new Vue({
+				el:'#submit',
+				data:{
+					counter1:0
+				},
+				methods:{
+					signUpClick:function(){
+						this.counter1+=1;
+					}
+				}
+			})
+			
+		</script>
+	</body>
+
+</html>

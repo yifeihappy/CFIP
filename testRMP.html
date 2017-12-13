@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<script src="js/vue.js"></script>
+		<script src="jquery/jquery-3.2.1.min.js"></script>
+		<style type="text/css">
+			#btnPut,
+			#btnGet {
+				padding: 150px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="" class="container">
+			<div id="div-btn">
+				<div class="row">
+					<div class="col-lg-3 col-lg-offset-2">
+						<input type="button" v-on:click="addUser" value="PUT" id="btnPut" />
+					</div>
+					<div class="col-lg-3">
+						<input type="button" v-on:click="getUsers" value="Get" id="btnGet" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<p>click {{counter}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-lg-offset-2">
+						<input type="text" placeholder="userID" v-model="uID" />
+					</div>
+					<div class="col-lg-2">
+						<input type="button" value="getUserByID" @click="getUserById(uID)" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-lg-offset-2">
+						<input type="text" placeholder="userID" v-model="uID" />
+					</div>
+					<div class="col-lg-2">
+						<input type="button" value="updateUserByID" @click="updateUserById(uID)" />
+					</div>
+				</div>
+			</div>
+
+			<script>
+				//				var UserObject = {
+				//					username:"KangKang",
+				//					usertelephone:18819472412,
+				//					usernumber:"201330550221",
+				//					userpassword:"123456",
+				//					usertype:1
+				//				}
+				var UserObject = {
+					username: "Tom",
+					usertelephone: 15221193320,
+					usernumber: "117037910055",
+					userpassword: "123456",
+					usertype: 2
+				}
+				var dataJsonStr = JSON.stringify(UserObject);
+				new Vue({
+					el: '#div-btn',
+					data: {
+						counter: 0,
+						uID: "1512877109986"
+					},
+					methods: {
+						addUser: function() {
+							this.counter += 1;
+							$.ajax({
+								url: "http://115.159.81.122:8080/Entity/U3d616b41047817/CFIP/User/",
+								contentType: "application/json",
+								type: "POST",
+								data: dataJsonStr,
+								error: function() {
+									console.log(dataJsonStr);
+								},
+								success: function(data, state) {
+									console.log(state)
+								}
+
+							});
+						},
+						getUsers: function() {
+							this.counter += 1;
+							$.ajax({
+								type: "get",
+								url: "http://115.159.81.122:8080/Entity/U3d616b41047817/CFIP/User/",
+								async: true,
+								datatype: "json",
+								success: function(data, state) {
+									console.log(state);
+									console.log(data);
+								}
+							});
+						},
+						getUserById: function(userID) {
+							this.counter += 1;
+							$.ajax({
+								type: "get",
+								url: "http://115.159.81.122:8080/Entity/U3d616b41047817/CFIP/User/" + userID,
+								async: true,
+								datatype: "json",
+								success: function(data, state) {
+									console.log(state);
+									console.log(data);
+								}
+							});
+						},
+						updateUserById: function(userID) {
+							this.counter += 1;
+							$.ajax({
+								url: "http://115.159.81.122:8080/Entity/U3d616b41047817/CFIP/User/"+userID,
+								contentType: "application/json",
+								type: "PUT",
+								data: dataJsonStr,
+								error: function() {
+									console.log(dataJsonStr);
+								},
+								success: function(data, state) {
+									console.log(state);
+									console.log(data);
+								}
+
+							});
+						}
+
+					}
+				});
+			</script>
+	</body>
+
+</html>

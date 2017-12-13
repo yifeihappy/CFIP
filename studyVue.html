@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" id="btn2" v-bind:disabled="b" :value="t"/>
+					<div>{{t}}</div>
+			<div v-bind:style="{ 'color': activeColor, 'fontSize': fontSize + 'px' }">123d</div>
+		</div>
+
+
+<input type="button" id="button1" value="点我!">
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					b:false,
+					t:'button',
+					activeColor: 'red', 
+					fontSize: 30
+				}
+			})
+		</script>
+	</body>
+</html>
