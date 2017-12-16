@@ -215,14 +215,33 @@
 		<script>
 			$(document).ready(function() {
 				$("#addTopicSubmit").click(function() {
+					//									var UserInfo = {
+					//										title:"Wangzhe1",
+					//										authorname:"KangKang"
+					//									};
+					//									var dataJsonStr = JSON.stringify(UserInfo);
+					//									console.log(dataJsonStr);
+					//									$.ajax({
+					//										type: "POST",
+					//										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFPIA/Topic/",
+					//										contentType: "application/json",
+					//										data: dataJsonStr,
+					//										async: true,
+					//										error: function(data, state) {
+					//											//console.log(dataJsonStr);
+					//											console.log(data);
+					//											console.log(state);
+					//										},
+					//										success: function(data, state) {
+					//											console.log(state);
+					//											console.log(data);
+					//										}
+					//									});
+					//									return false;
+
 					var actObject = {
-						title:"Wangzhe",
-						//brief:"It is a good game,but it will waste you a lot of time.",
-						//publishtime:"2017-12-21T12:00",
-						authorname:"KangKang"
-						//authorid:1513417478927,
-						//commentnumber:10,
-						//topictype:"1"
+						title: "Wangzhe2",
+						authorname: "KangKang"
 					};
 					var dataJsonStr = JSON.stringify(actObject);
 					console.log(dataJsonStr);
@@ -243,6 +262,7 @@
 					});
 				});
 			});
+
 			//
 			//			$(document).ready(function() {
 			//				$('#addActSubmit').click(function() {
