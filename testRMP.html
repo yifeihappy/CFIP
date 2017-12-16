@@ -20,7 +20,7 @@
 			<div id="div-btn">
 				<div class="row">
 					<div class="col-lg-3 col-lg-offset-2">
-						<input type="button" v-on:click="addUser" value="PUT" id="btnPut" />
+						<input type="button" v-on:click="addUser" value="POST" id="btnPut" />
 					</div>
 					<div class="col-lg-3">
 						<input type="button" v-on:click="getUsers" value="Get" id="btnGet" />
@@ -59,9 +59,14 @@
 				//				}
 				var UserObject = {
 					username: "Tom",
-					usertelephone: 15221193320,
 					usernumber: "117037910055",
-					userpassword: "123456",
+					telephone: "15221193321",
+					email:"145577543@qq.com",
+					sex:"Female",
+					grade:1,
+					college:"CS",
+					major:"SE",
+					password: "123456",
 					usertype: 2
 				}
 				var dataJsonStr = JSON.stringify(UserObject);
@@ -79,8 +84,10 @@
 								contentType: "application/json",
 								type: "POST",
 								data: dataJsonStr,
-								error: function() {
-									console.log(dataJsonStr);
+								error: function(data,state) {
+									//console.log(dataJsonStr);
+									console.log(data);
+									console.log(state);
 								},
 								success: function(data, state) {
 									console.log(state)
@@ -128,7 +135,6 @@
 									console.log(state);
 									console.log(data);
 								}
-
 							});
 						}
 

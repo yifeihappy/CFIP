@@ -13,49 +13,197 @@
 
 		<!-- Bootstrap core CSS -->
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
-
 		<!-- Custom styles for this template -->
 		<link href="../../css/dyf/signup.css" rel="stylesheet">
-		<script src="../../js/vue.js"></script>
+		<script src="../../jquery/jquery-3.2.1.min.js"></script>
+		<script src="../../js/dyf/user.js"></script>
 	</head>
-
 	<body>
-
 		<div class="container">
 			<form class="form-signup">
 				<h2 class="form-signup-heading">Please sign up</h2>
-				<label for="userName" class="sr-only">Name</label>
-				<input type="text" id="userName" class="form-control" placeholder="Student Name" required autofocus>
-				<label for="inputStudentNumber" class="sr-only">学号</label>
-				<input type="text" id="inputStudentNumber" class="form-control" placeholder="Student Number" required autofocus>
-				<label for="telephone" class="sr-only">手机号</label>
-				<input type="text" id="telephone" class="form-control" placeholder="Telephone Number" required>
-				<label for="inputPassword" class="sr-only">Password</label>
-				<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-				<label for="confirmPassword" class="sr-only">Confirm Password</label>
-				<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
-				<div id="submit">
-					<button  @click="signUpClick" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-					<p>The button above has been clicked {{ counter1 }} times.</p>
+				<label for="studentName" class="sr-only">User Name</label>
+				<input type="text" id="studentName" class="form-control" placeholder="Student Name" required autofocus>
+				<label for="studentNumber" class="sr-only">Student Number</label>
+				<input type="text" id="studentNumber" class="form-control" placeholder="Student Number" required autofocus>
+				<label for="telephone" class="sr-only">Telephone Number</label>
+				<input type="text" id="telephone" class="form-control" placeholder="Telephone Number" required autofocus>
+				<label for="email" class="sr-only">email</label>
+				<input type="text" id="email" class="form-control" placeholder="Email" required autofocus>
+				<!--				<label for="sex" class="sr-only">sex</label>
+				<input type="text" id="sex" class="form-control" placeholder="Sex" required autofocus>-->
+				<div class="form-group">
+					<label class="sr-only">Sex</label>
+					<select class="form-control" id="sex" required>
+						<!-- ngRepeat: t in actTypeLists -->
+						<option value="Female" class="ng-binding ng-scope">
+							Female
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="Male" class="ng-binding ng-scope">
+							Male
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="Other" class="ng-binding ng-scope">
+							Other
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+					</select>
 				</div>
-			</form>
-		</div>
 
-		<!-- /container -->
-		<script>
-			new Vue({
-				el:'#submit',
-				data:{
-					counter1:0
-				},
-				methods:{
-					signUpClick:function(){
-						this.counter1+=1;
+				<!--				<label for="grade" class="sr-only">grade</label>
+				<input type="text" id="grade" class="form-control" placeholder="Telephone Number" required>-->
+				<div class="form-group">
+					<select class="form-control" id="grade" required="">
+						<option value="1">大一</option>
+						<option value="2">大二</option>
+						<option value="3">大三</option>
+						<option value="4">大四</option>
+						<option value="5">研一</option>
+						<option value="6">研二</option>
+						<option value="7">研三</option>
+						<option value="8">研四</option>
+						<option value="9">研五</option>
+					</select>
+				</div>
+				<!--				<label for="college" class="sr-only">college</label>
+				<input type="text" id="college" class="form-control" placeholder="College" required>-->
+				<!--				<label for="major" class="sr-only">major</label>
+				<input type="text" id="major" class="form-control" placeholder="Major" required>-->
+				<div class="form-group">
+					<label class="sr-only">College</label>
+					<select class="form-control" id="college" required>
+						<!-- ngRepeat: t in actTypeLists -->
+						<option value="Computer Science" class="ng-binding ng-scope">
+							Computer Science
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="Biomedical Sciences" class="ng-binding ng-scope">
+							Biomedical Sciences
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="College of Literature" class="ng-binding ng-scope">
+							College of Literature
+						</option>
+						<option value="College of Social Development" class="ng-binding ng-scope">
+							College of Social Development
+						</option>
+						<option value="College of Public Administration" class="ng-binding ng-scope">
+							College of Public Administration
+						</option>
+						<option value="College of Science Education" class="ng-binding ng-scope">
+							College of Science Education
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="College of Foreign Languages" class="ng-binding ng-scope">
+							College of Foreign Languages
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="College of mathematical Science" class="ng-binding ng-scope">
+							College of mathematical Science
+						</option>
+						<option value="College of Physics and Technology" class="ng-binding ng-scope">
+							College of Physics and Technology
+						</option>
+						<option value="College of Geographical Sciences" class="ng-binding ng-scope">
+							College of Geographical Sciences
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+					</select>
+					<div class="form-group">
+						<label class="sr-only">Major</label>
+						<select class="form-control" id="major" required>
+							<!-- ngRepeat: t in actTypeLists -->
+							<option value="Philosophy" class="ng-binding ng-scope">
+								Philosophy
+							</option>
+							<!-- end ngRepeat: t in actTypeLists -->
+							<option value="International Trade" class="ng-binding ng-scope">
+								International Trade
+							</option>
+							<!-- end ngRepeat: t in actTypeLists -->
+							<option value="Economics" class="ng-binding ng-scope">
+								Economics
+							</option>
+							<option value="Finance" class="ng-binding ng-scope">
+								Finance
+							</option>
+							<option value="Law" class="ng-binding ng-scope">
+								Law
+							</option>
+							<option value="Journalism" class="ng-binding ng-scope">
+								Journalism
+							</option>
+							<!-- end ngRepeat: t in actTypeLists -->
+							<option value="Chemistry" class="ng-binding ng-scope">
+								Chemistry
+							</option>
+							<!-- end ngRepeat: t in actTypeLists -->
+							<option value="Radio and television Art" class="ng-binding ng-scope">
+								Radio and television Art
+							</option>
+							<option value="Vehicle Engineering" class="ng-binding ng-scope">
+								Vehicle Engineering
+							</option>
+							<option value="Environmental Engineering" class="ng-binding ng-scope">
+								Environmental Engineering
+							</option>
+							<!-- end ngRepeat: t in actTypeLists -->
+						</select>
+					</div>
+					<label for="password" class="sr-only">Password</label>
+					<input type="password" id="password" class="form-control" placeholder="Password" required>
+					<label for="confirmPassword" class="sr-only">Confirm Password</label>
+					<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+					<div>
+						<button id="signUpSubmit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+					</div>
+			</form>
+			</div>
+			<!-- /container -->
+			<script>
+				$(document).ready(function() {
+					$('#signUpSubmit').click(function()
+						{
+						var UserInfo = {
+							studentname: $("#studentName").val(),
+							studentnumber: $("#studentNumber").val(),
+							telephone: $("#telephone").val(),
+							email: $("#email").val(),
+							sex: $("#sex").val(),
+							grade: $("#grade").val(),
+							college: $("#college").val(),
+							major: $("#major").val(),
+							password: $("#password").val()
+						};
+						console.log(UserInfo.studentname + "," + UserInfo.studentnumber + "," + UserInfo.telephone +
+							"," + UserInfo.email + "," + UserInfo.sex + "," + UserInfo.grade + "," + UserInfo.college +
+							"," + UserInfo.major + "," + UserInfo.password);
+
+						var dataJsonStr = JSON.stringify(UserInfo);
+						console.log(dataJsonStr);
+						$.ajax({
+							//url: "http://115.159.81.122:8080/Entity/U3d616b41047817/CFIPA/Student/",
+							url:"http://115.159.81.122:8080/Entity/U3d616b41047817/CFIP/Student/",
+							contentType: "application/json",
+							type: "POST",
+							data: dataJsonStr,
+							async: true,
+							error: function(data, state) {
+								//console.log(dataJsonStr);
+								console.log(data);
+								console.log(state);
+							},
+							success: function(data, state) {
+								console.log(state);
+								console.log(data);
+							}
+						});
+						return false;
 					}
-				}
-			})
-			
-		</script>
+					)
+				});
+			</script>
 	</body>
 
 </html>
