@@ -16,6 +16,8 @@
 
 		<!-- Custom styles for this template -->
 		<link href="../../css/dyf/index.css" rel="stylesheet">
+		
+		<script type="text/javascript" src="../../jquery/jquery-3.2.1.min.js" ></script>
 
 	</head>
 
@@ -191,30 +193,30 @@
 						<div class="col-md-11">
 							<form>
 								<div class="form-group">
-									<select id="actType" class="form-control" required>
-										<!-- ngRepeat: t in actTypeLists -->
+									<select id="denshengType" class="form-control" required>
+										<!-- ngRepeat: t in dengshenTypeLists -->
 										<option value="1">
 											心愿
 										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
+										<!-- end ngRepeat: t in dengshenTypeLists -->
 										<option value="2">
 											表白
 										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
+										<!-- end ngRepeat: t in dengshenTypeLists -->
 										<option value="3">
 											闲物
 										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
+										<!-- end ngRepeat: t in dengshenTypeLists -->
 									</select>
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="actName" placeholder="标题">
+									<input type="text" class="form-control" id="dengshenTitle" placeholder="标题">
 								</div>
 								<div class="form-group">
 									<label>发布内容</label>
-									<textarea class="form-control" rows="6" id="actBrief"></textarea>
+									<textarea class="form-control" rows="6" id="dengshenBrief"></textarea>
 								</div>
-								<button id="addActSubmit" class="btn btn-lg btn-primary btn-block">Submit</button>
+								<button id="adddengshenSubmit" class="btn btn-lg btn-primary btn-block">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -241,6 +243,71 @@
 			</div>
 
 		</div>
+
+		<script>
+			$(document).ready(function() {
+				$("#adddengshenSubmit").click(function() {
+
+//					var topicObject = {
+//						title: $("#dengshenTitle").val(),
+//						brief: $("#dengshenBrief").val(),
+//						publishtime: getFormatDate(),
+//						authorid: 1513417478927,
+//						commentnumber: 0,
+//						dengshentype: $("#dengshenType").val()
+//					}
+					
+					
+					var dengshenObject = {
+						title: "This is Title",
+						brief: "This is breif.",
+						publishtime: "2017-12-22T12:00",
+						userid: 1513417478927,
+						type: "1",
+						state: "0"
+					};
+					
+					
+					
+					
+					
+					
+					
+					
+					var dataJsonStr = JSON.stringify(dengshenObject);
+					console.log(dataJsonStr);
+					$.ajax({
+						type: "POST",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Dengshen/",
+						contentType: "application/json",
+						data: dataJsonStr,
+						async: true,
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						},
+						success: function(data, state) {
+							console.log(state);
+							console.log(data);
+						}
+					});
+					return false;
+					//console.log("async");
+
+				});
+			});
+
+			function getFormatDate() {
+				var nowDate = new Date();
+				var year = nowDate.getFullYear();
+				var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+				var date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+				var hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+				var minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+				//var second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+				return year + "-" + month + "-" + date + "T" + hour + ":" + minute;
+			}
+		</script>
 
 	</body>
 
