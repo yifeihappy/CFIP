@@ -178,55 +178,47 @@
 			<div class="row row-offcanvas row-offcanvas-right">
 				<div class="col-md-9">
 					<div class="row">
-						<span>
-							<img src="../../img/logo.png" width="66px" height="66px" />
-							<font size="6">
-								灯神社区
-							</font>
-						</span>
+						<span><img src="../../img/logo.png" width="66px" height="66px" /><font size="6">灯神社区-发布</font></span>
 						<div class="col-md-4 col-md-offset-10">
-							<a href="../../cfip/dengshen/add_dengshen.html"><br /><font size="4">发布</font></a>
-						</div>
-					</div>
-					<div class="row">
-						<ul class="nav nav-tabs">
-							<li role="presentation" class="active">
-								<a href="../../cfip/dengshen/xinyuanqiang.html">
-									<font size="3">心愿墙</font>
-								</a>
-							</li>
-							<li role="presentation">
-								<a href="../../cfip/dengshen/biaobaiqiang.html">
-									<font size="3">表白墙</font>
-								</a>
-							</li>
-							<li role="presentation">
-								<a href="../../cfip/dengshen/xianwudian.html">
-									<font size="3">闲物店</font>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="row">
-						<br />
-						<div class="media">
-							<div class="media-left media-middle">
-								<a href="#">
-									<!--连接到个人主页-->
-									<img class="media-object" src="..." alt="...">
-								</a>
-								<a href="#">
-									<!--连接到个人主页-->
-									心愿
-								</a>
-							</div>
-							<div class="media-body">
-								<h4 class="media-heading">Middle aligned media</h4> ...1234567
-							</div>
+							<a href="../../cfip/dengshen/xinyuanqiang.html"><br />
+								<font size="4">灯神社区</font>
+							</a>
 						</div>
 						<hr />
+						<br />
 					</div>
-					
+					<div class="row">
+						<div class="col-md-11">
+							<form>
+								<div class="form-group">
+									<select id="actType" class="form-control" required>
+										<!-- ngRepeat: t in actTypeLists -->
+										<option value="1">
+											心愿
+										</option>
+										<!-- end ngRepeat: t in actTypeLists -->
+										<option value="2">
+											表白
+										</option>
+										<!-- end ngRepeat: t in actTypeLists -->
+										<option value="3">
+											闲物
+										</option>
+										<!-- end ngRepeat: t in actTypeLists -->
+									</select>
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" id="actName" placeholder="标题">
+								</div>
+								<div class="form-group">
+									<label>发布内容</label>
+									<textarea class="form-control" rows="6" id="actBrief"></textarea>
+								</div>
+								<button id="addActSubmit" class="btn btn-lg btn-primary btn-block">Submit</button>
+							</form>
+						</div>
+					</div>
+
 				</div>
 
 				<div class="col-md-3  sidebar-offcanvas" id="sidebar">
