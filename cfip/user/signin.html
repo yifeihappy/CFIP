@@ -24,26 +24,95 @@
 
 		<div class="container">
 
-			<form class="form-signin" action="index.html">
+			<form class="form-signin">
 				<h2 class="form-signin-heading">Please sign in</h2>
-				<label for="studentNumber" class="sr-only">学号</label>
-				<input type="text" id="studentNumber" class="form-control" placeholder="Student Number" required autofocus>
+				<label for="userNumber" class="sr-only">学号</label>
+				<input type="text" id="userNumber" oninvalid="setCustomValidity('学号不能为空')" oninput="setCustomValidity('')" class="form-control" placeholder="User Number" required autofocus>
 				<label for="password" class="sr-only">Password</label>
-				<input type="password" id="password" class="form-control" placeholder="Password" required>
+				<input type="password" id="password" oninvalid="setCustomValidity('密码不能为空')" oninput="setCustomValidity('')" class="form-control" placeholder="Password" required>
 				<div class="checkbox">
 					<label>
-            			<input type="checkbox" value="remember-me"> Remember me</input>
+           				 <input type="radio" value="Student" name="userType" checked> Student
+          			</label>
+					<label>
+           				 <input type="radio" value="Teacher" name="userType"> Teacher
+          			</label>
+					<label>
+           				 <input type="radio" value="Admin" name="userType"> Admin
           			</label>
 				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="userSignIn()" >Sign in</button>
+				<div>
+					<label id="error" hidden=true><font color="red">用户名或密码错误</font></label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" id="submitBtn">Sign in</button>
 			</form>
 		</div>
 		<!-- /container -->
 		<script>
-/*			function userSignIn() {
-				console.log($("#password ").val());
-				console.log($("#studentNumber ").val());
-			}*/
+			$(document).ready(function() {
+				$("#submitBtn").click(function() {
+
+					if($("#userNumber").val() != "" && $("#password").val() != "") {
+						var userType = $("input:radio:checked").val();
+						var userArray;
+						var userURL;
+						switch(userType) {
+							case "Student":
+								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.studentnumber=" + $("#userNumber").val();
+								break;
+							case "Teacher":
+								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Teacher/?Teacher.teachernumber=" + $("#userNumber").val();
+								break;
+							case "Admin":
+								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Admin/?Admin.adminnumber=" + $("#userNumber").val(), userArray = getByAdminNumber($("#userNumber").val());
+								break;
+						}
+						var resultFlag = false;
+						$.ajax({
+							type: "get",
+							async: false,
+							url: userURL,
+							success: function(data, state) {
+								console.log(state);
+								console.log(data);
+								if(JSON.stringify(data) == "{}") {
+									resultFlag = false;
+								} else {
+									switch(userType) {
+										case "Student":
+											if($("#password").val() == data.Student[0].password) {
+												resultFlag = true;
+											}
+											break;
+										case "Teacher":
+											if($("#password").val() == data.Teacher[0].password) {
+												resultFlag = true;
+											}
+											break;
+										case "Admin":
+											if($("#password").val() == data.Admin[0].password) {
+												resultFlag = true;
+											}
+											break;
+									}
+								}
+							},
+							error: function(data, state) {
+								console.log(state);
+							}
+
+						});
+
+						if(resultFlag) {
+							console.log("T");							
+						} else {
+							$("#error").show();
+							return false;
+						}
+
+					}
+				});
+			});
 		</script>
 	</body>
 

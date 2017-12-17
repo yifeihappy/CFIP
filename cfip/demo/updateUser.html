@@ -151,10 +151,10 @@
 							<!-- end ngRepeat: t in actTypeLists -->
 						</select>
 					</div>
-					<label for="password" class="sr-only">Password</label>
+					<!--<label for="password" class="sr-only">Password</label>
 					<input type="password" id="password" class="form-control" placeholder="Password" required>
 					<label for="confirmPassword" class="sr-only">Confirm Password</label>
-					<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+					<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>-->
 					<div>
 						<button id="signUpSubmit" class="btn btn-lg btn-primary btn-block">Update</button>
 					</div>
@@ -162,6 +162,7 @@
 			</div>
 			<!-- /container -->
 			<script>
+				var pswd;
 				window.onload = function() {
 					$.ajax({
 						type: "get",
@@ -176,7 +177,8 @@
 							$("#studentNumber").val(data.studentnumber);
 							$("#telephone").val(data.telephone);
 							$("#email").val(data.email);
-							$("#password").val(data.password);
+							//$("#password").val(data.password);
+							pswd = data.password;
 							//下拉框选择原来的性别
 							for(var i = 0; i < document.getElementById("sex").options.length; i++) {
 								if(document.getElementById("sex").options[i].value == data.sex) {
@@ -226,7 +228,7 @@
 							grade: $("#grade").val(),
 							college: $("#college").val(),
 							major: $("#major").val(),
-							password: $("#password").val()
+							password: data.password
 						};
 						console.log(UserInfo.studentname + "," + UserInfo.studentnumber + "," + UserInfo.telephone +
 							"," + UserInfo.email + "," + UserInfo.sex + "," + UserInfo.grade + "," + UserInfo.college +

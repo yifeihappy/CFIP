@@ -245,115 +245,78 @@
 		<script>
 			$(document).ready(function() {
 				$("#addActSubmit").click(function() {
+					//					var actObject = {
+					//						actname: "Hip Hop Music",
+					//						actaddress:"JingJingTang",
+					//						userid:1513417478927,
+					//						actsponser:"KangKang",
+					//						acttype:"1",
+					//						actstart:"2017-12-22T12:00",
+					//						actend:"2017-12-22T17:00",
+					//						applystart:"2017-12-22T12:00",
+					//						applyend:"2017-12-17T12:00",
+					//						actbrief:"2017-12-21T12:00",
+					//						totalnumber:100,
+					//						participantnumber:1,
+					//						viewernumber:2
+					//					}
 					var actObject = {
-						actname: "Hip Hop Music",
-						actaddress:"JingJingTang",
-						userid:1513417478927,
-						actsponser:"KangKang",
-						acttype:"1",
-						actstart:"2017-12-22T12:00",
-						actend:"2017-12-22T17:00",
-						applystart:"2017-12-22T12:00",
-						applyend:"2017-12-17T12:00",
-						actbrief:"2017-12-21T12:00",
-						totalnumber:100,
-						participantnumber:1,
-						viewernumber:2
-					}
+						actname: $("#actName").val(),
+						actaddress: $("#actAddress").val(),
+						userid: 1513417478927,
+						actsponser: $("#actSponser").val(),
+						acttype: $("#actType").val(),
+						actstart: $("#actStart").val(),
+						actend: $("#actEnd").val(),
+						applystart: $("#applystart").val(),
+						applyend: $("#applyEnd").val(),
+						actbrief: $("#actBrief").val(),
+						totalnumber: parseInt($("#totalNumber").val()),
+						participantnumber: 0,
+						viewernumber: 0
+					};
 					var dataJsonStr = JSON.stringify(actObject);
-					console.log(dataJsonStr);
+					//console.log(dataJsonStr);
 					$.ajax({
-						type:"post",
-						url:"http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-						async:true,
-						data:dataJsonStr,
-						contentType:"application/json",
-						success:function(data, state){
+						type: "post",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
+						async: false,
+						data: dataJsonStr,
+						contentType: "application/json",
+						success: function(data, state) {
 							console.log(state);
 							console.log(data);
+							console.log(data.id);
+							
+							var files = $(":file")[0].files;
+							var formData = new FormData();
+							formData.append("file", files[0]);
+							$.ajax({
+								//http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + data.id,
+								type: "POST",
+								data: formData,
+								async: false,
+								contentType: false,
+								processData: false,
+								error: function(dataImg, stateImg) {
+									console.log(stateImg);
+									console.log(dataImg);
+									//return false;
+								},
+								success: function(dataImg, stateImg) {
+									console.log(stateImg);
+									console.log(dataImg);
+								}
+							});
 						},
-						error:function(data, state){
+						error: function(data, state) {
 							console.log(data);
 							console.log(state);
 						}
 					});
 				});
 			});
-//
-//			$(document).ready(function() {
-//				$('#addActSubmit').click(function() {
-//					var actObject = {
-//						actname: "Party",
-//						actaddress: "JinJinTang",
-//						userid: 1513403672380,
-//						actsponser: "DaMing1",
-//						acttype: "1",
-//						actstart: "2017-12-22T12:00",
-//						actend: "2017-12-22T17:00",
-//						applystart: "2017-12-16T00:00",
-//						applyend: "2017-12-21T00:00",
-//						actbrief: "asdfasdfalsdjfklasjdflkjaskljdf",
-//						totalnumber: 100,
-//						participantnumber: 0,
-//						viewernumber: 0
-//					};
-//					/*					var actObject = {
-//											actname: $("#actName").val(),
-//											actaddress: $("#actAddress").val(),
-//											userid: 1513417478927,
-//											actsponser: $("#actSponser").val(),
-//											acttype: parseInt($("#actType").val()),
-//											actstart: $("#actStart").val(),
-//											actend: $("#actEnd").val(),
-//											applystart: $("#applystart").val(),
-//											applyend: $("#applyEnd").val(),
-//											actbrief: $("#actBrief").val(),
-//											totalnumber: parseInt($("#totalNumber").val()),
-//											participantnumber: 0,
-//											viewernumber: 0
-//										};*/
-//					var dataJsonStr = JSON.stringify(actObject);
-//					console.log(dataJsonStr);
-//					$.ajax({
-//						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-//						contentType: "application/json",
-//						type: "POST",
-//						data: dataJsonStr,
-//						async: true,
-//						error: function(data, state) {
-//							console.log(state);
-//							console.log(data);
-//							//return false;
-//						},
-//						success: function(data, state) {
-//							console.log(state);
-//							console.log(data);
-//							console.log(data.id);
-//
-//							/*							var files = $(":file")[0].files;
-//														var formData = new FormData();
-//														formData.append("file", files[0]);
-//														$.ajax({
-//															url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + data.id,
-//															type: "POST",
-//															data: formData,
-//															contentType: false,
-//															processData: false,
-//															error: function(dataImg, stateImg) {
-//																console.log(stateImg);
-//																console.log(dataImg);
-//																return false;
-//															},
-//															success: function(dataImg, stateImg) {
-//																console.log(stateImg);
-//																console.log(dataImg);
-//															}
-//														});*/
-//
-//						}
-//					});
-//				});
-//			});
 		</script>
 	</body>
 
