@@ -16,6 +16,9 @@
 
 		<!-- Custom styles for this template -->
 		<link href="css/dyf/index.css" rel="stylesheet">
+		<script src="jquery/jquery-3.2.1.min.js "></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/dyf/user.js"></script>
 
 	</head>
 
@@ -46,6 +49,12 @@
 						</li>
 						<li>
 							<a href="cfip/act/act.html">活动</a>
+						</li>
+						<li>
+							<a href="cfip/topic/topic.html">话题</a>
+						</li>
+						<li>
+							<a href="cfip/dengshen/xinyuanqiang.html">灯神</a>
 						</li>
 						<!--<li class="dropdown">
 										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
@@ -80,7 +89,7 @@
 											</li>
 										</ul>
 									</li>-->
-						<li class="dropdown">
+						<!--<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
@@ -112,8 +121,8 @@
 									<a href="#">其它</a>
 								</li>
 							</ul>
-						</li>
-						<li class="dropdown">
+						</li>-->
+						<!--<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
@@ -126,7 +135,7 @@
 									<a href="#">闲物店</a>
 								</li>
 							</ul>
-						</li>
+						</li>-->
 					</ul>
 
 					<form class="navbar-form navbar-left">
@@ -137,13 +146,32 @@
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-						<li>
+						<!--<div id="signinDiv" hidden=true>-->
+						<li id="signinLI">
 							<a href="/CFIP/cfip/user/signin.html">登录</a>
 						</li>
-						<li ng-hide="userService.isLogin">
+						<!--</div>-->
+						<!--<div id="signupDiv" hidden=true>-->
+						<li id="signupLI" ng-hide="userService.isLogin">
 							<a href="/CFIP/cfip/user/signup.html">注册</a>
 						</li>
-						<li class="dropdown">
+						<!--</div>-->
+						<!--<div id="userCenterDiv" hidden=true>-->
+						<li id="userCenterLI" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a>个人中心</a>
+								</li>
+								<li>
+									<a href="/CFIP/index.html">退出</a>
+								</li>
+							</ul>
+						</li>
+						<!--</div>-->
+						<!--<div id="publishDiv" hidden=true>-->
+						<li id="publishLI" class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -165,6 +193,8 @@
 								</li>
 							</ul>
 						</li>
+						<!--</div>-->
+
 					</ul>
 				</div>
 				<!-- /.nav-collapse -->
@@ -422,13 +452,40 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="jquery/jquery-3.2.1.min.js "></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="offcanvas.js"></script>
-		
+
+		<!--		<script src="offcanvas.js"></script>-->
+
 		<script>
-			
-			window.onload
+			//			var userID = "";
+			//			window.onload = function() {
+			//				var urlParam = window.location.href;
+			//				var urlParamArray = urlParam.split("userID");
+			//				if(urlParamArray.length != 1) {
+			//					console.log(urlParamArray[1]);
+			//					userID = urlParamArray[1].substr(1);
+			//					console.log(userID)
+			//
+			//				} else {
+			//					console.log("User has not login in!")
+			//				}
+			//
+			//				$(document).ready(function() {
+			//					if("" == userID) {
+			//						console.log("userID==null");
+			//						$("#userCenterLI").hide();
+			//						$("#publishLI").hide();
+			//						$("#signinLI").show();
+			//						$("#signupLI").show();
+			//					} else {
+			//						console.log("userID=" + userID);
+			//						$("#signinLI").hide();
+			//						$("#signupLI").hide();
+			//						$("#userCenterLI").show();
+			//						$("#publishLI").show();
+			//					}
+			//
+			//				});
+			//			};
 		</script>
 	</body>
 

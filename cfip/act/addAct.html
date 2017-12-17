@@ -18,7 +18,7 @@
 		<link href="../../css/dyf/index.css" rel="stylesheet">
 		<script src="../../jquery/jquery-3.2.1.min.js " type="text/javascript"></script>
 		<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
-
+		<script src="../../js/dyf/user.js"></script>
 	</head>
 
 	<body>
@@ -45,7 +45,9 @@
 						<li>
 							<a href="#">Chat</a>
 						</li>
-
+						<!--<li>
+							<a href="../act/act.html">活动</a>
+						</li>-->
 						<li class="dropdown">
 							<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -79,7 +81,46 @@
 								</li>
 							</ul>
 						</li>
-						<li class="dropdown">
+						<li>
+							<a href="../topic/topic.html">话题</a>
+						</li>
+						<li>
+							<a href="../dengshen/xinyuanqiang.html">灯神</a>
+						</li>
+						<!--<li class="dropdown">
+										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="#">比赛</a>
+											</li>
+											<li>
+												<a href="#">公益</a>
+											</li>
+											<li>
+												<a href="#">户外</a>
+											</li>
+											<li>
+												<a href="#">讲座</a>
+											</li>
+											<li>
+												<a href="#">艺术</a>
+											</li>
+											<li>
+												<a href="#">游学</a>
+											</li>
+											<li>
+												<a href="#">招聘</a>
+											</li>
+											<li>
+												<a href="#">招新</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a href="#">其它</a>
+											</li>
+										</ul>
+									</li>-->
+						<!--<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
@@ -111,8 +152,8 @@
 									<a href="#">其它</a>
 								</li>
 							</ul>
-						</li>
-						<li class="dropdown">
+						</li>-->
+						<!--<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
@@ -125,7 +166,7 @@
 									<a href="#">闲物店</a>
 								</li>
 							</ul>
-						</li>
+						</li>-->
 					</ul>
 
 					<form class="navbar-form navbar-left">
@@ -136,14 +177,56 @@
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-						<li>
-							<a href="/user/login">登录</a>
+						<!--<div id="signinDiv" hidden=true>-->
+						<li id="signinLI">
+							<a href="/CFIP/cfip/user/signin.html">登录</a>
 						</li>
-						<li ng-hide="userService.isLogin">
-							<a href="/user/register/mobile">注册</a>
+						<!--</div>-->
+						<!--<div id="signupDiv" hidden=true>-->
+						<li id="signupLI" ng-hide="userService.isLogin">
+							<a href="/CFIP/cfip/user/signup.html">注册</a>
 						</li>
-					</ul>
+						<!--</div>-->
+						<!--<div id="userCenterDiv" hidden=true>-->
+						<li id="userCenterLI" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a>个人中心</a>
+								</li>
+								<li>
+									<a href="/CFIP/index.html">退出</a>
+								</li>
+							</ul>
+						</li>
+						<!--</div>-->
+						<!--<div id="publishDiv" hidden=true>-->
+						<li id="publishLI" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">活动</a>
+								</li>
+								<li>
+									<a href="#">话题</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a href="#">心愿</a>
+								</li>
+								<li>
+									<a href="#">表白</a>
+								</li>
+								<li>
+									<a href="#">闲物</a>
+								</li>
+							</ul>
+						</li>
+						<!--</div>-->
 
+					</ul>
 				</div>
 				<!-- /.nav-collapse -->
 			</div>
@@ -245,115 +328,78 @@
 		<script>
 			$(document).ready(function() {
 				$("#addActSubmit").click(function() {
+					//					var actObject = {
+					//						actname: "Hip Hop Music",
+					//						actaddress:"JingJingTang",
+					//						userid:1513417478927,
+					//						actsponser:"KangKang",
+					//						acttype:"1",
+					//						actstart:"2017-12-22T12:00",
+					//						actend:"2017-12-22T17:00",
+					//						applystart:"2017-12-22T12:00",
+					//						applyend:"2017-12-17T12:00",
+					//						actbrief:"2017-12-21T12:00",
+					//						totalnumber:100,
+					//						participantnumber:1,
+					//						viewernumber:2
+					//					}
 					var actObject = {
-						actname: "Hip Hop Music",
-						actaddress:"JingJingTang",
-						userid:"1513417478927",
-						actsponser:"KangKang",
-						acttype:"1",
-						actstart:"2017-12-22T12:00",
-						actend:"2017-12-22T17:00",
-						applystart:"2017-12-22T12:00",
-						applyend:"2017-12-17T12:00",
-						actbrief:"2017-12-21T12:00",
-						totalnumber:100,
-						participantnumber:1,
-						viewernumber:2
-					}
+						actname: $("#actName").val(),
+						actaddress: $("#actAddress").val(),
+						userid: 1513417478927,
+						actsponser: $("#actSponser").val(),
+						acttype: $("#actType").val(),
+						actstart: $("#actStart").val(),
+						actend: $("#actEnd").val(),
+						applystart: $("#applystart").val(),
+						applyend: $("#applyEnd").val(),
+						actbrief: $("#actBrief").val(),
+						totalnumber: parseInt($("#totalNumber").val()),
+						participantnumber: 0,
+						viewernumber: 0
+					};
 					var dataJsonStr = JSON.stringify(actObject);
-					console.log(dataJsonStr);
+					//console.log(dataJsonStr);
 					$.ajax({
-						type:"post",
-						url:"http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-						async:true,
-						data:dataJsonStr,
-						contentType:"application/json",
-						success:function(data, state){
+						type: "post",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
+						async: false,
+						data: dataJsonStr,
+						contentType: "application/json",
+						success: function(data, state) {
 							console.log(state);
 							console.log(data);
+							console.log(data.id);
+
+							var files = $(":file")[0].files;
+							var formData = new FormData();
+							formData.append("file", files[0]);
+							$.ajax({
+								//http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + data.id,
+								type: "POST",
+								data: formData,
+								async: false,
+								contentType: false,
+								processData: false,
+								error: function(dataImg, stateImg) {
+									console.log(stateImg);
+									console.log(dataImg);
+									//return false;
+								},
+								success: function(dataImg, stateImg) {
+									console.log(stateImg);
+									console.log(dataImg);
+								}
+							});
 						},
-						error:function(data, state){
+						error: function(data, state) {
 							console.log(data);
 							console.log(state);
 						}
 					});
 				});
 			});
-//
-//			$(document).ready(function() {
-//				$('#addActSubmit').click(function() {
-//					var actObject = {
-//						actname: "Party",
-//						actaddress: "JinJinTang",
-//						userid: 1513403672380,
-//						actsponser: "DaMing1",
-//						acttype: "1",
-//						actstart: "2017-12-22T12:00",
-//						actend: "2017-12-22T17:00",
-//						applystart: "2017-12-16T00:00",
-//						applyend: "2017-12-21T00:00",
-//						actbrief: "asdfasdfalsdjfklasjdflkjaskljdf",
-//						totalnumber: 100,
-//						participantnumber: 0,
-//						viewernumber: 0
-//					};
-//					/*					var actObject = {
-//											actname: $("#actName").val(),
-//											actaddress: $("#actAddress").val(),
-//											userid: 1513417478927,
-//											actsponser: $("#actSponser").val(),
-//											acttype: parseInt($("#actType").val()),
-//											actstart: $("#actStart").val(),
-//											actend: $("#actEnd").val(),
-//											applystart: $("#applystart").val(),
-//											applyend: $("#applyEnd").val(),
-//											actbrief: $("#actBrief").val(),
-//											totalnumber: parseInt($("#totalNumber").val()),
-//											participantnumber: 0,
-//											viewernumber: 0
-//										};*/
-//					var dataJsonStr = JSON.stringify(actObject);
-//					console.log(dataJsonStr);
-//					$.ajax({
-//						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-//						contentType: "application/json",
-//						type: "POST",
-//						data: dataJsonStr,
-//						async: true,
-//						error: function(data, state) {
-//							console.log(state);
-//							console.log(data);
-//							//return false;
-//						},
-//						success: function(data, state) {
-//							console.log(state);
-//							console.log(data);
-//							console.log(data.id);
-//
-//							/*							var files = $(":file")[0].files;
-//														var formData = new FormData();
-//														formData.append("file", files[0]);
-//														$.ajax({
-//															url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + data.id,
-//															type: "POST",
-//															data: formData,
-//															contentType: false,
-//															processData: false,
-//															error: function(dataImg, stateImg) {
-//																console.log(stateImg);
-//																console.log(dataImg);
-//																return false;
-//															},
-//															success: function(dataImg, stateImg) {
-//																console.log(stateImg);
-//																console.log(dataImg);
-//															}
-//														});*/
-//
-//						}
-//					});
-//				});
-//			});
 		</script>
 	</body>
 

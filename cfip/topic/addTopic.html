@@ -16,13 +16,12 @@
 
 		<!-- Custom styles for this template -->
 		<link href="../../css/dyf/index.css" rel="stylesheet">
-		<script src="../../jquery/jquery-3.2.1.min.js "></script>
-		<script src="../../js/bootstrap.min.js"></script>
+		<script src="../../jquery/jquery-3.2.1.min.js " type="text/javascript"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="../../js/dyf/user.js"></script>
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-fixed-top navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
@@ -46,35 +45,38 @@
 						<li>
 							<a href="#">Chat</a>
 						</li>
+						<li>
+							<a href="cfip/act/act.html">活动</a>
+						</li>
 						<!--<li>
-							<a href="../act/act.html">活动</a>
+							<a href="cfip/topic/topic.html">话题</a>
 						</li>-->
 						<li class="dropdown">
-							<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">比赛</a>
+									<a href="#">明星</a>
 								</li>
 								<li>
-									<a href="#">公益</a>
+									<a href="#">搞笑</a>
 								</li>
 								<li>
-									<a href="#">户外</a>
+									<a href="#">情感</a>
 								</li>
 								<li>
-									<a href="#">讲座</a>
+									<a href="#">时尚</a>
 								</li>
 								<li>
-									<a href="#">艺术</a>
+									<a href="#">军事</a>
 								</li>
 								<li>
-									<a href="#">游学</a>
+									<a href="#">美女</a>
 								</li>
 								<li>
-									<a href="#">招聘</a>
+									<a href="#">体育</a>
 								</li>
 								<li>
-									<a href="#">招新</a>
+									<a href="#">动漫</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
@@ -83,10 +85,7 @@
 							</ul>
 						</li>
 						<li>
-							<a href="../topic/topic.html">话题</a>
-						</li>
-						<li>
-							<a href="../dengshen/xinyuanqiang.html">灯神</a>
+							<a href="cfip/dengshen/xinyuanqiang.html">灯神</a>
 						</li>
 						<!--<li class="dropdown">
 										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
@@ -235,10 +234,129 @@
 		</nav>
 		<!-- /.navbar -->
 
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" id="title" placeholder="标题">
+						</div>
+						<!--<div class="form-group">
+							<input type="text" class="form-control" id="brief" placeholder="话题内容">
+						</div>-->
+						<div class="form-group">
+							<input type="text" class="form-control" id="authorname" placeholder="作者姓名" />
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" rows="6" id="brief" placeholder="话题内容"></textarea>
+						</div>
+						<div class="form-group">
+							<select id="topicType" class="form-control" required>
+								<!-- ngRepeat: t in actTypeLists -->
+								<option value="1">
+									明星
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="2">
+									搞笑
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="3">
+									情感
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="4">
+									时尚
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="5">
+									军事
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="6">
+									美女
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="7">
+									体育
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="8">
+									动漫
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="9">
+									其他
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+							</select>
+						</div>
+						<button id="addTopicSubmit" class="btn btn-lg btn-primary btn-block">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 
+		<script>
+			$(document).ready(function() {
+				$("#addTopicSubmit").click(function() {
+
+					var topicObject = {
+						title: "This is Title",
+						brief: "This is breif.",
+						publishtime: "2017-12-22T12:00",
+						authorname: "小马哥",
+						authorid: 1513417478927,
+						commentnumber: 0,
+						topictype: "2"
+					};
+					//					var topicObject = {
+					//						title: $("#title").val(),
+					//						brief: $("#brief").val(),
+					//						publishtime: getFormatDate(),
+					//						authorname: $("#authorname").val(),
+					//						authorid: 1513417478927,
+					//						commentnumber: 0,
+					//						topictype: $("#topicType").val()
+					//					}
+					var dataJsonStr = JSON.stringify(topicObject);
+					console.log(dataJsonStr);
+					$.ajax({
+						type: "POST",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/",
+						contentType: "application/json",
+						data: dataJsonStr,
+						async: false,
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						},
+						success: function(data, state) {
+							console.log(state);
+							console.log(data);
+						}
+					});
+					//return false;
+					//console.log("async");
+
+				});
+			});
+
+			function getFormatDate() {
+				var nowDate = new Date();
+				var year = nowDate.getFullYear();
+				var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+				var date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+				var hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+				var minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+				//var second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+				return year + "-" + month + "-" + date + "T" + hour + ":" + minute;
+			}
+		</script>
 	</body>
 
 </html>
