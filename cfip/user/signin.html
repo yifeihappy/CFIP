@@ -10,7 +10,6 @@
 		<meta name="author" content="">
 
 		<title>Signin</title>
-
 		<!-- Bootstrap core CSS -->
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 
@@ -49,9 +48,10 @@
 		</div>
 		<!-- /container -->
 		<script>
+
+			
 			$(document).ready(function() {
 				$("#submitBtn").click(function() {
-
 					if($("#userNumber").val() != "" && $("#password").val() != "") {
 						var userType = $("input:radio:checked").val();
 						var userArray;
@@ -67,7 +67,9 @@
 								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Admin/?Admin.adminnumber=" + $("#userNumber").val(), userArray = getByAdminNumber($("#userNumber").val());
 								break;
 						}
+						//作为记录ajax内部执行结果的变量
 						var resultFlag = false;
+						var userID;
 						$.ajax({
 							type: "get",
 							async: false,
@@ -78,10 +80,12 @@
 								if(JSON.stringify(data) == "{}") {
 									resultFlag = false;
 								} else {
+									userID = data.Student[0].id;
 									switch(userType) {
 										case "Student":
 											if($("#password").val() == data.Student[0].password) {
 												resultFlag = true;
+
 											}
 											break;
 										case "Teacher":
@@ -104,11 +108,16 @@
 						});
 
 						if(resultFlag) {
-							console.log("T");							
+							console.log("T");
+							var indexUrl = encodeURI("../../index.html?userID=" + userID);
+							console.log(indexUrl);
+							window.location.href = indexUrl;
+							//window.event.returnValue = false;
+
 						} else {
 							$("#error").show();
-							return false;
 						}
+						return false;
 
 					}
 				});
