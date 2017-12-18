@@ -112,8 +112,8 @@ function isSignIn() {
 				return false;
 			});
 		}
-		if($("#xinYuanQiang").length > 0) {
-			$("#xinYuanQiang").click(function() {
+		if($("#dengShen").length > 0) {
+			$("#dengShen").click(function() {
 				var indexUrl = encodeURI("/CFIP/cfip/dengshen/xinyuanqiang.html?userID=" + userID);
 				console.log(indexUrl);
 				window.location.href = indexUrl;
