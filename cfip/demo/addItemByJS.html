@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../jquery/jquery-3.2.1.min.js" ></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			$(function() {
+				getParagraph = $("p"); //运行后p段落会变成div的子元素
+				$("#oo").append(getParagraph);
+			});
+		</script>
+
+		<p>段落</p>
+		<div id="oo">div</div>
+	</body>
+
+</html>
