@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../jquery/jquery-3.2.1.min.js"></script>
+	</head>
+
+	<body>
+		<h1>Hello World!</h1>
+		<div>
+			<table>
+				<tr>
+					<td>
+						User Name
+					</td>
+					<td id="userNameTd">
+
+					</td>
+				</tr>
+				<tr>
+					<td>
+						User Number
+					</td>
+					<td id="userNumberTd">
+
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script>
+		window.onload = function() {
+			$.ajax({
+				type: "get",
+				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/",
+				async: true,
+				success: function(data, state) {
+					console.log(state);
+					console.log(data);
+					$("#userNameTd").text(data.Student[0].studentname);
+					$("#userNumberTd").text(data.Student[0].studentnumber);
+				},
+				error: function(data, state) {
+					console.log(state);
+					console.log(data);
+				}
+			});
+		}
+	</script>
+
+</html>

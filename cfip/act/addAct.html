@@ -16,11 +16,12 @@
 
 		<!-- Custom styles for this template -->
 		<link href="../../css/dyf/index.css" rel="stylesheet">
-
+		<script src="../../jquery/jquery-3.2.1.min.js " type="text/javascript"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="../../js/dyf/user.js"></script>
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-fixed-top navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
@@ -42,11 +43,13 @@
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">Chat</a>
+							<a href="" id="chat">Chat</a>
 						</li>
-
+						<!--<li>
+							<a href="../act/act.html">活动</a>
+						</li>-->
 						<li class="dropdown">
-							<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
 									<a href="#">比赛</a>
@@ -78,7 +81,46 @@
 								</li>
 							</ul>
 						</li>
-						<li class="dropdown">
+						<li>
+							<a href="" id="topic">话题</a>
+						</li>
+						<li>
+							<a href="" id="dengShen">灯神</a>
+						</li>
+						<!--<li class="dropdown">
+										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="#">比赛</a>
+											</li>
+											<li>
+												<a href="#">公益</a>
+											</li>
+											<li>
+												<a href="#">户外</a>
+											</li>
+											<li>
+												<a href="#">讲座</a>
+											</li>
+											<li>
+												<a href="#">艺术</a>
+											</li>
+											<li>
+												<a href="#">游学</a>
+											</li>
+											<li>
+												<a href="#">招聘</a>
+											</li>
+											<li>
+												<a href="#">招新</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a href="#">其它</a>
+											</li>
+										</ul>
+									</li>-->
+						<!--<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
@@ -110,8 +152,8 @@
 									<a href="#">其它</a>
 								</li>
 							</ul>
-						</li>
-						<li class="dropdown">
+						</li>-->
+						<!--<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
@@ -124,7 +166,7 @@
 									<a href="#">闲物店</a>
 								</li>
 							</ul>
-						</li>
+						</li>-->
 					</ul>
 
 					<form class="navbar-form navbar-left">
@@ -135,14 +177,50 @@
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-						<li>
-							<a href="/user/login">登录</a>
+						<!--<div id="signinDiv" hidden=true>-->
+						<li id="signinLI">
+							<a href="/CFIP/cfip/user/signin.html">登录</a>
 						</li>
-						<li ng-hide="userService.isLogin">
-							<a href="/user/register/mobile">注册</a>
+						<!--</div>-->
+						<!--<div id="signupDiv" hidden=true>-->
+						<li id="signupLI" ng-hide="userService.isLogin">
+							<a href="/CFIP/cfip/user/signup.html">注册</a>
 						</li>
-					</ul>
+						<!--</div>-->
+						<!--<div id="userCenterDiv" hidden=true>-->
+						<li id="userCenterLI" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="" id="personalCenter">个人中心</a>
+								</li>
+								<li>
+									<a href="/CFIP/index.html">退出</a>
+								</li>
+							</ul>
+						</li>
+						<!--</div>-->
+						<!--<div id="publishDiv" hidden=true>-->
+						<li id="publishLI" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a herf="" id="addAct">活动</a>
+								</li>
+								<li>
+									<a herf="" id="addTopic">话题</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a herf="" id="addWall">上墙</a>
+								</li>
+							</ul>
+						</li>
+						<!--</div>-->
 
+					</ul>
 				</div>
 				<!-- /.nav-collapse -->
 			</div>
@@ -155,58 +233,83 @@
 				<div class="col-md-8 col-md-offset-2">
 					<form>
 						<div class="form-group">
-							<label for="act-Name" class="sr-only">活动名称</label>
-							<input type="text" class="form-control" id="act-Name" placeholder="活动名称">
+							<input type="text" class="form-control" id="actName" placeholder="活动名称">
 						</div>
 						<div class="form-group">
-							<label for="sponsor" class="sr-only">主办方</label>
-							<input type="text" class="form-control" id="sponsor" placeholder="主办方">
+							<input type="text" class="form-control" id="actAddress" placeholder="活动地址">
 						</div>
-
 						<div class="form-group">
-							<label class="sr-only">活动分类</label>
-							<select ui-select2="" class="form-control tq-select ng-untouched select2-offscreen ng-dirty ng-valid-parse ng-valid ng-valid-required" ng-model="act.type" required="" tabindex="-1" title="">
+							<input type="text" class="form-control" id="actSponser" placeholder="主办方">
+						</div>
+						<div class="form-group">
+							<select id="actType" class="form-control" required>
 								<!-- ngRepeat: t in actTypeLists -->
-								<option value="9" class="ng-binding ng-scope">
+								<option value="1">
 									招新
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="2" class="ng-binding ng-scope">
+								<option value="2">
 									讲座
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="1" class="ng-binding ng-scope">
+								<option value="3">
 									艺术
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="10" class="ng-binding ng-scope">
+								<option value="4">
 									户外
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="4" class="ng-binding ng-scope">
+								<option value="5">
 									招聘
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="5" class="ng-binding ng-scope">
+								<option value="6">
 									游学
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="7" class="ng-binding ng-scope">
+								<option value="7">
 									比赛
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="11" class="ng-binding ng-scope">
+								<option value="8">
 									公益
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
-								<option value="8" class="ng-binding ng-scope">
+								<option value="9">
 									其他
 								</option>
 								<!-- end ngRepeat: t in actTypeLists -->
 							</select>
 						</div>
-
-						<button type="submit" class="btn btn-default">Submit</button>
+						<div class="form-group">
+							<label>活动开始时间</label>
+							<input type="datetime-local" class="form-control" id="actStart" />
+						</div>
+						<div class="form-group">
+							<label>活动结束时间</label>
+							<input type="datetime-local" class="form-control" id="actEnd" />
+						</div>
+						<div class="form-group">
+							<label>报名开始时间</label>
+							<input type="datetime-local" class="form-control" id="applystart" />
+						</div>
+						<div class="form-group">
+							<label>报名结束时间</label>
+							<input type="datetime-local" class="form-control" id="applyEnd" />
+						</div>
+						<div class="form-group">
+							<label>活动海报</label>
+							<input type="file" class="form-control" id="actImg" placeholder="主办方">
+						</div>
+						<div class="form-group">
+							<label>活动简介</label>
+							<textarea class="form-control" rows="6" id="actBrief"></textarea>
+						</div>
+						<div class="form-group">
+							<input type="number" class="form-control" id="totalNumber" min="0" max="10000" placeholder="活动总人数" />
+						</div>
+						<div id="addActSubmit" class="btn btn-lg btn-primary btn-block">Submit</div>
 					</form>
 				</div>
 			</div>
@@ -215,8 +318,87 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="../../jquery/jquery-3.2.1.min.js "></script>
-		<script src="../../js/bootstrap.min.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
+
+				$("#addActSubmit").click(function() {
+					var actObject = {
+						actname: "Duang Duang Duang",
+						actaddress: "JingJingTang",
+						userid: 1513502243526,
+						actsponser: "KangKang",
+						acttype: "1",
+						actstart: "2017-12-26T12:00",
+						actend: "2017-12-27T17:00",
+						applystart: "2017-12-22T12:00",
+						applyend: "2017-12-15T12:00",
+						actbrief: "关于AI，他们要说——\n霍金： 全面人工智能化会导致人类灭亡。\n马斯克： 人工智能是人类生存最大威胁。\n比尔 ? 盖茨： 人类需要敬畏AI的崛起。\n关于AI， 我们想问——\nAlpha Go是如何打败柯杰的？\nsiri是如何一步步“ 沦落” 至任人调戏？\nI程序员们内心究竟寄居着怎样的小怪兽？\n这一次\n我们聚集了行业大神， 学术大牛\n试图为你提供最全面的答案 ",
+						totalnumber: 100,
+						participantnumber: 1,
+						viewernumber: 2
+					}
+					//					var actObject = {
+					//						actname: $("#actName").val(),
+					//						actaddress: $("#actAddress").val(),
+					//						userid: 1513417478927,
+					//						actsponser: $("#actSponser").val(),
+					//						acttype: $("#actType").val(),
+					//						actstart: $("#actStart").val(),
+					//						actend: $("#actEnd").val(),
+					//						applystart: $("#applystart").val(),
+					//						applyend: $("#applyEnd").val(),
+					//						actbrief: $("#actBrief").val(),
+					//						totalnumber: parseInt($("#totalNumber").val()),
+					//						participantnumber: 0,
+					//						viewernumber: 0
+					//					};
+					var dataJsonStr = JSON.stringify(actObject);
+					//console.log(dataJsonStr);
+					$.ajax({
+						type: "post",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
+						async: false,
+						data: dataJsonStr,
+						contentType: "application/json",
+						success: function(data, state) {
+							console.log(state);
+							console.log(data);
+							console.log(data.id);
+
+							var files = $(":file")[0].files;
+							var formData = new FormData();
+							formData.append("file", files[0]);
+							$.ajax({
+								//http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + data.id,
+								type: "POST",
+								data: formData,
+								async: false,
+								contentType: false,
+								processData: false,
+								error: function(dataImg, stateImg) {
+									console.log(stateImg);
+									console.log(dataImg);
+									//return false;
+								},
+								success: function(dataImg, stateImg) {
+									console.log(stateImg);
+									console.log(dataImg);
+								}
+							});
+						},
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						}
+					});
+				});
+			});
+		</script>
 	</body>
 
 </html>

@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="js/vue.js"></script>
+		<script src="jquery/jquery-3.2.1.min.js"></script>
+		<script src="js/dyf/user.js" type="text/javascript"></script>
 	</head>
+
 	<body>
+
 		<div id="app">
-			<input type="button" id="btn2" v-bind:disabled="b" :value="t"/>
-					<div>{{t}}</div>
+			<input type="button" id="btn2" v-bind:disabled="b" :value="t" @click="addCount" />
+			<div>{{t}}</div>
 			<div v-bind:style="{ 'color': activeColor, 'fontSize': fontSize + 'px' }">123d</div>
+			<p>{{count}}</p>
 		</div>
-
-
-<input type="button" id="button1" value="点我!">
+		<div id="asd">{{pp}}</div>
+		<input type="button" id="button1" value="点我!">
 		<script>
-			new Vue({
+			//var aaaa= new addC();
+		</script>
+<!--		<script>
+
+			var ab = new Vue({
 				el: '#app',
 				data: {
-					b:false,
-					t:'button',
-					activeColor: 'red', 
-					fontSize: 30
+					b: false,
+					t: 'button',
+					activeColor: 'red',
+					fontSize: 30,
+					count: 1
+				},
+				methods: {
+					addCount:addC
+				}
+			});
+			new Vue({
+				el: '#asd',
+				data: {
+					pp: 'asdf'
 				}
 			})
-		</script>
+		</script>-->
 	</body>
+
 </html>

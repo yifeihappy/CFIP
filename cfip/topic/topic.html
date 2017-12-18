@@ -22,7 +22,6 @@
 	</head>
 
 	<body>
-
 		<nav class="navbar navbar-fixed-top navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
@@ -46,44 +45,44 @@
 						<li>
 							<a href="" id="chat">Chat</a>
 						</li>
+						<li>
+							<a href="" id="act">活动</a>
+						</li>
 						<!--<li>
-							<a href="../act/act.html">活动</a>
+							<a href="cfip/topic/topic.html">话题</a>
 						</li>-->
 						<li class="dropdown">
-							<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">比赛</a>
+									<a href="#">明星</a>
 								</li>
 								<li>
-									<a href="#">公益</a>
+									<a href="#">搞笑</a>
 								</li>
 								<li>
-									<a href="#">户外</a>
+									<a href="#">情感</a>
 								</li>
 								<li>
-									<a href="#">讲座</a>
+									<a href="#">时尚</a>
 								</li>
 								<li>
-									<a href="#">艺术</a>
+									<a href="#">军事</a>
 								</li>
 								<li>
-									<a href="#">游学</a>
+									<a href="#">美女</a>
 								</li>
 								<li>
-									<a href="#">招聘</a>
+									<a href="#">体育</a>
 								</li>
 								<li>
-									<a href="#">招新</a>
+									<a href="#">动漫</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
 									<a href="#">其它</a>
 								</li>
 							</ul>
-						</li>
-						<li>
-							<a href="" id="topic">话题</a>
 						</li>
 						<li>
 							<a href="" id="dengShen">灯神</a>
@@ -237,26 +236,44 @@
 			</div>
 		</div>
 
-		<div id="act-thumbnails" class="container">
+		<div id="topic-thumbnails" class="container">
 			<div class="row">
-				<a href="/CFIP/index.html?userID=123345">
-					<div class="col-md-8 col-md-offset-2">
-						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-4 thumbnail">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="thumbnail">
 								<img src="../../img/Desert.jpg" alt="...">
 							</div>
-							<div class="col-md-8 col-sm-8 col-xs-8 caption">
-								<h3>Activiyty Name</h3>
-								<p>活动地点：菁菁堂</p>
-								<p>活动时间：8月1日至9月1日</p>
-								<p>主办单位：小雪</p>
-								<p>报名人数：6|100</p>
-								<p>报名截止：8月31日</p>
+						</div>
+						<div class="col-md-8 col-sm-8 col-xs-8">
+							<div class="caption">
+								<h3>Tabel Thumbnail label label Thumbnail label Thumbnail label Thumbnail label </h3>
+								<p>Tbel Thumbnail label label Thumbnail label Thumbnail label Thumbnail label</p>
 							</div>
 						</div>
-						<hr />
 					</div>
-				</a>
+					<hr />
+				</div>
+			</div>
+		</div>
+
+		<div id="topic-thumbnails" class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<div class="thumbnail">
+								<img src="../../img/Desert.jpg" alt="...">
+							</div>
+						</div>
+						<div class="col-md-8 col-sm-8 col-xs-8">
+							<div class="caption">
+								<h3>Tabel Thumbnail label label Thumbnail label Thumbnail label Thumbnail label </h3>
+								<p>Tbel Thumbnail label label Thumbnail label Thumbnail label Thumbnail label</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -304,61 +321,6 @@
 				/**********判断用户有无登录 start*********/
 				var userID = isSignIn(); //判断用户有没有登录进行页面变化
 				/**********判断用户有无登录 end*********/
-
-				$.ajax({
-					type: "get",
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-					//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
-					async: true,
-					success: function(data, state) {
-						console.log(state);
-						console.log(data);
-						for(var i = 0; i < data.Activity.length; i++) {
-							var hTitle = $("<h3></h3>").text(data.Activity[i].actname);
-							var pAddr = $("<p></p>").text("活动地点：" + data.Activity[i].actaddress);
-							var pActTime = $("<p></p>").text("活动时间：" + data.Activity[i].actstart + "至" + data.Activity[i].actend);
-							var pSponser = $("<p></p>").text("主办单位：" + data.Activity[i].actsponser);
-							var pNumber = $("<p></p>").text("报名人数：" + data.Activity[i].participantnumber + "|" + data.Activity[i].totalNumber);
-							var pApplyEnd = $("<p></p>").text("报名截止：" + data.Activity[i].applyend);
-							var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
-							divCaption.append(hTitle, pAddr, pActTime, pSponser, pNumber, pApplyEnd);
-
-							var imgAct = $("<img></img>").attr({
-								"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + data.Activity[i].id,
-								"alt": "...."
-							});
-							var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
-							divThumbnail.append(imgAct);
-
-							var divRow1 = $("<div class='row'></div>");
-							divRow1.append(divThumbnail, divCaption);
-
-							var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
-							div1.append(divRow1, $("<hr>"));
-
-							var actDetailUrl;
-							if("" == userID) {
-								actDetailUrl = "/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id;
-							} else {
-								actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id + "&userID=" + userID);
-							}
-
-							var actDetailA = $("<a></a>").attr("href", actDetailUrl);
-							actDetailA.append(div1);
-
-							var divRow2 = $("<div class='row'></div>");
-							divRow2.append(actDetailA);
-
-							$("#act-thumbnails").append(divRow2);
-
-						}
-
-					},
-					error: function(data, state) {
-						console.log(state);
-						console.log(data);
-					}
-				});
 			});
 		</script>
 	</body>
