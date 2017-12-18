@@ -43,10 +43,10 @@
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">Chat</a>
+							<a href="" id="chat">Chat</a>
 						</li>
 						<li>
-							<a href="cfip/act/act.html">活动</a>
+							<a href="" id="act">活动</a>
 						</li>
 						<!--<li>
 							<a href="cfip/topic/topic.html">话题</a>
@@ -85,7 +85,7 @@
 							</ul>
 						</li>
 						<li>
-							<a href="cfip/dengshen/xinyuanqiang.html">灯神</a>
+							<a href="" id="dengShen">灯神</a>
 						</li>
 						<!--<li class="dropdown">
 										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
@@ -193,7 +193,7 @@
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a>个人中心</a>
+									<a href="" id="personalCenter">个人中心</a>
 								</li>
 								<li>
 									<a href="/CFIP/index.html">退出</a>
@@ -207,20 +207,14 @@
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">活动</a>
+									<a herf="" id="addAct">活动</a>
 								</li>
 								<li>
-									<a href="#">话题</a>
+									<a herf="" id="addTopic">话题</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
-									<a href="#">心愿</a>
-								</li>
-								<li>
-									<a href="#">表白</a>
-								</li>
-								<li>
-									<a href="#">闲物</a>
+									<a herf="" id="addWall">上墙</a>
 								</li>
 							</ul>
 						</li>
@@ -303,6 +297,10 @@
 
 		<script>
 			$(document).ready(function() {
+
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
 				$("#addTopicSubmit").click(function() {
 
 					var topicObject = {
