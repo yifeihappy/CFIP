@@ -156,18 +156,72 @@
 					<label for="confirmPassword" class="sr-only">Confirm Password</label>
 					<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>-->
 					<div>
-						<button id="signUpSubmit" class="btn btn-lg btn-primary btn-block">Update</button>
+						<div id="signUpSubmit" class="btn btn-lg btn-primary btn-block">Update</div>
 					</div>
 			</form>
 			</div>
 			<!-- /container -->
 			<script>
 				var pswd;
-				window.onload = function() {
+				//				window.onload = function() {
+				//					$.ajax({
+				//						type: "get",
+				//						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513417478927",
+				//						async: true,
+				//						success: function(data, state) {
+				//							console.log(state);
+				//							console.log(data);
+				//							//$("#userNameTd").text(data.Student[0].studentname);
+				//							//$("#userNumberTd").text(data.Student[0].studentnumber);
+				//							$("#studentName").val(data.studentname);
+				//							$("#studentNumber").val(data.studentnumber);
+				//							$("#telephone").val(data.telephone);
+				//							$("#email").val(data.email);
+				//							//$("#password").val(data.password);
+				//							pswd = data.password;
+				//							//下拉框选择原来的性别
+				//							for(var i = 0; i < document.getElementById("sex").options.length; i++) {
+				//								if(document.getElementById("sex").options[i].value == data.sex) {
+				//									document.getElementById("sex").options[i].selected = true;
+				//									break;
+				//								}
+				//							}
+				//							//下拉框选择原来的年级
+				//							for(var i = 0; i < document.getElementById("grade").options.length; i++) {
+				//								if(document.getElementById("grade").options[i].value == data.grade) {
+				//									document.getElementById("grade").options[i].selected = true;
+				//									break;
+				//								}
+				//							}
+				//							//下拉框选择原来的学院
+				//							for(var i = 0; i < document.getElementById("college").options.length; i++) {
+				//								if(document.getElementById("college").options[i].value == data.college) {
+				//									document.getElementById("college").options[i].selected = true;
+				//									break;
+				//								}
+				//							}
+				//							
+				//							//下拉框选择原来的专业
+				//							for(var i = 0; i < document.getElementById("major").options.length; i++) {
+				//								if(document.getElementById("major").options[i].value == data.major) {
+				//									document.getElementById("major").options[i].selected = true;
+				//									break;
+				//								}
+				//							}
+				//
+				//						},
+				//						error: function(data, state) {
+				//							console.log(state);
+				//							console.log(data);
+				//						}
+				//					});
+				//				};
+
+				$(document).ready(function() {
 					$.ajax({
 						type: "get",
 						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513417478927",
-						async: true,
+						async: false,
 						success: function(data, state) {
 							console.log(state);
 							console.log(data);
@@ -200,7 +254,7 @@
 									break;
 								}
 							}
-							
+
 							//下拉框选择原来的专业
 							for(var i = 0; i < document.getElementById("major").options.length; i++) {
 								if(document.getElementById("major").options[i].value == data.major) {
@@ -215,9 +269,7 @@
 							console.log(data);
 						}
 					});
-				};
-
-				$(document).ready(function() {
+					
 					$('#signUpSubmit').click(function() {
 						var UserInfo = {
 							studentname: $("#studentName").val(),
@@ -228,7 +280,7 @@
 							grade: $("#grade").val(),
 							college: $("#college").val(),
 							major: $("#major").val(),
-							password: data.password
+							password: pswd
 						};
 						console.log(UserInfo.studentname + "," + UserInfo.studentnumber + "," + UserInfo.telephone +
 							"," + UserInfo.email + "," + UserInfo.sex + "," + UserInfo.grade + "," + UserInfo.college +
@@ -242,7 +294,7 @@
 							contentType: "application/json",
 							type: "PUT",
 							data: dataJsonStr,
-							async: true,
+							async: false,
 							error: function(data, state) {
 								//console.log(dataJsonStr);
 								console.log(data);

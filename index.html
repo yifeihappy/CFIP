@@ -21,7 +21,6 @@
 		<script src="js/dyf/user.js"></script>
 
 	</head>
-
 	<body>
 
 		<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -45,16 +44,16 @@
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">Chat</a>
+							<a id="chat">Chat</a>
 						</li>
 						<li>
-							<a href="cfip/act/act.html">活动</a>
+							<a href="" id="act">活动</a>
 						</li>
 						<li>
-							<a href="cfip/topic/topic.html">话题</a>
+							<a href="" id="topic">话题</a>
 						</li>
 						<li>
-							<a href="cfip/dengshen/xinyuanqiang.html">灯神</a>
+							<a id="dengShen">灯神</a>
 						</li>
 						<!--<li class="dropdown">
 										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
@@ -176,20 +175,14 @@
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">活动</a>
+									<a herf="" id="addAct">活动</a>
 								</li>
 								<li>
-									<a href="#">话题</a>
+									<a herf="" id="addTopic">话题</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
-									<a href="#">心愿</a>
-								</li>
-								<li>
-									<a href="#">表白</a>
-								</li>
-								<li>
-									<a href="#">闲物</a>
+									<a herf="" id="addWall">上墙</a>
 								</li>
 							</ul>
 						</li>
@@ -456,36 +449,16 @@
 		<!--		<script src="offcanvas.js"></script>-->
 
 		<script>
-			//			var userID = "";
-			//			window.onload = function() {
-			//				var urlParam = window.location.href;
-			//				var urlParamArray = urlParam.split("userID");
-			//				if(urlParamArray.length != 1) {
-			//					console.log(urlParamArray[1]);
-			//					userID = urlParamArray[1].substr(1);
-			//					console.log(userID)
 			//
-			//				} else {
-			//					console.log("User has not login in!")
-			//				}
-			//
-			//				$(document).ready(function() {
-			//					if("" == userID) {
-			//						console.log("userID==null");
-			//						$("#userCenterLI").hide();
-			//						$("#publishLI").hide();
-			//						$("#signinLI").show();
-			//						$("#signupLI").show();
-			//					} else {
-			//						console.log("userID=" + userID);
-			//						$("#signinLI").hide();
-			//						$("#signupLI").hide();
-			//						$("#userCenterLI").show();
-			//						$("#publishLI").show();
-			//					}
-			//
-			//				});
-			//			};
+			$(document).ready(function() {
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				if("" == userID) {
+					console.log("Null userId");
+				} else {
+					console.log("hh:" + userID);
+				}
+
+			});
 		</script>
 	</body>
 

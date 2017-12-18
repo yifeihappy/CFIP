@@ -43,13 +43,13 @@
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">Chat</a>
+							<a href="" id="chat">Chat</a>
 						</li>
 						<!--<li>
 							<a href="../act/act.html">活动</a>
 						</li>-->
 						<li class="dropdown">
-							<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
 									<a href="#">比赛</a>
@@ -82,10 +82,10 @@
 							</ul>
 						</li>
 						<li>
-							<a href="../topic/topic.html">话题</a>
+							<a href="" id="topic">话题</a>
 						</li>
 						<li>
-							<a href="../dengshen/xinyuanqiang.html">灯神</a>
+							<a href="" id="dengShen">灯神</a>
 						</li>
 						<!--<li class="dropdown">
 										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
@@ -193,7 +193,7 @@
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a>个人中心</a>
+									<a href="" id="personalCenter">个人中心</a>
 								</li>
 								<li>
 									<a href="/CFIP/index.html">退出</a>
@@ -207,20 +207,14 @@
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">活动</a>
+									<a herf="" id="addAct">活动</a>
 								</li>
 								<li>
-									<a href="#">话题</a>
+									<a herf="" id="addTopic">话题</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
-									<a href="#">心愿</a>
-								</li>
-								<li>
-									<a href="#">表白</a>
-								</li>
-								<li>
-									<a href="#">闲物</a>
+									<a herf="" id="addWall">上墙</a>
 								</li>
 							</ul>
 						</li>
@@ -315,7 +309,7 @@
 						<div class="form-group">
 							<input type="number" class="form-control" id="totalNumber" min="0" max="10000" placeholder="活动总人数" />
 						</div>
-						<button id="addActSubmit" class="btn btn-lg btn-primary btn-block">Submit</button>
+						<div id="addActSubmit" class="btn btn-lg btn-primary btn-block">Submit</div>
 					</form>
 				</div>
 			</div>
@@ -327,37 +321,41 @@
 
 		<script>
 			$(document).ready(function() {
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
+
 				$("#addActSubmit").click(function() {
-					//					var actObject = {
-					//						actname: "Hip Hop Music",
-					//						actaddress:"JingJingTang",
-					//						userid:1513417478927,
-					//						actsponser:"KangKang",
-					//						acttype:"1",
-					//						actstart:"2017-12-22T12:00",
-					//						actend:"2017-12-22T17:00",
-					//						applystart:"2017-12-22T12:00",
-					//						applyend:"2017-12-17T12:00",
-					//						actbrief:"2017-12-21T12:00",
-					//						totalnumber:100,
-					//						participantnumber:1,
-					//						viewernumber:2
-					//					}
 					var actObject = {
-						actname: $("#actName").val(),
-						actaddress: $("#actAddress").val(),
-						userid: 1513417478927,
-						actsponser: $("#actSponser").val(),
-						acttype: $("#actType").val(),
-						actstart: $("#actStart").val(),
-						actend: $("#actEnd").val(),
-						applystart: $("#applystart").val(),
-						applyend: $("#applyEnd").val(),
-						actbrief: $("#actBrief").val(),
-						totalnumber: parseInt($("#totalNumber").val()),
-						participantnumber: 0,
-						viewernumber: 0
-					};
+						actname: "Duang Duang Duang",
+						actaddress: "JingJingTang",
+						userid: 1513502243526,
+						actsponser: "KangKang",
+						acttype: "1",
+						actstart: "2017-12-26T12:00",
+						actend: "2017-12-27T17:00",
+						applystart: "2017-12-22T12:00",
+						applyend: "2017-12-15T12:00",
+						actbrief: "关于AI，他们要说——\n霍金： 全面人工智能化会导致人类灭亡。\n马斯克： 人工智能是人类生存最大威胁。\n比尔 ? 盖茨： 人类需要敬畏AI的崛起。\n关于AI， 我们想问——\nAlpha Go是如何打败柯杰的？\nsiri是如何一步步“ 沦落” 至任人调戏？\nI程序员们内心究竟寄居着怎样的小怪兽？\n这一次\n我们聚集了行业大神， 学术大牛\n试图为你提供最全面的答案 ",
+						totalnumber: 100,
+						participantnumber: 1,
+						viewernumber: 2
+					}
+					//					var actObject = {
+					//						actname: $("#actName").val(),
+					//						actaddress: $("#actAddress").val(),
+					//						userid: 1513417478927,
+					//						actsponser: $("#actSponser").val(),
+					//						acttype: $("#actType").val(),
+					//						actstart: $("#actStart").val(),
+					//						actend: $("#actEnd").val(),
+					//						applystart: $("#applystart").val(),
+					//						applyend: $("#applyEnd").val(),
+					//						actbrief: $("#actBrief").val(),
+					//						totalnumber: parseInt($("#totalNumber").val()),
+					//						participantnumber: 0,
+					//						viewernumber: 0
+					//					};
 					var dataJsonStr = JSON.stringify(actObject);
 					//console.log(dataJsonStr);
 					$.ajax({
