@@ -1,30 +1,156 @@
-var userID = "";
-$(document).ready(function() {
-	var urlParam = window.location.href;
-	var urlParamArray = urlParam.split("userID");
+function isSignIn() {
+	var userID = "";
+	var urlParam = decodeURI(window.location.href);
+	var urlParamArray = urlParam.split("userID=");
 	if(urlParamArray.length != 1) {
-		console.log(urlParamArray[1]);
-		userID = urlParamArray[1].substr(1);
-		console.log(userID)
+//		console.log(urlParamArray[1]);
+//		userID = urlParamArray[1].substr(1);
+//		console.log(userID);
+		userID = urlParamArray[1];
+		console.log(userID);
 
 	} else {
-		console.log("User has not login in!")
+		console.log("User has not login in!");
 	}
+
 	if("" == userID) {
 		console.log("userID==null");
 		$("#userCenterLI").hide();
 		$("#publishLI").hide();
 		$("#signinLI").show();
 		$("#signupLI").show();
+
+		if($("#chat").length > 0) {
+			$("#chact").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/chat/chat.html");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+		if($("#act").length > 0) {
+			$("#act").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/act/act.html");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+		if($("#topic").length > 0) {
+			$("#topic").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+
+			});
+		}
+		if($("#dengShen").length > 0) {
+			$("#dengShen").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/dengshen/xinyuanqiang.html");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+
+		return "";
 	} else {
 		console.log("userID=" + userID);
 		$("#signinLI").hide();
 		$("#signupLI").hide();
 		$("#userCenterLI").show();
 		$("#publishLI").show();
-	}
+		$("#addAct").click(function() {
+			var indexUrl = encodeURI("/CFIP/cfip/act/addAct.html?userID=" + userID);
+			console.log(indexUrl);
+			window.location.href = indexUrl;
+			return false;
+		});
+		$("#addTopic").click(function() {
+			var indexUrl = encodeURI("/CFIP/cfip/topic/addTopic.html?userID=" + userID);
+			console.log(indexUrl);
+			window.location.href = indexUrl;
+			return false;
 
-});
+		});
+		$("#addXinYuan").click(function() {
+			var indexUrl = encodeURI("/CFIP/cfip/dengshen/addAct.html?userID=" + userID);
+			console.log(indexUrl);
+			window.location.href = indexUrl;
+			return false;
+
+		});
+		$("#addWall").click(function() {
+			var indexUrl = encodeURI("/CFIP/cfip/dengshen/add_dengshen.html?userID=" + userID);
+			console.log(indexUrl);
+			window.location.href = indexUrl;
+			return false;
+		});
+
+		if($("#chat").length > 0) {
+			$("#chact").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/chat/chat.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+		if($("#act").length > 0) {
+			$("#act").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/act/act.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+		if($("#topic").length > 0) {
+			$("#topic").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+		if($("#xinYuanQiang").length > 0) {
+			$("#xinYuanQiang").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/dengshen/xinyuanqiang.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+		return userID;
+	}
+}
+
+//var userID = "";
+//$(document).ready(function() {
+//	var urlParam = window.location.href;
+//	var urlParamArray = urlParam.split("userID");
+//	if(urlParamArray.length != 1) {
+//		console.log(urlParamArray[1]);
+//		userID = urlParamArray[1].substr(1);
+//		console.log(userID)
+//
+//	} else {
+//		console.log("User has not login in!")
+//	}
+//	if("" == userID) {
+//		console.log("userID==null");
+//		$("#userCenterLI").hide();
+//		$("#publishLI").hide();
+//		$("#signinLI").show();
+//		$("#signupLI").show();
+//	} else {
+//		console.log("userID=" + userID);
+//		$("#signinLI").hide();
+//		$("#signupLI").hide();
+//		$("#userCenterLI").show();
+//		$("#publishLI").show();
+//	}
+//	
+//});
 
 //function getByStudentNumber(studentNumber) {
 //	var student;
