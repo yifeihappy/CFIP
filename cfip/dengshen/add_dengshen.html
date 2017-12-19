@@ -308,7 +308,7 @@
 											title: $("#dengshenTitle").val(),
 											content: $("#dengshenContent").val(),
 										    publishtime: getFormatDate(),
-										    userid: userID,
+										    userid: parseInt(userID),
 											type: $("#dengshenType").val(),
 										    state: "0"
 
@@ -319,8 +319,7 @@
 //						userid: 1513502243526,
 //						type: "3",
 //						state: "0"
-					};
-					console.log(dengshenObject.type);
+				};
 
 					var dataJsonStr = JSON.stringify(dengshenObject);
 					console.log(dataJsonStr);
