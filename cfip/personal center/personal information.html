@@ -6,7 +6,8 @@
 		<title></title>
 		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/jh/template.css" />
-		
+		<script type="text/javascript" src="../../jquery/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../js/show students'information.js"></script>
 	</head>
 
 	<body>
@@ -170,7 +171,7 @@
 		<div class="container">
 			<div class="row" id="sidebar">
 				<div class="col-lg-2 sidebar">
-					<ul  class="nav nav-pills nav-stacked">
+					<ul class="nav nav-pills nav-stacked">
 						<li class="active">
 							<a href="#">基本信息</a>
 						</li>
@@ -184,13 +185,13 @@
 							<a href="#">我的消息</a>
 						</li>
 						<li>
-							<a href="#">我的心愿</a>
+							<a href="my wish.html" target="_self">我的心愿</a>
 						</li>
 						<li>
-							<a href="#">我的表白</a>
+							<a href="my express.html" target="_self">我的表白</a>
 						</li>
 						<li>
-							<a href="#">我的闲物</a>
+							<a href="my spare things.html" target="_self">我的闲物</a>
 						</li>
 						<li>
 							<a href="information update.html" target="_self">个人设置</a>
@@ -205,36 +206,37 @@
 					<table>
 						<tr>
 							<td width="200" height="30">真实姓名</td>
-							<td width="200" height="30">江浩</td>
+							<td width="200" height="30" id="studentname"></td>
 						</tr>
 						<tr>
 							<td width="200" height="30">学校</td>
-							<td width="200" height="30">上海交通大学</td>
+							<td width="200" height="30" id="studentcollege"></td>
 						</tr>
 						<tr>
 							<td width="200" height="30">学院</td>
-							<td width="200" height="30">电子信息与电气工程学院</td>
+							<td width="200" height="30" id="studentinstitute"></td>
 						</tr>
 						<tr>
 							<td width="200" height="30">性别</td>
-							<td width="200" height="30">男</td>
+							<td width="200" height="30" id="studentsex"></td>
 						</tr>
 						<tr>
 							<td width="200" height="30">学号</td>
-							<td width="200" height="30">117037910065</td>
+							<td width="200" height="30" id="studentnumber"></td>
 						</tr>
 						<tr>
 							<td width="200" height="30">手机号</td>
-							<td width="200" height="30">18341263402</td>
+							<td width="200" height="30" id="studenttelephone"></td>
 						</tr>
 						<tr>
 							<td width="200" height="30">邮箱</td>
-							<td width="200" height="30">1570999811@qq.com</td>
+							<td width="200" height="30" id="studentemail"></td>
 						</tr>
 					</table>
-						<button type="button" class="btn btn-info">修改资料</button>
-						<button type="button" class="btn btn-info">发布活动</button>
-						<button type="button" class="btn btn-info">发布话题</button>	
+					<script type="text/javascript" src="show students'information.js"></script>
+					<a href="information update.html" class="btn btn-primary btn-info active" role="button">修改资料</a>
+					<a href="#" class="btn btn-default btn-info active" role="button">发布活动</a>
+					<a href="#" class="btn btn-default btn-info active" role="button">发布话题</a>
 				</div>
 				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
 					<div class="row">
@@ -276,7 +278,5 @@
 
 			</div>
 		</div>
-
 	</body>
-
 </html>
