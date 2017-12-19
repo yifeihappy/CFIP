@@ -298,10 +298,49 @@
 		</div>
 		<script>
 			$(document).ready(function() {
-				/**********判断用户有无登录 start*********/
-				var userID = isSignIn(); //判断用户有没有登录进行页面变化
-				/**********判断用户有无登录 end*********/
-			})
+				var userID = isSignIn();
+
+				$.ajax({
+					type: "get",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Dengshen/",
+					async: true,
+					succes: function(data, state) 
+					{
+						console.log(state);
+						console.log(data);
+						for(var i = data.Dengshen.length; i >= 0; i--) 
+						{
+							var dType = date.Dengshen[i].type;
+
+							if(dType=="3") 
+							{
+								var PublisherName = $("<font size='3'></font>").text(data.Dengshen[i].userid);
+								var PersonalHomepageURL = "#"; //连接到“他的主页”
+								var PublisherHomepage = $("<a></a>").attr("href", PersonalHomepageURL);
+								PublisherHomepage.append(PublisherName);
+								var divPublisherName = $("<div class='col-md-1'></div>");
+								divPublisherName.append(PublisherHomepage);
+
+								var hTitle = $("<h3></h3>").text(data.Dengshen[i].title);
+								var pContent = $("<p></p>").text(data.Dengshen[i].content);
+								var divNeiRong = $("<div class='col-md-11'></div>");
+								divNeiRong.append(hTitle, pContent);
+
+								var divHr = $("<div class='col-md-12'></div>");
+								divHr.append($("<hr>"));
+
+								$("#xianwuzhanshi").append($("<br>"), divPublisherName, divNeiRong, divHr);
+
+							}
+						}
+					},
+					error: function(data, state) 
+					{
+						console.log(state);
+						console.log(data);
+					}
+				});
+			});
 		</script>
 
 	</body>

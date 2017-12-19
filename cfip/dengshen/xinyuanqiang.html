@@ -16,9 +16,9 @@
 
 		<!-- Custom styles for this template -->
 		<link href="../../css/dyf/index.css" rel="stylesheet">
-		<script src="../../jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
-		<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
-		<script src="/CFIP/js/dyf/user.js" type="text/javascript"></script>
+		<script src="../../jquery/jquery-3.2.1.min.js "></script>
+		<script src="../../js/bootstrap.min.js"></script>
+		<script src="../../js/dyf/user.js"></script>
 	</head>
 
 	<body>
@@ -275,20 +275,20 @@
 						</div>
 						-->
 						<div class="col-md-1">
-							<a href="#"><font size="3">用户姓名</font></a>
+							<a href="#">
+								<font size="3">用户姓名</font>
+							</a>
 						</div>
-						
+
 						<div class="col-md-11">
 							<h3>your dream</h3>
 							<p>what does your dream look like?</p>
 						</div>
-						
+
 						<div class="col-md-12">
 							<hr />
 						</div>
 					</div>
-					
-					
 
 				</div>
 
@@ -314,10 +314,49 @@
 		</div>
 		<script>
 			$(document).ready(function() {
-				/**********判断用户有无登录 start*********/
-				var userID = isSignIn(); //判断用户有没有登录进行页面变化
-				/**********判断用户有无登录 end*********/
-			})
+				var userID = isSignIn();
+
+				$.ajax({
+					type: "get",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Dengshen/",
+					async: true,
+					succes: function(data, state) 
+					{
+						console.log(state);
+						console.log(data);
+						for(var i = data.Dengshen.length; i >= 0; i--) 
+						{
+							var dType = date.Dengshen[i].type;
+
+							if(dType=="1") 
+							{
+								var PublisherName = $("<font size='3'></font>").text(data.Dengshen[i].userid);
+								var PersonalHomepageURL = "#"; //连接到“他的主页”
+								var PublisherHomepage = $("<a></a>").attr("href", PersonalHomepageURL);
+								PublisherHomepage.append(PublisherName);
+								var divPublisherName = $("<div class='col-md-1'></div>");
+								divPublisherName.append(PublisherHomepage);
+
+								var hTitle = $("<h3></h3>").text(data.Dengshen[i].title);
+								var pContent = $("<p></p>").text(data.Dengshen[i].content);
+								var divNeiRong = $("<div class='col-md-11'></div>");
+								divNeiRong.append(hTitle, pContent);
+
+								var divHr = $("<div class='col-md-12'></div>");
+								divHr.append($("<hr>"));
+
+								$("#xinyuanzhanshi").append($("<br>"), divPublisherName, divNeiRong, divHr);
+
+							}
+						}
+					},
+					error: function(data, state) 
+					{
+						console.log(state);
+						console.log(data);
+					}
+				});
+			});
 		</script>
 
 	</body>
