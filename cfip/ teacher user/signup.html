@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>signup</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="../../css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="../../css/dyf/signup.css" rel="stylesheet">
+		<script src="../../jquery/jquery-3.2.1.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<form class="form-signup">
+				<h2 class="form-signup-heading">Please sign up</h2>
+				<label for="teacherName" class="sr-only">User Name</label>
+				<input type="text" id="teacherName" class="form-control" placeholder="teacher Name" required autofocus>
+				<label for="teacherNumber" class="sr-only">teacher Number</label>
+				<input type="text" id="teacherNumber" class="form-control" placeholder="teacher Number" required autofocus>
+				<label for="telephone" class="sr-only">Telephone Number</label>
+				<input type="text" id="telephone" class="form-control" placeholder="Telephone Number" required autofocus>
+				<label for="email" class="sr-only">email</label>
+				<input type="text" id="email" class="form-control" placeholder="Email" required autofocus>
+				<div class="form-group">
+					<label class="sr-only">Sex</label>
+					<select class="form-control" id="sex" required>
+						<!-- ngRepeat: t in actTypeLists -->
+						<option value="Female" class="ng-binding ng-scope">
+							Female
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="Male" class="ng-binding ng-scope">
+							Male
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+						<option value="Other" class="ng-binding ng-scope">
+							Other
+						</option>
+						<!-- end ngRepeat: t in actTypeLists -->
+					</select>
+				</div>
+				<label for="password" class="sr-only">Password</label>
+				<input type="password" id="password" class="form-control" placeholder="Password" required>
+				<div class="form-group">
+					<label class="sr-only">Type</label>
+					<select class="form-control" id="teachertype" required>
+						<!-- ngRepeat: t in actTypeLists -->
+						<option value="1" class="ng-binding ng-scope">
+							Admin
+						</option>
+						<option value="2" class="ng-binding ng-scope">
+							Teacher
+						</option>
+					</select>
+				</div>
+				<div>
+					<button id="signUpSubmit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+				</div>
+			</form>
+		</div>
+		<!-- /container -->
+		<script>
+			$(document).ready(function() {
+				$('#signUpSubmit').click(function() {
+					var UserInfo = {
+						teachername: $("#teacherName").val(),
+						teachernumber: $("#teacherNumber").val(),
+						telephone: $("#telephone").val(),
+						email: $("#email").val(),
+						sex: $("#sex").val(),
+						password: $("#password").val(),
+						teachertype: $("#teachertype").val()
+					};
+					var dataJsonStr = JSON.stringify(UserInfo);
+					console.log(dataJsonStr);
+					$.ajax({
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Teacher/",
+						contentType: "application/json",
+						type: "POST",
+						data: dataJsonStr,
+						async: true,
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						},
+						success: function(data, state) {
+							console.log(state);
+							console.log(data);
+						}
+					});
+					return false;
+				});
+			});
+		</script>
+	</body>
+
+</html>

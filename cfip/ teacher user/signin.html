@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Signin</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+		<script src="../../jquery/jquery-3.2.1.min.js"></script>
+		<link href="../../css/dyf/signin.css" rel="stylesheet">
+		<script src="../../js/ teacher user.js" type="text/javascript"></script>
+
+	</head>
+
+	<body>
+
+		<div class="container">
+
+			<form class="form-signin">
+				<h2 class="form-signin-heading">Please sign in</h2>
+				<label for="userNumber" class="sr-only">教工号</label>
+				<input type="text" id="userNumber" oninvalid="setCustomValidity('教工号不能为空')" oninput="setCustomValidity('')" class="form-control" placeholder="User Number" required autofocus>
+				<label for="password" class="sr-only">Password</label>
+				<input type="password" id="password" oninvalid="setCustomValidity('密码不能为空')" oninput="setCustomValidity('')" class="form-control" placeholder="Password" required>
+				<div class="checkbox">
+					<label>
+           				 <input type="radio" value="Student" name="userType" checked> Student
+          			</label>
+					<label>
+           				 <input type="radio" value="Teacher" name="userType"> Teacher
+          			</label>
+					<label>
+           				 <input type="radio" value="Admin" name="userType"> Admin
+          			</label>
+				</div>
+				<div>
+					<label id="error" hidden=true><font color="red">用户名或密码错误</font></label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" id="submitBtn">Sign in</button>
+			</form>
+		</div>
+		<!-- /container -->
+		<script>
+
+			
+			$(document).ready(function() {
+				$("#submitBtn").click(function() {
+					if($("#userNumber").val() != "" && $("#password").val() != "") {
+						var userType = $("input:radio:checked").val();
+						var userArray;
+						var userURL;
+						switch(userType) {
+							case "Student":
+								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.studentnumber=" + $("#userNumber").val();
+								break;
+							case "Teacher":
+								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Teacher/?Teacher.teachernumber=" + $("#userNumber").val();
+								break;
+							case "Admin":
+								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Admin/?Admin.adminnumber=" + $("#userNumber").val(), userArray = getByAdminNumber($("#userNumber").val());
+								break;
+						}
+						//作为记录ajax内部执行结果的变量
+						var resultFlag = false;
+						var userID;
+						$.ajax({
+							type: "get",
+							async: false,
+							url: userURL,
+							success: function(data, state) {
+								console.log(state);
+								console.log(data);
+								if(JSON.stringify(data) == "{}") {
+									resultFlag = false;
+								} else {
+									userID = data.Teacher[0].id;
+									switch(userType) {
+										case "Student":
+											if($("#password").val() == data.Student[0].password) {
+												resultFlag = true;
+
+											}
+											break;
+										case "Teacher":
+											if($("#password").val() == data.Teacher[0].password) {
+												resultFlag = true;
+											}
+											break;
+										case "Admin":
+											if($("#password").val() == data.Admin[0].password) {
+												resultFlag = true;
+											}
+											break;
+									}
+								}
+							},
+							error: function(data, state) {
+								console.log(state);
+							}
+
+						});
+
+						if(resultFlag) {
+							console.log("T");
+							var indexUrl = encodeURI("../../index.html?userID=" + userID);
+							console.log(indexUrl);
+							window.location.href = indexUrl;
+						} else {
+							$("#error").show();
+						}
+						return false;
+
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>
+</html>
