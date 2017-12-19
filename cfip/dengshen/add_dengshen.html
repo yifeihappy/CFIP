@@ -246,7 +246,7 @@
 						<div class="col-md-11">
 							<form>
 								<div class="form-group">
-									<select id="denshengType" class="form-control" required>
+									<select id="dengshenType" class="form-control" required>
 										<!-- ngRepeat: t in dengshenTypeLists -->
 										<option value="1">
 											心愿
@@ -304,23 +304,23 @@
 				/**********判断用户有无登录 end*********/
 				$("#adddengshenSubmit").click(function() {
 
-					//					var topicObject = {
-					//						title: $("#dengshenTitle").val(),
-					//						content: $("#dengshenContent").val(),
-					//						publishtime: getFormatDate(),
-					//						authorid: 1513417478927,
-					//						commentnumber: 0,
-					//						dengshentype: $("#dengshenType").val()
-					//					}
+										var dengshenObject = {
+											title: $("#dengshenTitle").val(),
+											content: $("#dengshenContent").val(),
+										    publishtime: getFormatDate(),
+										    userid: userID,
+											type: $("#dengshenType").val(),
+										    state: "0"
 
-					var dengshenObject = {
-						title: "This is xianwu2",
-						content: "This is xianwu2.",
-						publishtime: "2017-12-22T12:00",
-						userid: 1513502243526,
-						type: "3",
-						state: "0"
+//					var dengshenObject = {
+//						title: "This is xianwu3.",
+//						content: "This is xianwu3.",
+//						publishtime: "2017-12-22T12:00",
+//						userid: 1513502243526,
+//						type: "3",
+//						state: "0"
 					};
+					console.log(dengshenObject.type);
 
 					var dataJsonStr = JSON.stringify(dengshenObject);
 					console.log(dataJsonStr);
