@@ -304,13 +304,13 @@
 					type: "get",
 					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Dengshen/",
 					async: true,
-					succes: function(data, state) 
+					success: function(data, state) 
 					{
 						console.log(state);
 						console.log(data);
-						for(var i = data.Dengshen.length; i >= 0; i--) 
+						for(var i = data.Dengshen.length-1; i >= 0; i--) 
 						{
-							var dType = date.Dengshen[i].type;
+							var dType = data.Dengshen[i].type;
 
 							if(dType=="3") 
 							{
