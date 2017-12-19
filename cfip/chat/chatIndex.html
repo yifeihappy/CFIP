@@ -16,7 +16,10 @@
 
 		<!-- Custom styles for this template -->
 		<link href="../../css/dyf/index.css" rel="stylesheet">
-		<link href="../../css/dyf/chatIndex.css"
+		<link rel="stylesheet" href="../../css/dyf/chatIndex.css" />
+		<script src="../../jquery/jquery-3.2.1.min.js "></script>
+		<script src="../../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../js/dyf/user.js"></script>
 
 	</head>
 
@@ -43,9 +46,11 @@
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">Chat</a>
+							<a href="" id="chat">Chat</a>
 						</li>
-
+						<!--<li>
+							<a href="../act/act.html">活动</a>
+						</li>-->
 						<li class="dropdown">
 							<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
 							<ul class="dropdown-menu">
@@ -79,52 +84,11 @@
 								</li>
 							</ul>
 						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">明星</a>
-								</li>
-								<li>
-									<a href="#">搞笑</a>
-								</li>
-								<li>
-									<a href="#">情感</a>
-								</li>
-								<li>
-									<a href="#">时尚</a>
-								</li>
-								<li>
-									<a href="#">军事</a>
-								</li>
-								<li>
-									<a href="#">美女</a>
-								</li>
-								<li>
-									<a href="#">体育</a>
-								</li>
-								<li>
-									<a href="#">动漫</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li>
-									<a href="#">其它</a>
-								</li>
-							</ul>
+						<li>
+							<a href="" id="topic">话题</a>
 						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">表白墙</a>
-								</li>
-								<li>
-									<a href="#">心愿墙</a>
-								</li>
-								<li>
-									<a href="#">闲物店</a>
-								</li>
-							</ul>
+						<li>
+							<a href="" id="dengShen">灯神</a>
 						</li>
 					</ul>
 
@@ -136,14 +100,50 @@
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-						<li>
-							<a href="/user/login">登录</a>
+						<!--<div id="signinDiv" hidden=true>-->
+						<li id="signinLI">
+							<a href="/CFIP/cfip/user/signin.html">登录</a>
 						</li>
-						<li ng-hide="userService.isLogin">
-							<a href="/user/register/mobile">注册</a>
+						<!--</div>-->
+						<!--<div id="signupDiv" hidden=true>-->
+						<li id="signupLI" ng-hide="userService.isLogin">
+							<a href="/CFIP/cfip/user/signup.html">注册</a>
 						</li>
-					</ul>
+						<!--</div>-->
+						<!--<div id="userCenterDiv" hidden=true>-->
+						<li id="userCenterLI" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="" id="personalCenter">个人中心</a>
+								</li>
+								<li>
+									<a href="/CFIP/index.html">退出</a>
+								</li>
+							</ul>
+						</li>
+						<!--</div>-->
+						<!--<div id="publishDiv" hidden=true>-->
+						<li id="publishLI" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a herf="" id="addAct">活动</a>
+								</li>
+								<li>
+									<a herf="" id="addTopic">话题</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a herf="" id="addWall">上墙</a>
+								</li>
+							</ul>
+						</li>
+						<!--</div>-->
 
+					</ul>
 				</div>
 				<!-- /.nav-collapse -->
 			</div>
@@ -153,40 +153,74 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-2 col-xs-offset-1 col-md-1 col-md-offset-2 " id="Menu">
-					<ul class="nav nav-sidebar">
-						<li class="active">
-							<a href="#">Overview <span class="sr-only">(current)</span></a>
-						</li>
-						<li>
-							<a href="#">Reports</a>
-						</li>
-						<li>
-							<a href="#">Analytics</a>
-						</li>
-						<li>
-							<a href="#">Export</a>
+				<div class="col-md-1 col-md-offset-1 " id="menu" ">
+					<ul class="nav nav-sidebar ">
+						<li class="active " style="text-align: center;margin: 0px; ">
+								<a href=" " style="padding: 0px; "><span class="glyphicon glyphicon-user " aria-hidden="true " style="color:gray;font-size:50px; "></span></a>
+							<!--<a href=" " style="margin: 0px; "></span></a>-->
+						</li >
+						<li style="text-align: center;margin: 0px; ">
+							<a href=" " style="padding: 0px "><span class="glyphicon glyphicon-envelope " aria-hidden="true " style="color:gray;font-size:50px; "></span></a>
 						</li>
 					</ul>
 				</div>
-				<div class="col-xs-2 col-md-2 ">
-					<ul class="nav nav-sidebar">
-						<li class="active">
-							<a href="#">Overview <span class="sr-only">(current)</span></a>
+				<div class="col-md-2 ">
+					<ul class="nav nav-sidebar ">
+						<li class="active ">
+							<a href="# ">Overview <span class="sr-only ">(current)</span></a>
 						</li>
 						<li>
-							<a href="#">Reports</a>
+							<a href="# ">Reports</a>
 						</li>
 						<li>
-							<a href="#">Analytics</a>
+							<a href="# ">Analytics</a>
 						</li>
 						<li>
-							<a href="#">Export</a>
+							<a href="# ">Export</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar ">
+						<li>
+							<a>asdf</a>
+						</li>
+						<li>
+							<a>asdf</a>
 						</li>
 					</ul>
 				</div>
-				<div class="col-md-5">
-
+				<div class="col-md-7 ">
+					<div class="row ">
+						<div id="messageList" class="col-sm-12" style="min-height: 200px; border:1px solid #1B6D85;">
+							<div class="row">
+								<div class="col-sm-4">
+									发信息的人：
+								</div>
+								<div class="col-sm-5">
+									发送信息的时间：
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									信息内容
+								</div>
+							</div>
+							<hr></hr>
+							
+						</div>
+					</div>
+					<div class="row" style=" border:1px solid #1B6D85;margin-top: 10px;">
+						<div id="chat" class="col-sm-10 form-group" style="margin-top: 10px;">
+							<textarea rows="6" class="form-control"></textarea>
+						</div>
+						<div class="col-sm-2 form-group" style="padding: 0px;margin-top: 10px;padding-right: 10px;">
+							<div style="margin-bottom: 10px;">
+								<button type="button" class="form-control btn btn-block" style="background-color:#269ABC" >发生信息</button>
+							</div>
+							<div >
+								<button class="form-control btn btn-block" style="background-color:#269ABC">发送文件</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -194,8 +228,12 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="../../jquery/jquery-3.2.1.min.js "></script>
-		<script src="../../js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+
+			})
+		</script>
 	</body>
 
 </html>
