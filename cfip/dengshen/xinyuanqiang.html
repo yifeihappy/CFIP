@@ -19,6 +19,7 @@
 		<script src="../../jquery/jquery-3.2.1.min.js "></script>
 		<script src="../../js/bootstrap.min.js"></script>
 		<script src="../../js/dyf/user.js"></script>
+		<script src="../../js/qpj/userIDtianjia.js"></script>
 	</head>
 
 	<body>
@@ -240,17 +241,17 @@
 					<div class="row">
 						<ul class="nav nav-tabs">
 							<li role="presentation" class="active">
-								<a href="../../cfip/dengshen/xinyuanqiang.html?userID=" + userID>
+								<a href="" id="HRxinyuanqiang">
 									<font size="3">心愿墙</font>
 								</a>
 							</li>
-							<li role="presentation">
-								<a href="../../cfip/dengshen/biaobaiqiang.html?userID=" + userID>
+							<li role="presentation" >
+								<a href=""  id="HRbiaobaiqiang">
 									<font size="3">表白墙</font>
 								</a>
 							</li>
 							<li role="presentation">
-								<a href="../../cfip/dengshen/xianwudian.html?userID=" + userID>
+								<a href="" id="HRxianwudian">
 									<font size="3">闲物店</font>
 								</a>
 							</li>
@@ -285,6 +286,7 @@
 		<script>
 			$(document).ready(function() {
 				var userID = isSignIn();
+				userIDtianjia();
 
 				$.ajax({
 					type: "get",
