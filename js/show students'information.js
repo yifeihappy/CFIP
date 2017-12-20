@@ -6,8 +6,9 @@ window.onload = function() {
 		success: function(data, state) {
 			console.log(state);
 			console.log(data);
-			$("#studentname").text(data.Student[0].studentname);
-			$("#studentnumber").text(data.Student[0].studentnumber);
+			$("#studentname").text(data.studentname);
+			$("#studentnumber").text(data.studentnumber);
+			
 		},
 		error: function(data, state) {
 			console.log(state);
