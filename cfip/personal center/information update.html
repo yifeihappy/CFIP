@@ -3,18 +3,21 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
-		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../../css/jh/template2.css" />
+		<title>个人中心-信息更新</title>
+
 		<script type="text/javascript" src="../../jquery/jquery-3.2.1.min.js"></script>
 		<script src="../../js/Cancel.js"></script>
-
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="">
 		<meta name="author" content="">
+		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../css/jh/template2.css" />
 		<link href="../../css/dyf/signup.css" rel="stylesheet" />
+		
+		<script src="../../jquery/jquery-3.2.1.min.js "></script>
+		<script src="../../js/bootstrap.min.js"></script>
+		<script src="../../js/dyf/user.js"></script>
 	</head>
 
 	<body>
@@ -176,178 +179,176 @@
 		</div>
 
 		<div class="container">
-			<div class="row" id="sidebar">
-				<div class="col-sm-2 sidebar">
+			<div class="row row-offcanvas row-offcanvas-right">
+				<div class="col-md-2 sidebar">
 					<ul class="nav nav-pills nav-stacked">
 						<li>
-							<a href="personal information.html" target="_self">基本信息</a>
+							<a href="personal information.html?userID=" + userID target="_self">基本信息</a>
 						</li>
 						<li>
-							<a href="my act.html" target="_self">我的活动</a>
+							<a href="my act.html?userID=" + userID target="_self">我的活动</a>
 						</li>
 						<li>
-							<a href="my topic.html" target="_self">我的话题</a>
+							<a href="my topic.html?userID=" + userID target="_self">我的话题</a>
 						</li>
 						<li>
 							<a href="#">我的消息</a>
 						</li>
 						<li>
-							<a href="my wish.html" target="_self">我的心愿</a>
+							<a href="my wish.html?userID=" + userID target="_self">我的心愿</a>
 						</li>
 						<li>
-							<a href="my express.html" target="_self">我的表白</a>
+							<a href="my express.html?userID=" + userID target="_self">我的表白</a>
 						</li>
 						<li>
-							<a href="my spare things.html" target="_self">我的闲物</a>
+							<a href="my spare things.html?userID=" + userID target="_self">我的闲物</a>
 						</li>
 						<li class="active">
 							<a href="#">个人设置</a>
 						</li>
 					</ul>
 				</div>
-				<div class="col-sm-4 sidebar">
+				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
 						<li role="presentation" class="active">
 							<a>个人资料</a>
 							<li role="presentation">
-								<a href="change passwords.html" target="_self">密码修改</a>
+								<a href="change passwords.html?userID=" + userID target="_self">密码修改</a>
 							</li>
 					</ul>
-					<div>
-						<form class="form-update">
-							<label for="studentName" class="sr-only">User Name</label>
-							<input type="text" id="studentName" class="form-control" placeholder="Student Name" required autofocus>
-							<label for="studentNumber" class="sr-only">Student Number</label>
-							<input type="text" id="studentNumber" class="form-control" placeholder="Student Number" required autofocus>
-							<label for="telephone" class="sr-only">Telephone Number</label>
-							<input type="text" id="telephone" class="form-control" placeholder="Telephone Number" required autofocus>
-							<label for="email" class="sr-only">email</label>
-							<input type="text" id="email" class="form-control" placeholder="Email" required autofocus>
-							<div class="form-group">
-								<label class="sr-only">Sex</label>
-								<select class="form-control" id="sex" required>
-									<!-- ngRepeat: t in actTypeLists -->
-									<option value="Female" class="ng-binding ng-scope">
-										Female
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-									<option value="Male" class="ng-binding ng-scope">
-										Male
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-									<option value="Other" class="ng-binding ng-scope">
-										Other
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-								</select>
-							</div>
-							<div class="form-group">
-								<select class="form-control" id="grade" required="">
-									<option value="1">大一</option>
-									<option value="2">大二</option>
-									<option value="3">大三</option>
-									<option value="4">大四</option>
-									<option value="5">研一</option>
-									<option value="6">研二</option>
-									<option value="7">研三</option>
-									<option value="8">研四</option>
-									<option value="9">研五</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label class="sr-only">College</label>
-								<select class="form-control" id="college" required>
-									<!-- ngRepeat: t in actTypeLists -->
-									<option value="Computer Science" class="ng-binding ng-scope">
-										Computer Science
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-									<option value="Biomedical Sciences" class="ng-binding ng-scope">
-										Biomedical Sciences
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-									<option value="College of Literature" class="ng-binding ng-scope">
-										College of Literature
-									</option>
-									<option value="College of Social Development" class="ng-binding ng-scope">
-										College of Social Development
-									</option>
-									<option value="College of Public Administration" class="ng-binding ng-scope">
-										College of Public Administration
-									</option>
-									<option value="College of Science Education" class="ng-binding ng-scope">
-										College of Science Education
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-									<option value="College of Foreign Languages" class="ng-binding ng-scope">
-										College of Foreign Languages
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-									<option value="College of mathematical Science" class="ng-binding ng-scope">
-										College of mathematical Science
-									</option>
-									<option value="College of Physics and Technology" class="ng-binding ng-scope">
-										College of Physics and Technology
-									</option>
-									<option value="College of Geographical Sciences" class="ng-binding ng-scope">
-										College of Geographical Sciences
-									</option>
-									<!-- end ngRepeat: t in actTypeLists -->
-								</select>
-								<div class="form-group">
-									<label class="sr-only">Major</label>
-									<select class="form-control" id="major" required>
-										<!-- ngRepeat: t in actTypeLists -->
-										<option value="Philosophy" class="ng-binding ng-scope">
-											Philosophy
-										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
-										<option value="International Trade" class="ng-binding ng-scope">
-											International Trade
-										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
-										<option value="Economics" class="ng-binding ng-scope">
-											Economics
-										</option>
-										<option value="Finance" class="ng-binding ng-scope">
-											Finance
-										</option>
-										<option value="Law" class="ng-binding ng-scope">
-											Law
-										</option>
-										<option value="Journalism" class="ng-binding ng-scope">
-											Journalism
-										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
-										<option value="Chemistry" class="ng-binding ng-scope">
-											Chemistry
-										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
-										<option value="Radio and television Art" class="ng-binding ng-scope">
-											Radio and television Art
-										</option>
-										<option value="Vehicle Engineering" class="ng-binding ng-scope">
-											Vehicle Engineering
-										</option>
-										<option value="Environmental Engineering" class="ng-binding ng-scope">
-											Environmental Engineering
-										</option>
-										<!-- end ngRepeat: t in actTypeLists -->
-									</select>
-								</div>
-								<div>
-									<button id="updateSubmmit" class="btn btn-info">保存</button>
-									<button id="updateCancel" class="btn btn-info">取消</button>
-								</div>
-						</form>
-						</div>
 
+					<form class="form-update">
+						<label for="studentName" class="sr-only">User Name</label>
+						<input type="text" id="studentName" class="form-control" placeholder="Student Name" required autofocus>
+						<label for="studentNumber" class="sr-only">Student Number</label>
+						<input type="text" id="studentNumber" class="form-control" placeholder="Student Number" required autofocus>
+						<label for="telephone" class="sr-only">Telephone Number</label>
+						<input type="text" id="telephone" class="form-control" placeholder="Telephone Number" required autofocus>
+						<label for="email" class="sr-only">email</label>
+						<input type="text" id="email" class="form-control" placeholder="Email" required autofocus>
+						<div class="form-group">
+							<label class="sr-only">Sex</label>
+							<select class="form-control" id="sex" required>
+								<!-- ngRepeat: t in actTypeLists -->
+								<option value="Female" class="ng-binding ng-scope">
+									Female
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="Male" class="ng-binding ng-scope">
+									Male
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="Other" class="ng-binding ng-scope">
+									Other
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="form-control" id="grade" required="">
+								<option value="1">大一</option>
+								<option value="2">大二</option>
+								<option value="3">大三</option>
+								<option value="4">大四</option>
+								<option value="5">研一</option>
+								<option value="6">研二</option>
+								<option value="7">研三</option>
+								<option value="8">研四</option>
+								<option value="9">研五</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label class="sr-only">College</label>
+							<select class="form-control" id="college" required>
+								<!-- ngRepeat: t in actTypeLists -->
+								<option value="Computer Science" class="ng-binding ng-scope">
+									Computer Science
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="Biomedical Sciences" class="ng-binding ng-scope">
+									Biomedical Sciences
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="College of Literature" class="ng-binding ng-scope">
+									College of Literature
+								</option>
+								<option value="College of Social Development" class="ng-binding ng-scope">
+									College of Social Development
+								</option>
+								<option value="College of Public Administration" class="ng-binding ng-scope">
+									College of Public Administration
+								</option>
+								<option value="College of Science Education" class="ng-binding ng-scope">
+									College of Science Education
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="College of Foreign Languages" class="ng-binding ng-scope">
+									College of Foreign Languages
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+								<option value="College of mathematical Science" class="ng-binding ng-scope">
+									College of mathematical Science
+								</option>
+								<option value="College of Physics and Technology" class="ng-binding ng-scope">
+									College of Physics and Technology
+								</option>
+								<option value="College of Geographical Sciences" class="ng-binding ng-scope">
+									College of Geographical Sciences
+								</option>
+								<!-- end ngRepeat: t in actTypeLists -->
+							</select>
+							<div class="form-group">
+								<label class="sr-only">Major</label>
+								<select class="form-control" id="major" required>
+									<!-- ngRepeat: t in actTypeLists -->
+									<option value="Philosophy" class="ng-binding ng-scope">
+										Philosophy
+									</option>
+									<!-- end ngRepeat: t in actTypeLists -->
+									<option value="International Trade" class="ng-binding ng-scope">
+										International Trade
+									</option>
+									<!-- end ngRepeat: t in actTypeLists -->
+									<option value="Economics" class="ng-binding ng-scope">
+										Economics
+									</option>
+									<option value="Finance" class="ng-binding ng-scope">
+										Finance
+									</option>
+									<option value="Law" class="ng-binding ng-scope">
+										Law
+									</option>
+									<option value="Journalism" class="ng-binding ng-scope">
+										Journalism
+									</option>
+									<!-- end ngRepeat: t in actTypeLists -->
+									<option value="Chemistry" class="ng-binding ng-scope">
+										Chemistry
+									</option>
+									<!-- end ngRepeat: t in actTypeLists -->
+									<option value="Radio and television Art" class="ng-binding ng-scope">
+										Radio and television Art
+									</option>
+									<option value="Vehicle Engineering" class="ng-binding ng-scope">
+										Vehicle Engineering
+									</option>
+									<option value="Environmental Engineering" class="ng-binding ng-scope">
+										Environmental Engineering
+									</option>
+									<!-- end ngRepeat: t in actTypeLists -->
+								</select>
+							</div>
+							<div>
+								<button id="updateSubmmit" class="btn btn-info">保存</button>
+								<button id="updateCancel" class="btn btn-info">取消</button>
+							</div>
+					</form>
 					</div>
 
 				</div>
-				<div class="col-sm-6 " id="sidebar">
+				<div class="col-md-3 sidebar-offcanvas" id="sidebar">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<img src="../../img/logo.png" width="44px" height="44px" />
 							<span>猜你喜欢</span>
 						</div>
@@ -360,117 +361,106 @@
 						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
 						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
 					</div>
-					<!--<div class="list-group">
-						<a href="#" class="list-group-item active">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-						<a href="#" class="list-group-item">Link</a>
-					</div>-->
+
 				</div>
-
 			</div>
-
+		</div>
 	</body>
 	<script>
 		$(document).ready(function() {
-					var originalpassword;
-					$.ajax({
-						type: "get",
-						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513502243526",
-						async: true,
-						success: function(data, state) {
-							console.log(state);
-							console.log(data);
-							$("#studentName").val(data.studentname);
-							$("#studentNumber").val(data.studentnumber);
-							$("#telephone").val(data.telephone);
-							$("#email").val(data.email);
-							originalpassword = data.password;
-							//下拉框选择原来的性别
-							for(var i = 0; i < document.getElementById("sex").options.length; i++) {
-								if(document.getElementById("sex").options[i].value == data.sex) {
-									document.getElementById("sex").options[i].selected = true;
-									break;
-								}
-							}
-							//下拉框选择原来的年级
-							for(var i = 0; i < document.getElementById("grade").options.length; i++) {
-								if(document.getElementById("grade").options[i].value == data.grade) {
-									document.getElementById("grade").options[i].selected = true;
-									break;
-								}
-							}
-							//下拉框选择原来的学院
-							for(var i = 0; i < document.getElementById("college").options.length; i++) {
-								if(document.getElementById("college").options[i].value == data.college) {
-									document.getElementById("college").options[i].selected = true;
-									break;
-								}
-							}
 
-							//下拉框选择原来的专业
-							for(var i = 0; i < document.getElementById("major").options.length; i++) {
-								if(document.getElementById("major").options[i].value == data.major) {
-									document.getElementById("major").options[i].selected = true;
-									break;
-								}
-							}
-						},
-						error: function(data, state) {
-							console.log(state);
-							console.log(data);
+			var userID = isSignIn();
+			var originalpassword;
+			$.ajax({
+				type: "get",
+				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513502243526",
+				async: true,
+				success: function(data, state) {
+					console.log(state);
+					console.log(data);
+					$("#studentName").val(data.studentname);
+					$("#studentNumber").val(data.studentnumber);
+					$("#telephone").val(data.telephone);
+					$("#email").val(data.email);
+					originalpassword = data.password;
+					//下拉框选择原来的性别
+					for(var i = 0; i < document.getElementById("sex").options.length; i++) {
+						if(document.getElementById("sex").options[i].value == data.sex) {
+							document.getElementById("sex").options[i].selected = true;
+							break;
 						}
-					});
+					}
+					//下拉框选择原来的年级
+					for(var i = 0; i < document.getElementById("grade").options.length; i++) {
+						if(document.getElementById("grade").options[i].value == data.grade) {
+							document.getElementById("grade").options[i].selected = true;
+							break;
+						}
+					}
+					//下拉框选择原来的学院
+					for(var i = 0; i < document.getElementById("college").options.length; i++) {
+						if(document.getElementById("college").options[i].value == data.college) {
+							document.getElementById("college").options[i].selected = true;
+							break;
+						}
+					}
 
-					$('#updateSubmmit').click(function() {
-						var UserInfo = {
-							studentname: $("#studentName").val(),
-							studentnumber: $("#studentNumber").val(),
-							telephone: $("#telephone").val(),
-							email: $("#email").val(),
-							sex: $("#sex").val(),
-							grade: $("#grade").val(),
-							college: $("#college").val(),
-							major: $("#major").val(),
-							password: originalpassword,
-						};
-						console.log(UserInfo.studentname + "," + UserInfo.studentnumber + "," + UserInfo.telephone +
-							"," + UserInfo.email + "," + UserInfo.sex + "," + UserInfo.grade + "," + UserInfo.college +
-							"," + UserInfo.major + "," + UserInfo.password);
+					//下拉框选择原来的专业
+					for(var i = 0; i < document.getElementById("major").options.length; i++) {
+						if(document.getElementById("major").options[i].value == data.major) {
+							document.getElementById("major").options[i].selected = true;
+							break;
+						}
+					}
+				},
+				error: function(data, state) {
+					console.log(state);
+					console.log(data);
+				}
+			});
 
-						var dataJsonStr = JSON.stringify(UserInfo);
-						console.log(dataJsonStr);
-						$.ajax({
-							url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513502243526",
-							contentType: "application/json",
-							type: "PUT",
-							data: dataJsonStr,
-							async: true,
-							error: function(data, state) {
-								console.log(data);
-								console.log(state);
-							},
-							success: function(data, state) {
-								console.log(state);
-								console.log(data);
-							}
-						});
-						return false;
-					});
+			$('#updateSubmmit').click(function() {
+				var UserInfo = {
+					studentname: $("#studentName").val(),
+					studentnumber: $("#studentNumber").val(),
+					telephone: $("#telephone").val(),
+					email: $("#email").val(),
+					sex: $("#sex").val(),
+					grade: $("#grade").val(),
+					college: $("#college").val(),
+					major: $("#major").val(),
+					password: originalpassword,
+				};
+				console.log(UserInfo.studentname + "," + UserInfo.studentnumber + "," + UserInfo.telephone +
+					"," + UserInfo.email + "," + UserInfo.sex + "," + UserInfo.grade + "," + UserInfo.college +
+					"," + UserInfo.major + "," + UserInfo.password);
 
-		
-				$('#updateCancel').click(function() {
-						var indexUrl = encodeURI("information update.html?userID=" + "1513502243526");
-						console.log(indexUrl);
-						window.location.href = indexUrl;
-
+				var dataJsonStr = JSON.stringify(UserInfo);
+				console.log(dataJsonStr);
+				$.ajax({
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513502243526",
+					contentType: "application/json",
+					type: "PUT",
+					data: dataJsonStr,
+					async: true,
+					error: function(data, state) {
+						console.log(data);
+						console.log(state);
+					},
+					success: function(data, state) {
+						console.log(state);
+						console.log(data);
+					}
 				});
+				return false;
+			});
+
+			$('#updateCancel').click(function() {
+				var indexUrl = encodeURI("information update.html?userID=" + "1513502243526");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+
+			});
 		});
 	</script>
 
