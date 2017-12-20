@@ -304,22 +304,22 @@
 				/**********判断用户有无登录 end*********/
 				$("#adddengshenSubmit").click(function() {
 
-										var dengshenObject = {
-											title: $("#dengshenTitle").val(),
-											content: $("#dengshenContent").val(),
-										    publishtime: getFormatDate(),
-										    userid: parseInt(userID),
-											type: $("#dengshenType").val(),
-										    state: "0"
+					var dengshenObject = {
+						title: $("#dengshenTitle").val(),
+						content: $("#dengshenContent").val(),
+						publishtime: getFormatDate(),
+						userid: parseInt(userID),
+						type: $("#dengshenType").val(),
+						state: "0"
 
-//					var dengshenObject = {
-//						title: "This is xianwu3.",
-//						content: "This is xianwu3.",
-//						publishtime: "2017-12-22T12:00",
-//						userid: 1513502243526,
-//						type: "3",
-//						state: "0"
-				};
+						//					var dengshenObject = {
+						//						title: "This is xianwu3.",
+						//						content: "This is xianwu3.",
+						//						publishtime: "2017-12-22T12:00",
+						//						userid: 1513502243526,
+						//						type: "3",
+						//						state: "0"
+					};
 
 					var dataJsonStr = JSON.stringify(dengshenObject);
 					console.log(dataJsonStr);
@@ -336,6 +336,11 @@
 						success: function(data, state) {
 							console.log(state);
 							console.log(data);
+							
+							var indexUrl = encodeURI("/CFIP/cfip/dengshen/xinyuanqiang.html?userID=" + userID);
+							console.log(indexUrl);
+							window.location.href = indexUrl;
+							return false;
 						}
 					});
 					return false;
