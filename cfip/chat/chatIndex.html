@@ -9,7 +9,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>Off Canvas Template for Bootstrap</title>
+		<title>1513685380811</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 		<script src="../../jquery/jquery-3.2.1.min.js "></script>
 		<script src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../js/dyf/user.js"></script>
-		<script type="text/javascript" src="../../js/dyf/chatIndex.js" ></script>
+		<script type="text/javascript" src="../../js/dyf/chatIndex.js"></script>
 	</head>
 
 	<body>
@@ -176,51 +176,58 @@
 				</div>
 				<!--</div class="col-md-2 ">-->
 				<div class="col-md-7 ">
-					<div class="row ">
-						<div id="messagePlane" class="col-sm-12 " style="min-height: 200px; border:1px solid #1B6D85; ">
-							<div class="row">
-								<div class="col-sm-1 you-img">
-									<span class="glyphicon glyphicon-user you-glyphicon"></span>
-								</div>
-								<div class="col-sm-8 you-msg">
-									<div class="row ">
-										<div class="col-sm-5 ">
-											发信息的人：
-										</div>
-										<div class="col-sm-5 ">
-											发送信息的时间：
-										</div>
-									</div>
-									<hr></hr>
-									<div class="row">
-										<div class="col-sm-10 ">
-											信息内容
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="row" style="min-height: 20px; border:2px solid crimson; ">
+						<div class="col-sm-3" id="diaglogUser">
 
-							<div class="row ">
-								<div class="col-sm-8 col-sm-offset-3 i-msg">
-									<div class="row ">
-										<div class="col-sm-5 ">
-											发信息的人：
-										</div>
-										<div class="col-sm-5 ">
-											发送信息的时间：
-										</div>
+						</div>
+					</div>
+					<div class="row">
+						<div id="allMessagePlane" class="col-sm-12 " style="min-height: 200px; border:1px solid #1B6D85; ">
+
+							<!--<div id="messagePlane">
+								<div class="row">
+									<div class="col-sm-1 you-img">
+										<span class="glyphicon glyphicon-user you-glyphicon"></span>
 									</div>
-									<hr></hr>
-									<div class="row">
-										<div class="col-sm-10 ">
-											信息内容
+									<div class="col-sm-8 you-msg">
+										<div class="row ">
+											<div class="col-sm-5 ">
+												发信息的人：
+											</div>
+											<div class="col-sm-5 ">
+												发送信息的时间：
+											</div>
+										</div>
+										<hr></hr>
+										<div class="row">
+											<div class="col-sm-10 ">
+												信息内容
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-1 i-img">
-									<span class="glyphicon glyphicon-user i-glyphicon"></span>
+								<div class="row ">
+									<div class="col-sm-8 col-sm-offset-3 i-msg">
+										<div class="row ">
+											<div class="col-sm-5 ">
+												发信息的人：
+											</div>
+											<div class="col-sm-5 ">
+												发送信息的时间：
+											</div>
+										</div>
+										<hr></hr>
+										<div class="row">
+											<div class="col-sm-10 ">
+												信息内容
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-1 i-img">
+										<span class="glyphicon glyphicon-user i-glyphicon"></span>
+									</div>
 								</div>
-							</div>
+							</div>-->
 
 						</div>
 					</div>
@@ -249,58 +256,21 @@
 		<script>
 			var userID;
 			var userIDMsgTriggerID;
-			var curYID; //当前对话窗口的对方用户ID
+			var curYID = ""; //当前对话窗口的对方用户ID
 			var curYIDMsgTriggerID;
 			var studentArray;
 			var teacherArray;
+			var msgPlaneMap = {}; //记录所有的MessagePlane
+			var source;
 			$(document).ready(function() {
 				userID = isSignIn(); //判断用户有没有登录进行页面变化
-				userID = "1513685359511";
-				curYID = "1513685380811";
+				userID = "1513685380811";
+				//curYID = "1513685359511";
 				userIDMsgTriggerID = getMessageTrigger(userID);
-				curYIDMsgTriggerID = getMessageTrigger(curYID);
-				studentURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/";
-				teacherURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Teacher/";
-				$.ajax({
-					type: "get",
-					url: studentURL,
-					async: false,
-					success: function(studentArrayObj, state) {
-						console.log("查询Student" + state);
-						console.log(studentArrayObj);
-						studentArray = studentArrayObj.Student;
-					},
-					error: function(data, state) {
-						console.log("查询Student失败" + state);
-					}
-				});
-
-				$.ajax({
-					type: "get",
-					url: teacherURL,
-					async: false,
-					success: function(teacherArrayObj, state) {
-						console.log("查询Teacher" + state);
-						console.log(teacherArrayObj);
-					},
-					error: function(data, state) {
-						console.log("查询Student失败" + state);
-					}
-				});
-
-				for(var i = 0; i < studentArray.length; i++) {
-					if(studentArray[i].studentnumber == userID) {
-						continue;
-					}
-					var studentA = $("<a href=''></a>").text(studentArray[i].studentname + "\n" + studentArray[i].studentnumber);
-					var studentLi = $("<li></li>").attr("id", studentArray[i].studentnumber);
-					studentLi.append(studentA);
-					$("#contactsUl").append(studentLi);
-					$("#" + studentArray[i].studentnumber).click(function() {
-						window.event.returnValue = false;
-						console.log(this.id);
-					});
-				}
+				source = new EventSource("http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/" + userIDMsgTriggerID + "/syncronize");
+				creatContactList();
+				console.log("监听：" + userIDMsgTriggerID);
+				listenToMessageTrigger();
 
 				$("#contactsMenu").click(function() {
 					$("#contactsUl").show();
@@ -315,66 +285,69 @@
 				});
 
 				$("#sendBtn").click(function() {
-					var msg = $("#messageTextarea").val(); //获取当前textarea文本框里的消息
-					console.log(msg);
-					if("" == msg) {
-						alert("输入信息不能为空！");
+					if(curYID == "") {
+						alert("请先选中联系人");
 					} else {
-						$("#messageTextarea").val(""); //清空
+						var msg = $("#messageTextarea").val(); //获取当前textarea文本框里的消息
+						console.log(msg);
+						if("" == msg) {
+							alert("输入信息不能为空！");
+						} else {
+							$("#messageTextarea").val(""); //清空
 
-						var currentTime = getFormatDate(); //获取当前时间
-						/***改变当前的页面，添加自己发送信息的内容******/
-						createIMsgItem(userID, currentTime, msg);
-						//createYMsgItem(userID, currentTime, msg);
+							var currentTime = getFormatDate(); //获取当前时间
+							/***改变当前的页面，添加自己发送信息的内容******/
+							var myNewItem = createIMsgItem(userID, currentTime, msg);
 
-						
+							msgPlaneMap["Tr" + curYID].append(myNewItem);
+							//createYMsgItem(userID, currentTime, msg);
 
+							/******发送信息******/
+							var msgIObj = {
+								fromuserid: parseInt(userID),
+								touserid: parseInt(curYID),
+								msgcontent: msg,
+								state: "1",
+								msgtime: currentTime,
+								type: "1"
+							};
+							var msgJsonStr = JSON.stringify(msgIObj);
+							console.log(msgJsonStr);
+							$.ajax({
+								type: "POST",
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/",
+								contentType: "application/json",
+								data: msgJsonStr,
+								async: true,
+								success: function(data, state) {
+									console.log("发送信息成功");
+									//改变对方监听的数据
+									var msgTriggerObj = {
+										userid: parseInt(curYID),
+										state: "1"
+									};
+									var msgJsonStrTr = JSON.stringify(msgTriggerObj);
+									console.log("改变触发器：" + msgJsonStrTr +":"+1);
+									$.ajax({
+										type: "put",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/" + curYIDMsgTriggerID,
+										contentType: "application/json",
+										data: msgJsonStrTr,
+										async: true,
+										success: function(data, state) {
+											console.log("trigger success");
+										},
+										error: function(data, state) {
+											console.log("trigger fialier!");
+										}
+									});
+								},
+								error: function(data, state) {
+									alert("发送信息失败！");
+								}
+							});
 
-//						/******发送信息******/
-//						var msgIObj = {
-//							fromuserid: parseInt(userID),
-//							touserid: parseInt(curYID),
-//							msgcontent: msg,
-//							state: "1",
-//							msgtime: currentTime,
-//							type: "1"
-//						};
-//						var msgJsonStr = JSON.stringify(msgIObj);
-//						console.log(msgJsonStr);
-//						$.ajax({
-//							type: "POST",
-//							url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/",
-//							contentType: "application/json",
-//							data: msgJsonStr,
-//							async: true,
-//							success: function(data, state) {
-//								console.log("发送信息成功");
-//								var msgTriggerObj = {
-//									userid: curYID,
-//									state: "1"
-//								};
-//								var msgJsonStrTr = JSON.stringify(msgTriggerObj);
-//								$.ajax({
-//									type: "put",
-//									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/" + curYIDMsgTriggerID,
-//									contentType: "application/json",
-//									data: msgJsonStrTr,
-//									async: true,
-//									success:function(data,state) {
-//										console.log("trigger success");
-//									},
-//									error:function(data, state) {
-//										console.log("trigger fialier!");
-//									}
-//								});
-//							},
-//							error: function(data, state) {
-//								alert("发送信息失败！");
-//							}
-//						});
-
-
-
+						}
 					}
 
 				});
@@ -382,8 +355,7 @@
 				$("#sendFileBtn").click(function() {
 
 				});
-		})
-
+			})
 		</script>
 	</body>
 

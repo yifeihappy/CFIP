@@ -9,7 +9,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>1513790630135</title>
+		<title>1513798219925</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -184,50 +184,6 @@
 					<div class="row">
 						<div id="allMessagePlane" class="col-sm-12 " style="min-height: 200px; border:1px solid #1B6D85; ">
 
-							<!--<div id="messagePlane">
-								<div class="row">
-									<div class="col-sm-1 you-img">
-										<span class="glyphicon glyphicon-user you-glyphicon"></span>
-									</div>
-									<div class="col-sm-8 you-msg">
-										<div class="row ">
-											<div class="col-sm-5 ">
-												发信息的人：
-											</div>
-											<div class="col-sm-5 ">
-												发送信息的时间：
-											</div>
-										</div>
-										<hr></hr>
-										<div class="row">
-											<div class="col-sm-10 ">
-												信息内容
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row ">
-									<div class="col-sm-8 col-sm-offset-3 i-msg">
-										<div class="row ">
-											<div class="col-sm-5 ">
-												发信息的人：
-											</div>
-											<div class="col-sm-5 ">
-												发送信息的时间：
-											</div>
-										</div>
-										<hr></hr>
-										<div class="row">
-											<div class="col-sm-10 ">
-												信息内容
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-1 i-img">
-										<span class="glyphicon glyphicon-user i-glyphicon"></span>
-									</div>
-								</div>
-							</div>-->
 
 						</div>
 					</div>
@@ -264,7 +220,7 @@
 			var source;
 			$(document).ready(function() {
 				userID = isSignIn(); //判断用户有没有登录进行页面变化
-				userID = "1513790630135";
+				userID = "1513798219925";
 				userIDMsgTriggerID = getMessageTrigger(userID);
 				source = new EventSource("http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/" + userIDMsgTriggerID + "/syncronize");
 				creatContactList();
