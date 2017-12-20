@@ -1,7 +1,45 @@
 .sidebar {
 	border: 5px green;
 }
-#menu ul li{
+
+#menu ul li {
 	content: 50px;
 }
 
+hr {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.you-img {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.you-msg {
+	border: 1px red solid;
+	margin-top: 15px;
+	margin-left: 10px;
+}
+
+.i-msg {
+	border: 1px blue solid;
+	margin-top: 15px;
+}
+
+.i-img {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.i-glyphicon {
+	color: blue;
+	font-size: 40px;
+	border: blue 1px solid;
+}
+
+.you-glyphicon {
+	color: red;
+	font-size: 40px;
+	border: red 1px solid;
+}

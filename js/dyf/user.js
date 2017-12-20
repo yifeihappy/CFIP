@@ -3,16 +3,16 @@ function isSignIn() {
 	var urlParam = decodeURI(window.location.href);
 	var urlParamArray = urlParam.split("userID=");
 	if(urlParamArray.length != 1) {
-//		console.log(urlParamArray[1]);
-//		userID = urlParamArray[1].substr(1);
-//		console.log(userID);
+		//		console.log(urlParamArray[1]);
+		//		userID = urlParamArray[1].substr(1);
+		//		console.log(userID);
 		userID = urlParamArray[1];
 		console.log(userID);
 
 	} else {
 		console.log("User has not login in!");
 	}
-
+	//user has not signed in
 	if("" == userID) {
 		console.log("userID==null");
 		$("#userCenterLI").hide();
@@ -48,6 +48,15 @@ function isSignIn() {
 		if($("#dengShen").length > 0) {
 			$("#dengShen").click(function() {
 				var indexUrl = encodeURI("/CFIP/cfip/dengshen/xinyuanqiang.html");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+
+		if($("#CFIP").length > 0) {
+			$("#CFIP").click(function() {
+				var indexUrl = encodeURI("/CFIP/index.html");
 				console.log(indexUrl);
 				window.location.href = indexUrl;
 				return false;
@@ -119,6 +128,23 @@ function isSignIn() {
 				window.location.href = indexUrl;
 				return false;
 			});
+		}
+		if($("#CFIP").length > 0) {
+			$("#CFIP").click(function() {
+				var indexUrl = encodeURI("/CFIP/index.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			})
+		}
+
+		if($("#userCenterID").length > 0) {
+			$("#userCenterID").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/personal center/my act.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			})
 		}
 		return userID;
 	}

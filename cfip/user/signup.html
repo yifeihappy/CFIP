@@ -17,13 +17,14 @@
 		<link href="../../css/dyf/signup.css" rel="stylesheet">
 		<script src="../../jquery/jquery-3.2.1.min.js"></script>
 	</head>
+
 	<body>
 		<div class="container">
 			<form class="form-signup">
 				<h2 class="form-signup-heading">Please sign up</h2>
 				<label for="studentName" class="sr-only">User Name</label>
 				<input type="text" id="studentName" class="form-control" placeholder="Student Name" required autofocus>
-				<label for="studentNumber" class="sr-only">Student Number</label>
+				<label for="studentNumber" oninvalid="setCustomValidity('学号不能为空')" oninput="setCustomValidity('')" class="sr-only">Student Number</label>
 				<input type="text" id="studentNumber" class="form-control" placeholder="Student Number" required autofocus>
 				<label for="telephone" class="sr-only">Telephone Number</label>
 				<input type="text" id="telephone" class="form-control" placeholder="Telephone Number" required autofocus>
@@ -162,44 +163,108 @@
 			<!-- /container -->
 			<script>
 				$(document).ready(function() {
-					$('#signUpSubmit').click(function()
-						{
-						var UserInfo = {
-							studentname: $("#studentName").val(),
-							studentnumber: $("#studentNumber").val(),
-							telephone: $("#telephone").val(),
-							email: $("#email").val(),
-							sex: $("#sex").val(),
-							grade: $("#grade").val(),
-							college: $("#college").val(),
-							major: $("#major").val(),
-							password: $("#password").val()
-						};
-						console.log(UserInfo.studentname + "," + UserInfo.studentnumber + "," + UserInfo.telephone +
-							"," + UserInfo.email + "," + UserInfo.sex + "," + UserInfo.grade + "," + UserInfo.college +
-							"," + UserInfo.major + "," + UserInfo.password);
+					$('#signUpSubmit').click(function() {
 
-						var dataJsonStr = JSON.stringify(UserInfo);
-						console.log(dataJsonStr);
-						$.ajax({
-							url:"http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/",
-							contentType: "application/json",
-							type: "POST",
-							data: dataJsonStr,
-							async: true,
-							error: function(data, state) {
-								//console.log(dataJsonStr);
-								console.log(data);
-								console.log(state);
-							},
-							success: function(data, state) {
-								console.log(state);
-								console.log(data);
-							}
-						});
-						return false;
-					}
-				);
+						if($("#studentName").val() != "" && $("#studentNumber").val() != "" && $("#telephone").val() != "" &&
+							$("#email").val() != "" && $("#password").val() != "") {
+							var UserInfo = {
+								studentname: $("#studentName").val(),
+								studentnumber: $("#studentNumber").val(),
+								telephone: $("#telephone").val(),
+								email: $("#email").val(),
+								sex: $("#sex").val(),
+								grade: $("#grade").val(),
+								college: $("#college").val(),
+								major: $("#major").val(),
+								password: $("#password").val()
+							};
+							window.event.returnValue = false;
+							//						var UserInfo = {
+							//							studentname: "student1",
+							//							studentnumber: "20170923445",
+							//							telephone: "18819473234",
+							//							email: "1477675362@qq.com",
+							//							sex: "Male",
+							//							grade: "1",
+							//							college: "Computer Science",
+							//							major: "Philosophy",
+							//							password: "123456"
+							//						};
+							var userID = "";
+							//						console.log(UserInfo.studentname + "," + UserInfo.studentnumber + "," + UserInfo.telephone +
+							//							"," + UserInfo.email + "," + UserInfo.sex + "," + UserInfo.grade + "," + UserInfo.college +
+							//							"," + UserInfo.major + "," + UserInfo.password);
+							console.log($("#studentNumber").val());
+							var exitUrl = encodeURI("http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.studentnumber=" + $("#studentNumber").val());
+							console.log(exitUrl);
+							$.ajax({
+								type: "get",
+								url: exitUrl,
+								async: false,
+								success: function(data, state) {
+									console.log("是否存在：");
+									console.log(data);
+									console.log(JSON.stringify(data));
+									console.log(state);
+									if(JSON.stringify(data) == "{}") {
+										console.log("不存在")
+										var dataJsonStr = JSON.stringify(UserInfo);
+										console.log(dataJsonStr);
+										$.ajax({
+											url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/",
+											contentType: "application/json",
+											type: "POST",
+											data: dataJsonStr,
+											async: false,
+											error: function(data, state) {
+												//console.log(dataJsonStr);
+												console.log(data);
+												console.log("Student:" + state);
+											},
+											success: function(data, state) {
+												console.log("Student:" + state);
+												console.log(data);
+												userID = data.id;
+												var msgListen = {
+													userid: data.id,
+													state: "0"
+												};
+												var jsonMsgListenStr = JSON.stringify(msgListen);
+												console.log(jsonMsgListenStr);
+												$.ajax({
+													type: "post",
+													url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/",
+													data: jsonMsgListenStr,
+													contentType: "application/json",
+													async: false,
+													success: function(data, state) {
+														console.log(data);
+														console.log("Messagetrigger:" + state);
+
+														var indexUrl = encodeURI("../../index.html?userID=" + userID);
+														console.log(indexUrl);
+														window.location.href = indexUrl;
+													},
+													error: function(data, state) {
+														console.log("Messagetrigger:" + state);
+													}
+												})
+											}
+										});
+										return false;
+									} else {
+										console.log("学号已存在");
+										return false;
+									}
+
+								},
+								error: function(data, state) {
+									console.log("查询学号是否存在失败");
+									return false;
+								}
+							});
+						}
+					});
 				});
 			</script>
 	</body>

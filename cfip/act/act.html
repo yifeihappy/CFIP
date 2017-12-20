@@ -37,7 +37,7 @@
 							<img src="../../img/logo.png" width="44px" height="44px" />
 						</li>
 						<li>
-							<a href="#" style="text-decoration:none">CPFI</a>
+							<a href="" id="CFIP" style="text-decoration:none">CFIP</a>
 						</li>
 					</div>
 				</div>
@@ -238,7 +238,7 @@
 		</div>
 
 		<div id="act-thumbnails" class="container">
-			<div class="row">
+			<!--<div class="row">
 				<a href="/CFIP/index.html?userID=123345">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="row">
@@ -257,7 +257,7 @@
 						<hr />
 					</div>
 				</a>
-			</div>
+			</div>-->
 		</div>
 
 		<div class="container" id="page-navgation">
@@ -318,7 +318,7 @@
 							var pAddr = $("<p></p>").text("活动地点：" + data.Activity[i].actaddress);
 							var pActTime = $("<p></p>").text("活动时间：" + data.Activity[i].actstart + "至" + data.Activity[i].actend);
 							var pSponser = $("<p></p>").text("主办单位：" + data.Activity[i].actsponser);
-							var pNumber = $("<p></p>").text("报名人数：" + data.Activity[i].participantnumber + "|" + data.Activity[i].totalNumber);
+							var pNumber = $("<p></p>").text("报名人数：" + data.Activity[i].participantnumber + "|" + data.Activity[i].totalnumber);
 							var pApplyEnd = $("<p></p>").text("报名截止：" + data.Activity[i].applyend);
 							var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
 							divCaption.append(hTitle, pAddr, pActTime, pSponser, pNumber, pApplyEnd);
