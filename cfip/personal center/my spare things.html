@@ -11,6 +11,7 @@
 		<script src="../../jquery/jquery-3.2.1.min.js "></script>
 		<script src="../../js/bootstrap.min.js"></script>
 		<script src="../../js/dyf/user.js"></script>
+		<script src="../../js/qpj/userIDtianjia.js"></script> 
 	</head>
 
 	<body>
@@ -174,30 +175,30 @@
 		<div class="container">
 			<div class="row row-offcanvas row-offcanvas-right">
 				<div class="col-md-2 sidebar">
-					<ul  class="nav nav-pills nav-stacked">
+					<ul class="nav nav-pills nav-stacked">
 						<li>
-							<a href="personal information.html" target="_self">基本信息</a>
+							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
 						</li>
 						<li>
-							<a href="my act.html?userID=" + userID target="_self">我的活动</a>
+							<a href="" target="_self" id="HRmyact">我的活动</a>
 						</li>
 						<li>
-							<a href="my topic.html?userID=" + userID target="_self">我的话题</a>
+							<a href="" target="_self" id="HRmytopic">我的话题</a>
 						</li>
 						<li>
-							<a href="#">我的消息</a>
+							<a href="" id="HRmymessage">我的消息</a>
 						</li>
 						<li>
-							<a href="my wish.html?userID=" + userID>我的心愿</a>
+							<a href="" id="HRmywish">我的心愿</a>
 						</li>
 						<li>
-							<a href="my express.html?userID=" + userID>我的表白</a>
+							<a href="" id="HRmyexpress">我的表白</a>
 						</li>
 						<li class="active">
-							<a href="my spare things.html?userID=" + userID>我的闲物</a>
+							<a href="" id="HRmysparethings">我的闲物</a>
 						</li>
-						<li>
-							<a href="information update.html?userID=" + userID target="_self">个人设置</a>
+						<li >
+							<a href="" target="_self" id="HRinformationupdate">个人设置</a>
 						</li>
 					</ul>
 				</div>
@@ -255,6 +256,7 @@
 		<script>
 			$(document).ready(function() {
 				var userID = isSignIn();
+				userIDtianjia();
 
 				$.ajax({
 					type: "get",
@@ -265,7 +267,7 @@
 						console.log(state);
 						console.log(data);
 						for(var i = data.Dengshen.length - 1; i >= 0; i--) {
-							if(userI == data.Dengshen[i].userid) 
+							if(userID == data.Dengshen[i].userid) 
 							{
 								var dType = data.Dengshen[i].type;
 

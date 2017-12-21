@@ -39,6 +39,107 @@ function userIDtianjia() {
 				return false;
 			});
 		}
+		
+		if($("#HRpersonalinformation").length > 0) {
+			$("#HRpersonalinformation").click(function() {
+				var hrefURL = encodeURI("personal information.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmyact").length > 0) {
+			$("#HRmyact").click(function() {
+				var hrefURL = encodeURI("my act.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmytopic").length > 0) {
+			$("#HRmytopic").click(function() {
+				var hrefURL = encodeURI("my topic.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRxinyuanqiang").length > 0) {
+			$("#HRxinyuanqiang").click(function() {
+				var hrefURL = encodeURI("xinyuanqiang.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmymessage").length > 0) {
+			$("#HRmymessage").click(function() {
+				var hrefURL = encodeURI("");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmywish").length > 0) {
+			$("#HRmywish").click(function() {
+				var hrefURL = encodeURI("my wish.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmyexpress").length > 0) {
+			$("#HRmyexpress").click(function() {
+				var hrefURL = encodeURI("my express.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmysparethings").length > 0) {
+			$("#HRmysparethings").click(function() {
+				var hrefURL = encodeURI("my spare things.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRinformationupdate").length > 0) {
+			$("#HRinformationupdate").click(function() {
+				var hrefURL = encodeURI("information update.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRinformationupdate2").length > 0) {
+			$("#HRinformationupdate2").click(function() {
+				var hrefURL = encodeURI("information update.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRchangepasswords").length > 0) {
+			$("#HRchangepasswords").click(function() {
+				var hrefURL = encodeURI("change passwords.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		
 	} else {
 		if($("#HRxinyuanqiang").length > 0) {
 			console.log($("#HRxinyuanqiang").length);
@@ -65,6 +166,108 @@ function userIDtianjia() {
 				return false;
 			});
 		}
+		
+				if($("#HRpersonalinformation").length > 0) {
+			$("#HRpersonalinformation").click(function() {
+				var hrefURL = encodeURI("personal information.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmyact").length > 0) {
+			$("#HRmyact").click(function() {
+				var hrefURL = encodeURI("my act.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmytopic").length > 0) {
+			$("#HRmytopic").click(function() {
+				var hrefURL = encodeURI("my topic.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRxinyuanqiang").length > 0) {
+			$("#HRxinyuanqiang").click(function() {
+				var hrefURL = encodeURI("xinyuanqiang.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmymessage").length > 0) {
+			$("#HRmymessage").click(function() {
+				var hrefURL = encodeURI("");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmywish").length > 0) {
+			$("#HRmywish").click(function() {
+				var hrefURL = encodeURI("my wish.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmyexpress").length > 0) {
+			$("#HRmyexpress").click(function() {
+				var hrefURL = encodeURI("my express.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRmysparethings").length > 0) {
+			$("#HRmysparethings").click(function() {
+				var hrefURL = encodeURI("my spare things.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRinformationupdate").length > 0) {
+			$("#HRinformationupdate").click(function() {
+				var hrefURL = encodeURI("information update.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRinformationupdate2").length > 0) {
+			$("#HRinformationupdate2").click(function() {
+				var hrefURL = encodeURI("information update.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRchangepasswords").length > 0) {
+			$("#HRchangepasswords").click(function() {
+				var hrefURL = encodeURI("change passwords.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		
+		
 	}
 	//     "../../cfip/dengshen/xinyuanqiang.html?userID=" + userID;
 

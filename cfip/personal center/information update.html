@@ -5,8 +5,6 @@
 		<meta charset="UTF-8">
 		<title>个人中心-信息更新</title>
 
-		<script type="text/javascript" src="../../jquery/jquery-3.2.1.min.js"></script>
-		<script src="../../js/Cancel.js"></script>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
@@ -14,10 +12,11 @@
 		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/jh/template2.css" />
 		<link href="../../css/dyf/signup.css" rel="stylesheet" />
-		
+
 		<script src="../../jquery/jquery-3.2.1.min.js "></script>
 		<script src="../../js/bootstrap.min.js"></script>
 		<script src="../../js/dyf/user.js"></script>
+		<script src="/CFIP/js/qpj/userIDtianjia.js"></script>
 	</head>
 
 	<body>
@@ -183,28 +182,28 @@
 				<div class="col-md-2 sidebar">
 					<ul class="nav nav-pills nav-stacked">
 						<li>
-							<a href="personal information.html?userID=" + userID target="_self">基本信息</a>
+							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
 						</li>
 						<li>
-							<a href="my act.html?userID=" + userID target="_self">我的活动</a>
+							<a href="" target="_self" id="HRmyact">我的活动</a>
 						</li>
 						<li>
-							<a href="my topic.html?userID=" + userID target="_self">我的话题</a>
+							<a href="" target="_self" id="HRmytopic">我的话题</a>
 						</li>
 						<li>
-							<a href="#">我的消息</a>
+							<a href="" id="HRmymessage">我的消息</a>
 						</li>
 						<li>
-							<a href="my wish.html?userID=" + userID target="_self">我的心愿</a>
+							<a href="" id="HRmywish">我的心愿</a>
 						</li>
 						<li>
-							<a href="my express.html?userID=" + userID target="_self">我的表白</a>
+							<a href="" id="HRmyexpress">我的表白</a>
 						</li>
 						<li>
-							<a href="my spare things.html?userID=" + userID target="_self">我的闲物</a>
+							<a href="" id="HRmysparethings">我的闲物</a>
 						</li>
 						<li class="active">
-							<a href="#">个人设置</a>
+							<a href="" target="_self" id="HRinformationupdate">个人设置</a>
 						</li>
 					</ul>
 				</div>
@@ -212,9 +211,10 @@
 					<ul class="nav nav-tabs">
 						<li role="presentation" class="active">
 							<a>个人资料</a>
-							<li role="presentation">
-								<a href="change passwords.html?userID=" + userID target="_self">密码修改</a>
-							</li>
+						</li>
+						<li role="presentation">
+							<a href="" target="_self" id="HRchangepasswords">密码修改</a>
+						</li>
 					</ul>
 
 					<form class="form-update">
@@ -370,6 +370,7 @@
 		$(document).ready(function() {
 
 			var userID = isSignIn();
+			userIDtianjia();
 			var originalpassword;
 			$.ajax({
 				type: "get",

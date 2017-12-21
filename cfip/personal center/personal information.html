@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="../../js/show students'information.js"></script>
 		<script src="../../js/bootstrap.min.js"></script>
 		<script src="../../js/dyf/user.js"></script>
+		<script src="../../js/qpj/userIDtianjia.js"></script> 
 	</head>
 
 	<body>
@@ -175,28 +176,28 @@
 				<div class="col-md-2 sidebar">
 					<ul class="nav nav-pills nav-stacked">
 						<li class="active">
-							<a href="personal information.html?userID=" + userID>基本信息</a>
+							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
 						</li>
 						<li>
-							<a href="my act.html?userID=" + userID target="_self">我的活动</a>
+							<a href="" target="_self" id="HRmyact">我的活动</a>
 						</li>
 						<li>
-							<a href="my topic.html?userID=" + userID target="_self">我的话题</a>
+							<a href="" target="_self" id="HRmytopic">我的话题</a>
 						</li>
 						<li>
-							<a href="#">我的消息</a>
+							<a href="" id="HRmymessage">我的消息</a>
 						</li>
 						<li>
-							<a href="my wish.html?userID=" + userID target="_self">我的心愿</a>
+							<a href="" id="HRmywish">我的心愿</a>
 						</li>
 						<li>
-							<a href="my express.html?userID=" + userID target="_self">我的表白</a>
+							<a href="" id="HRmyexpress">我的表白</a>
 						</li>
 						<li>
-							<a href="my spare things.html?userID=" + userID target="_self">我的闲物</a>
+							<a href="" id="HRmysparethings">我的闲物</a>
 						</li>
-						<li>
-							<a href="information update.html?userID=" + userID target="_self">个人设置</a>
+						<li >
+							<a href="" target="_self" id="HRinformationupdate">个人设置</a>
 						</li>
 					</ul>
 				</div>
@@ -236,7 +237,7 @@
 						</tr>
 					</table>
 					<script type="text/javascript" src="show students'information.js"></script>
-					<a href="information update.html?userID=" + userID class="btn btn-primary btn-info active" role="button">修改资料</a>
+					<a href="" id="HRinformationupdate2" class="btn btn-primary btn-info active" role="button">修改资料</a>
 				</div>
 				<div class="col-md-3 sidebar-offcanvas" id="sidebar">
 					<div class="row">
@@ -272,6 +273,7 @@
 			<script>
 			$(document).ready(function() {
 				var userID = isSignIn();
+				userIDtianjia();
 
 			});
 			</script>
