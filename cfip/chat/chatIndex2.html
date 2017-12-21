@@ -184,6 +184,74 @@
 					<div class="row">
 						<div id="allMessagePlane" class="col-sm-12 " style="min-height: 200px; border:1px solid #1B6D85; ">
 
+							<!--<div class="row ">
+								<div class="col-sm-8 col-sm-offset-3 i-msg">
+									<div class="row ">
+										<div class="col-xs-6 col-sm-6 col-xs-offset-3 col-sm-offset-3">
+											<video class="you-video" width="320" height="240" src="../../vedio/testvideo.mp4" controls="controls" autoplay="autoplay">
+											</video>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-1 i-img">
+									<span class="glyphicon glyphicon-user i-glyphicon"></span>
+								</div>
+							</div>-->
+
+							<!--<div class="row">
+								<div class="col-sm-1 you-img-img">
+									<span class="glyphicon glyphicon-user you-glyphicon"></span>
+								</div>
+								<div class="col-sm-8 you-msg">
+									<div class="row ">
+										<div class="col-xs-6 col-sm-4 col-sm-offset-4">
+											<a class="you-img-img-top thumbnail" href="http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404" download="img.jpg">
+												<img src="http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404">
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row ">
+								<div class="col-sm-8 col-sm-offset-3 i-msg">
+									<div class="row ">
+										<div class="col-xs-6 col-sm-4 col-xs-offset-3 col-sm-offset-4">
+											<a class="you-img-img-top thumbnail" href="http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404" download="img.jpg">
+												<img src="http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404">
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-1 i-img">
+									<span class="glyphicon glyphicon-user i-glyphicon"></span>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-1 you-img-img">
+									<span class="glyphicon glyphicon-user you-glyphicon"></span>
+								</div>
+								<div class="col-sm-8 you-msg">
+									<div class="row vedio">
+										<video class="you-video" width="320" height="240" src="../../vedio/testvideo.mp4" controls="controls" autoplay="autoplay">
+										</video>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-3 i-msg">
+									<div class="row vedio">
+										<video class="you-video" width="320" height="240" src="../../vedio/testvideo.mp4" controls="controls" autoplay="autoplay">
+										</video>
+									</div>
+								</div>
+								<div class="col-sm-1 i-img">
+									<span class="glyphicon glyphicon-user i-glyphicon"></span>
+								</div>
+							</div>-->
+							
 							<!--<div id="messagePlane">
 								<div class="row">
 									<div class="col-sm-1 you-img">
@@ -234,7 +302,16 @@
 
 					<div class="row " style=" border:1px solid #1B6D85;margin-top: 10px; ">
 						<div class="col-sm-10 form-group " style="margin-top: 10px; ">
-							<textarea id="messageTextarea" rows="6 " class="form-control " autofocus style="overflow-x:hidden "></textarea>
+							<div class="row">
+								<div class="col-sm-12">
+									<textarea id="messageTextarea" rows="6 " class="form-control " autofocus style="overflow-x:hidden "></textarea>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<input type="file" class="form-control btn btn-block" id="fileBtn" placeholder="选择文件">
+								</div>
+							</div>
 						</div>
 						<div class="col-sm-2 form-group " style="padding: 0px;margin-top: 10px;padding-right: 10px; ">
 							<div style="margin-bottom: 10px; ">
@@ -242,6 +319,7 @@
 							</div>
 							<div>
 								<button id="sendFileBtn" class="form-control btn btn-block " style="background-color:#269ABC ">发送文件</button>
+								<!--<input type="file" class="form-control btn btn-block" id="fileBtn" placeholder="选择文件">-->
 							</div>
 						</div>
 					</div>
@@ -261,16 +339,22 @@
 			var studentArray;
 			var teacherArray;
 			var msgPlaneMap = {}; //记录所有的MessagePlane
-			var source;
+			var source; //监听
+			var formData; //文件数据
 			$(document).ready(function() {
 				userID = isSignIn(); //判断用户有没有登录进行页面变化
 				userID = "1513790630135";
+				//curYID = "1513685359511";
 				userIDMsgTriggerID = getMessageTrigger(userID);
 				source = new EventSource("http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/" + userIDMsgTriggerID + "/syncronize");
 				creatContactList();
 				console.log("监听：" + userIDMsgTriggerID);
 				listenToMessageTrigger();
-				
+
+				//createIImgItem();
+				//createYImgItem();
+				//createIVedioItem();
+				//createYVedioItem();
 				$("#contactsMenu").click(function() {
 					$("#contactsUl").show();
 					$("#messageUl").hide();
@@ -352,6 +436,114 @@
 				});
 
 				$("#sendFileBtn").click(function() {
+
+					if(curYID == "") {
+						alert("请先选中联系人");
+					} else {
+						var files = $(":file")[0].files;
+						console.log(files);
+						console.log(files.length);
+						if(0 != files.length) {
+							formData = new FormData();
+							formData.append("file", files[0]);
+							console.log(files[0].name);
+							//console.log();
+							var currentTime = getFormatDate(); //获取当前时间
+							
+							var fileType = "0";
+							if(files[0].name.endsWith('jpg'))
+							{
+								console.log("你选择的是一张jpg图片");
+								fileType = "2"
+							} else if(files[0].name.endsWith("mp4"))
+							{
+								console.log("你选择的是个mp4视频");
+								fileType = "3";
+							} else {
+								alert("文件格式不正确");
+							}
+							/******发送信息******/
+							var msgIObj = {
+								fromuserid: parseInt(userID),
+								touserid: parseInt(curYID),
+								msgcontent: files[0].name,
+								state: "1",
+								msgtime: currentTime,
+								type: fileType
+							};
+							var msgJsonStr = JSON.stringify(msgIObj);
+							$.ajax({
+								type: "POST",
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/",
+								contentType: "application/json",
+								data: msgJsonStr,
+								async: true,
+								success: function(data, state) {
+									console.log("发送文件成功0.5");
+									console.log(data);
+									var myNewItem;
+									if(data.type == "2") {
+										myNewItem = createIImgItem(userID, data.msgtime, data.msgcontent, data.id); //自身页面添加文件
+									} else if(data.type == "3") {
+										myNewItem = createIVedioItem(userID, data.msgtime, data.msgcontent, data.id); //自身页面添加文件
+									}
+									
+									
+									msgPlaneMap["Tr" + curYID].append(myNewItem);
+									//发生文件
+									$.ajax({
+										//http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/1513472664404
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/" + data.id,
+										type: "POST",
+										data: formData,
+										async: false,
+										contentType: false,
+										processData: false,
+										error: function(dataImg, stateImg) {
+											console.log("发送文件失败" + stateImg);
+											console.log(dataImg);
+											//return false;
+										},
+										success: function(dataImg, stateImg) {
+											console.log("发送文件成功1");
+											console.log(stateImg);
+											console.log(dataImg);
+										}
+									});
+
+									//改变对方监听的数据
+									var msgTriggerObj = {
+										userid: parseInt(curYID),
+										state: "1"
+									};
+									var msgJsonStrTr = JSON.stringify(msgTriggerObj);
+									console.log("改变触发器：" + msgJsonStrTr + ":" + 1);
+									$.ajax({
+										type: "put",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/" + curYIDMsgTriggerID,
+										contentType: "application/json",
+										data: msgJsonStrTr,
+										async: true,
+										success: function(data, state) {
+											console.log("trigger success");
+										},
+										error: function(data, state) {
+											console.log("trigger fialier!");
+										}
+									});
+								},
+								error: function(data, state) {
+									alert("发送信息失败！");
+								}
+							});
+
+							var obj = document.getElementById('fileBtn');
+							obj.outerHTML = obj.outerHTML;
+							console.log($(":file")[0].files.length);
+						} else {
+							alert("请先选择文件");
+						}
+					}
 
 				});
 			})

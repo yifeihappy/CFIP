@@ -10,7 +10,6 @@
 		<meta name="author" content="">
 
 		<title>Off Canvas Template for Bootstrap</title>
-
 		<!-- Bootstrap core CSS -->
 		<link href="../../css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,9 +19,7 @@
 		<script src="../../js/bootstrap.min.js"></script>
 		<script src="../../js/dyf/user.js"></script>
 	</head>
-
 	<body>
-
 		<nav class="navbar navbar-fixed-top navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
@@ -340,7 +337,7 @@
 							if("" == userID) {
 								actDetailUrl = "/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id;
 							} else {
-								actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id + "&userID=" + userID);
+								actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id + "userID=" + userID);
 							}
 
 							var actDetailA = $("<a></a>").attr("href", actDetailUrl);

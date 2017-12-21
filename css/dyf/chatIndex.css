@@ -15,6 +15,14 @@ hr {
 	text-align: center;
 	margin-top: 20px;
 }
+.you-img-img {
+	text-align: center;
+	margin-top: 50px;
+}
+.you-img-img-top {
+	margin-top: 20px;
+}
+
 
 .you-msg {
 	border: 1px red solid;
@@ -32,6 +40,15 @@ hr {
 	margin-top: 20px;
 }
 
+.i-img-img {
+	text-align: center;
+	margin-top: 50px;
+}
+.i-img-img-top {
+	margin-top: 20px;
+}
+
+
 .i-glyphicon {
 	color: blue;
 	font-size: 40px;
@@ -42,4 +59,17 @@ hr {
 	color: red;
 	font-size: 40px;
 	border: red 1px solid;
+}
+
+
+.you-video{
+	margin-left: 20px;
+}
+
+.my-video{
+	margin-right: 20px;
+}
+
+.vedio{
+	text-align: center;
 }
