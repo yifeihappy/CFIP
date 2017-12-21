@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="UTF-8">
-		<title>个人中心-我的活动</title>
+		<title>个人中心-我的奖学金申请</title>
 		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../../css/jh/template2.css" />
 		<link href="../../css/dyf/signup.css" rel="stylesheet" />
@@ -179,13 +178,13 @@
 						<li>
 							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
 						</li>
-						<li class="active">
+						<li >
 							<a href="" target="_self" id="HRmyact">我的活动</a>
 						</li>
 						<li>
 							<a href="" target="_self" id="HRmytopic">我的话题</a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="" id="HRmyapply_zhuxuejin">我的申请</a>
 						</li>
 						<li>
@@ -204,17 +203,17 @@
 				</div>
 				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
+						<li role="presentation" >
+							<a herf="" id="HRzhuxuejin">我的助学金申请</a>
+						</li>
 						<li role="presentation" class="active">
-							<a href="#">我发布的活动</a>
+							<a href="" id="HRjiangxuejin">我的奖学金申请</a>
 						</li>
 						<li role="presentation">
-							<a href="#">我参加的活动</a>
-						</li>
-						<li role="presentation">
-							<a href="#">我收藏的活动</a>
+							<a href="" id="HRaddapply">提交申请</a>
 						</li>
 					</ul>
-					<div id="act-thumbnails" class="container">
+					<div id="applyzhanshi" class="container">
 						<!--<div class="row">
 				<a href="/CFIP/index.html?userID=123345">
 					<div class="col-md-8 col-md-offset-2">
@@ -277,73 +276,89 @@
 
 			</div>
 		</div>
-
+		
 		<script>
 			$(document).ready(function() {
-				var userID = isSignIn();
-				console.log(userID);
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
 				userIDtianjia();
-
+				
 				$.ajax({
 					type: "get",
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-					//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
-					async: true,
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/",
+					async: false,
 					success: function(data, state) {
+						console.log("adf");
 						console.log(state);
 						console.log(data);
-						for(var i = data.Activity.length - 1; i >= 0; i--) {
-							if(data.Activity[i].userid == userID) {
+						for(var i = data.Apply.length - 1; i >= 0; i--) {
+							if(userID == data.Apply[i].userid) 
+							{
+								var dType = data.Apply[i].type;
 
-								var hTitle = $("<h3></h3>").text(data.Activity[i].actname);
-								var pAddr = $("<p></p>").text("活动地点：" + data.Activity[i].actaddress);
-								var pActTime = $("<p></p>").text("活动时间：" + data.Activity[i].actstart + "至" + data.Activity[i].actend);
-								var pSponser = $("<p></p>").text("主办单位：" + data.Activity[i].actsponser);
-								var pNumber = $("<p></p>").text("报名人数：" + data.Activity[i].participantnumber + "|" + data.Activity[i].totalnumber);
-								var pApplyEnd = $("<p></p>").text("报名截止：" + data.Activity[i].applyend);
-								var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
-								divCaption.append(hTitle, pAddr, pActTime, pSponser, pNumber, pApplyEnd);
+								if(dType == "2") 
+								{
+									var dState = data.Apply[i].state;
+									
+									
+									var PublisherName = $("<font size='3'></font>").text(data.Apply[i].userid);
+									var PersonalHomepageURL = "#"; //连接到“他的主页”
+									var PublisherHomepage = $("<a></a>").attr("href", PersonalHomepageURL);
+									PublisherHomepage.append(PublisherName);
+									var divPublisherName = $("<div class='col-md-1'></div>");
+									divPublisherName.append(PublisherHomepage);
 
-								var imgAct = $("<img></img>").attr({
-									"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + data.Activity[i].id,
-									"alt": "...."
-								});
-								var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
-								divThumbnail.append(imgAct);
+									var hTitle = $("<h3></h3>").text(data.Apply[i].title);
+									var pContent = $("<p></p>").text(data.Apply[i].content);
+									var divNeiRong = $("<div class='col-md-11'></div>");
+									divNeiRong.append(hTitle, pContent);
+									
+									var divState =$("<div class='col-md-12'></div>");
+									var divApplyState=$("<div class='row' col-md-offset-10></div>");
+									if (dState=="0"){
+										var zhuangtai=$("<font size='5'></font>").text("正在审核");
+									}
+									if (dState=="1"){
+										var zhuangtai=$("<font size='5'></font>").text("通过审核");
+									}
+									
+									if (dState=="2"){
+										var zhuangtai=$("<font size='5'></font>").text("未通过审核");
+									}
+									divApplyState.append(zhuangtai);
+									divState.append(divApplyState);
+									
 
-								var divRow1 = $("<div class='row'></div>");
-								divRow1.append(divThumbnail, divCaption);
+									var divHr = $("<div class='col-md-12'></div>");
+									divHr.append($("<hr>"));
 
-								var div1 = $("<div class='col-md-8'></div>");
-								div1.append(divRow1, $("<hr>"));
+									$("#applyzhanshi").append($("<br>"),divPublisherName,divNeiRong,divState,divHr);
 
-								var actDetailUrl;
-								if("" == userID) {
-									actDetailUrl = "/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id;
-								} else {
-									actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id + "userID=" + userID);
 								}
 
-								var actDetailA = $("<a></a>").attr("href", actDetailUrl);
-								actDetailA.append(div1);
-
-								var divRow2 = $("<div class='row'></div>");
-								divRow2.append(actDetailA);
-
-								$("#act-thumbnails").append(divRow2);
 							}
 
 						}
-
 					},
 					error: function(data, state) {
 						console.log(state);
 						console.log(data);
 					}
 				});
-
-			});
+				
+				
+				
+				});
+				
+				
+				
+				
+				
+				
+				
+			
 		</script>
-	</body>
 
+	</body>
 </html>

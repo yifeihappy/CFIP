@@ -139,6 +139,52 @@ function userIDtianjia() {
 			});
 		}
 		
+		if($("#HRmyapply_zhuxuejin").length > 0) {
+			$("#HRmyapply_zhuxuejin").click(function() {
+				var hrefURL = encodeURI("myapply_zhuxuejin.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRzhuxuejin").length > 0) {
+			$("#HRzhuxuejin").click(function() {
+				var hrefURL = encodeURI("myapply_zhuxuejin.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRjiangxuejin").length > 0) {
+			$("#HRjiangxuejin").click(function() {
+				var hrefURL = encodeURI("myapply_jiangxuejin.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRaddapply").length > 0) {
+			$("#HRaddapply").click(function() {
+				var hrefURL = encodeURI("myapply_addapply.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	} else {
 		if($("#HRxinyuanqiang").length > 0) {
@@ -265,6 +311,49 @@ function userIDtianjia() {
 				return false;
 			});
 		}
+		
+		if($("#HRmyapply_zhuxuejin").length > 0) {
+			$("#HRmyapply_zhuxuejin").click(function() {
+				var hrefURL = encodeURI("myapply_zhuxuejin.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRzhuxuejin").length > 0) {
+			$("#HRzhuxuejin").click(function() {
+				var hrefURL = encodeURI("myapply_zhuxuejin.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRjiangxuejin").length > 0) {
+			$("#HRjiangxuejin").click(function() {
+				var hrefURL = encodeURI("myapply_jiangxuejin.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRaddapply").length > 0) {
+			$("#HRaddapply").click(function() {
+				var hrefURL = encodeURI("myapply_addapply.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
