@@ -19,6 +19,7 @@ function isSignIn() {
 		$("#publishLI").hide();
 		$("#signinLI").show();
 		$("#signupLI").show();
+		$("#chat").hide();
 
 		if($("#chat").length > 0) {
 			$("#chact").click(function() {
@@ -70,6 +71,7 @@ function isSignIn() {
 		$("#signupLI").hide();
 		$("#userCenterLI").show();
 		$("#publishLI").show();
+		$("#chat").show();
 		$("#addAct").click(function() {
 			var indexUrl = encodeURI("/CFIP/cfip/act/addAct.html?userID=" + userID);
 			console.log(indexUrl);
@@ -140,7 +142,7 @@ function isSignIn() {
 
 		if($("#userCenterID").length > 0) {
 			$("#userCenterID").click(function() {
-				var indexUrl = encodeURI("/CFIP/cfip/personal center/my act.html?userID=" + userID);
+				var indexUrl = encodeURI("/CFIP/cfip/personal center/personal information.html?userID=" + userID);
 				console.log(indexUrl);
 				window.location.href = indexUrl;
 				return false;
@@ -148,6 +150,28 @@ function isSignIn() {
 		}
 		return userID;
 	}
+}
+
+function IsHasNewMessage() {
+	var flagF = false;
+	$.ajax({
+		type: "get",
+		url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/?Message.touserid=" + userID,
+		async: false,
+		success: function(data, state) {
+			if(typeof(data) != "{}") {
+				//遍历所有消息
+				for(var i = 0; i < data.Message.length; i++) {
+					if(data.Message[i].state == "1") { //找出未读消息
+						flagF = true;
+						break;
+					}
+				}
+			}
+		},
+		error: function(data, state) {}
+	});
+	return flagF;
 }
 
 //var userID = "";

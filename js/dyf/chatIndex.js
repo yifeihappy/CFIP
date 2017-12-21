@@ -292,7 +292,7 @@ function listenToMessageTrigger() {
 										msgtime: data.Message[i].msgtime,
 										type: "3"
 									};
-								} 
+								}
 
 								msgPlaneMap["Tr" + data.Message[i].fromuserid].append(messageItem);
 								if(msgPlaneMap["Tr" + data.Message[i].fromuserid].is(":hidden")) {
@@ -351,5 +351,93 @@ function listenToMessageTrigger() {
 			console.log("trigger 没用新信息");
 		}
 		/**if end***/
+	}
+}
+//判断有无历史未读数据
+function hasHistoryMessage() {
+	{
+		$.ajax({
+			type: "get",
+			url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/?Message.touserid=" + userID,
+			async: false,
+			success: function(data, state) {
+				if(typeof(data) != "{}") {
+					//遍历所有消息
+					for(var i = 0; i < data.Message.length; i++) {
+						if(data.Message[i].state == "1") { //找出未读消息
+							//还未创建对话
+							if(!(("Tr" + data.Message[i].fromuserid) in msgPlaneMap)) {
+								var divTree = $("<div style='display:none'></div>").attr("id", "Tr" + data.Message[i].fromuserid);
+								msgPlaneMap["Tr" + data.Message[i].fromuserid] = divTree;
+								$("#allMessagePlane").append(divTree);
+							}
+							var messageItem;
+							var msgIObjReaded;
+							if(data.Message[i].type == "1") {
+								messageItem = createYMsgItem(data.Message[i].fromuserid, data.Message[i].msgtime, data.Message[i].msgcontent);
+								msgIObjReaded = {
+									fromuserid: data.Message[i].fromuserid,
+									touserid: data.Message[i].touserid,
+									msgcontent: data.Message[i].msgcontent,
+									state: "0",
+									msgtime: data.Message[i].msgtime,
+									type: "1"
+								};
+							} else if(data.Message[i].type == "2") {
+								console.log("图像信息");
+								messageItem = createYImgItem(data.Message[i].fromuserid, data.Message[i].msgtime, data.Message[i].msgcontent, data.Message[i].id);
+								msgIObjReaded = {
+									fromuserid: data.Message[i].fromuserid,
+									touserid: data.Message[i].touserid,
+									msgcontent: data.Message[i].msgcontent,
+									state: "0",
+									msgtime: data.Message[i].msgtime,
+									type: "2"
+								};
+							} else if(data.Message[i].type == "3") {
+								console.log("视频信息");
+								messageItem = createYVedioItem(data.Message[i].fromuserid, data.Message[i].msgtime, data.Message[i].msgcontent, data.Message[i].id);
+								msgIObjReaded = {
+									fromuserid: data.Message[i].fromuserid,
+									touserid: data.Message[i].touserid,
+									msgcontent: data.Message[i].msgcontent,
+									state: "0",
+									msgtime: data.Message[i].msgtime,
+									type: "3"
+								};
+							}
+
+							msgPlaneMap["Tr" + data.Message[i].fromuserid].append(messageItem);
+							if(msgPlaneMap["Tr" + data.Message[i].fromuserid].is(":hidden")) {
+								$("#Li" + data.Message[i].fromuserid).text("1");
+							}
+
+							//更改消息为已读
+							/******发送信息******/
+							var jsonStrmsgIObjReaded = JSON.stringify(msgIObjReaded);
+							console.log(jsonStrmsgIObjReaded);
+							$.ajax({
+								type: "put",
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/" + data.Message[i].id,
+								contentType: "application/json",
+								data: jsonStrmsgIObjReaded,
+								async: false,
+								success: function(data, state) {
+									console.log("已读设置 success");
+								},
+								error: function(data, state) {
+									console.log("已读设置 fialier!");
+								}
+							});
+
+						}
+
+					}
+				}
+			},
+			error: function(data, state) {
+
+			}
+		});
 	}
 }
