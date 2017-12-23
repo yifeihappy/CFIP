@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -305,13 +306,13 @@
 						</table>
 					</div>
 					<hr></hr>
-					<div class="form-group">
-							<input type="button" id="applyBtn" class=" form-control btn btn-block btn-primary" value="报名"></div>
-					</div>
-
+					<button class="form-group">
+						<button type="button" id="applyBtn" class=" form-control btn btn-block btn-primary">报名</button>
 				</div>
-				<!--				<!--/.col-md-8 col-md-offset-2>-->
+
 			</div>
+			<!--				<!--/.col-md-8 col-md-offset-2>-->
+		</div>
 		</div>
 		<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -324,6 +325,10 @@
 
 				/*********获取并展示数据*********/
 				/***获取actID***/
+				$("#applyBtn").click(function() {
+
+				});
+
 				var urlStr = decodeURI(window.location.href);
 				urlStrArray1 = urlStr.split("actID=");
 				if(typeof(urlStrArray1[1]) != "undefined") {
@@ -334,9 +339,9 @@
 						type: "get",
 						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + actID,
 						async: true,
-						success:function(data,state) {
+						success: function(data, state) {
 							$("#actName").text(data.actname);
-							$("#imgId").attr("src","http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + actID);
+							$("#imgId").attr("src", "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + actID);
 							$("#actStart").text(data.actstart);
 							$("#actEnd").text(data.actend);
 							$("#applystart").text(data.applystart);
@@ -346,9 +351,70 @@
 							$("#actAddress").text(data.actaddress);
 							$("#totalNumber").text(data.totalNumber);
 							$("#participantNumber").text(data.participantnumber);
+
+							var nowDate = new Date();
+							var year = nowDate.getFullYear();
+							var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;
+							var date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();
+							var hour = nowDate.getHours() < 10 ? "0" + nowDate.getHours() : nowDate.getHours();
+							var minute = nowDate.getMinutes() < 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();
+							//var second = nowDate.getSeconds() < 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();
+							var CurrentTime = year + "-" + month + "-" + date + "T" + hour + ":" + minute;
+
+							if(CurrentTime > data.applyend) {
+								alert("活动已过期！");#
+								("#applyBtn").attr("disabled", "disabled");
+							} else {
+								if(CurrentTime < data.applystart) {
+									alert("活动尚未开始！");#
+									("#applyBtn").attr("disabled", "disabled");
+								} else {
+									$("#applyBtn").click(function() {
+										if(userID == "") {
+											alert("请先登录！");
+
+										} else {
+											if(data.totalNumber == data.participantnumber) {
+												alert("抱歉！人数已满。");
+
+											} else {
+												var Applyinfo = {
+													Userid: userID,
+													Actid: actID,
+													ApplyTime: CurrentTime
+												};
+												console.log(Applyinfo.Userid + "," + Applyinfo.Actid + "," + UserInfo.ApplyTime);
+
+												var dataJsonStr = JSON.stringify(Applyinfo);
+												console.log(dataJsonStr);
+												$.ajax({
+													url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Applicationform/",
+													contentType: "application/json",
+													type: "POST",
+													data: dataJsonStr,
+													async: true,
+													error: function(data, state) {
+														//console.log(dataJsonStr);
+														console.log(data);
+														console.log(state);
+													},
+													success: function(data, state) {
+														console.log(state);
+														console.log(data);
+													}
+												});
+
+											}
+
+										}
+
+									});
+
+								}
+							}
 						},
-						error:function(data, state) {
-					
+						error: function(data, state) {
+
 						}
 					});
 				}
