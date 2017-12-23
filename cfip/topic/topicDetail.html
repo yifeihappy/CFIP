@@ -23,6 +23,15 @@
 			td {
 				text-align: center;
 			}
+			
+			.topic-detail {
+				border: 2px black solid;
+			}
+			
+			.comment {
+				border: 2px black solid;
+				min-height: 100px;
+			}
 		</style>
 	</head>
 
@@ -42,7 +51,7 @@
 							<img src="../../img/logo.png" width="44px" height="44px" />
 						</li>
 						<li>
-							<a href="" id="CFIP" style="text-decoration:none">CFIP</a>
+							<a href="#" style="text-decoration:none">CPFI</a>
 						</li>
 					</div>
 				</div>
@@ -234,15 +243,42 @@
 		</nav>
 		<!-- /.navbar -->
 
-		<div class="container">
-			<div class="row">
+		<div id="topicDetail-thumbnails" class="container">
+			<!--<div class="row">-->
+			<!--<a href="/CFIP/index.html?userID=123345">-->
+			<!--<div class="topic-detail col-md-8 col-md-offset-2">-->
+
+			<!--<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-4 thumbnail">
+								<img src="../../img/Desert.jpg" alt="...">
+							</div>
+							<div class="col-md-8 col-sm-8 col-xs-8 caption">
+								<h3>Topic Name</h3>
+								<p>话题内容</p>
+								<p>发布人</p>
+								<p>发布时间</p>
+							</div>
+						</div>
+						<hr>-->
+			<!--<div class="row">
+							<div class="comment col-md-12">
+								<p>评论人：评论内容</p>
+								<p>评论时间</p>
+							</div>
+						</div>-->
+
+			<!--</div>-->
+			<!--<div class="col-md-8 col-md-offset-2">-->
+			<!--</a>-->
+			<!--	</div>-->
+			<!--<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<h1>This is Header of the activity!This is Header of the activity!This is Header of the activity!</h1>
 					<hr></hr>
 					<div>
 						<img src="../../img/Desert.jpg" width="750px" height="500px" />
-					</div>
-					<div>
+					</div>-->
+			<!--<div>
 						<table class="table">
 							<tr>
 								<td>活动开始时间</td>
@@ -260,8 +296,8 @@
 								<td>报名结束时间</td>
 								<td>12月17日 13：00-15：15</td>
 							</tr>
-						</table>
-					</div>
+						</table>-->
+			<!--</div>
 					<hr></hr>
 					<div>
 						<span>
@@ -277,8 +313,8 @@
 							我们聚集了行业大神，
 							学术大牛试图为你提供最全面的答案
 						</span>
-					</div>
-					<hr></hr>
+					</div>-->
+			<!--<hr></hr>
 					<div>
 						<table class="table">
 							<tr>
@@ -298,8 +334,8 @@
 								</td>
 							</tr>
 							<tr>
-								<td>
-									总人数
+								<td>-->
+			<!--总人数
 								</td>
 								<td>
 									100
@@ -314,23 +350,166 @@
 								</td>
 							</tr>
 						</table>
-					</div>
+					</div>-->
 
+			<!--</div>-->
+			<!--				<!--/.col-md-8 col-md-offset-2>-->
+			<!--</div>-->
+		</div>
+		<div id="Comments" class="container">
+
+			<div class="row">
+				<div class=" col-md-8 col-md-offset-2">
+					<p>评论人：评论内容</p>
+					<p>评论时间</p>
+					<hr>
 				</div>
-<!--				<!--/.col-md-8 col-md-offset-2>-->
+
+			</div>
+
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class=" col-md-8 col-md-offset-2">
+
+					<div class="form-group">
+						<label>说点什么吧</label>
+						<textarea class="form-control" rows="3" id="CommentsBrief"></textarea>
+					</div>
+					<div id="CommentsSubmit" class="btn btn-lg btn-primary btn-block">Submit</div>
+				</div>
 			</div>
 		</div>
 
-		<!-- Bootstrap core JavaScript
-    ================================================== -->
-				<!-- Placed at the end of the document so the pages load faster -->
-				<script>
-					$(document).ready(function() {
-						/**********判断用户有无登录 start*********/
-						var userID = isSignIn(); //判断用户有没有登录进行页面变化
-						/**********判断用户有无登录 end*********/
-					});
-				</script>
 	</body>
+	<script>
+		$(document).ready(function() {
+			/**********判断用户有无登录 start*********/
+			var userID = isSignIn(); //判断用户有没有登录进行页面变化
+			/**********判断用户有无登录 end*********/
+
+			$.ajax({
+				type: "get",
+				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + "1513471613255",
+				//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+				async: true,
+				success: function(data, state) {
+					console.log(state);
+					console.log(data);
+
+					var hTitle = $("<h3></h3>").text(data.title);
+					var pText = $("<p></p>").text(data.brief);
+					var ppers = $("<p></p>").text("发布人：" + data.authorname);
+					var pTopTime = $("<p></p>").text("发布时间：" + data.publishtime);
+					var divCaption = $("<div class='row'></div>");
+					divCaption.append(hTitle, pText, ppers, pTopTime, );
+
+					//												var imgTopic = $("<img></img>").attr({
+					//													"src": "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
+					//													"alt": "...."
+					//												});
+					var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
+					//												divThumbnail.append(imgTopic);
+
+					var div3 = $("<div class='col-md-8 col-sm-8 col-xs-8 caption'></div>")
+					div3.append(divCaption);
+
+					var divRow1 = $("<div class='row'></div>");
+					divRow1.append(divThumbnail, div3);
+
+					var div1 = $("<div class='topic-detail col-md-8 col-md-offset-2'></div>");
+					div1.append(divRow1);
+
+					//												var topicDetailUrl;
+					//												if("" == userID) {
+					//													topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?actID=" + data.Topic[i].id;
+					//												} else {
+					//													topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?actID=" + data.Topic[i].id + "&userID=" + userID);
+					//												}
+					//					//
+					//							var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);
+					//							topicDetailA.append(div1);
+
+					var divRow2 = $("<div class='row'></div>");
+					divRow2.append(div1);
+					//					
+					$("#topicDetail-thumbnails").append(divRow2);
+
+				},
+				error: function(data, state) {
+					console.log(state);
+					console.log(data);
+				}
+			});
+		});
+	</script>
+	<!--<script>
+		$(document).ready(function() {
+			/**********判断用户有无登录 start*********/
+			var userID = isSignIn(); //判断用户有没有登录进行页面变化
+			/**********判断用户有无登录 end*********/
+
+			$.ajax({
+				type: "get",
+				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
+				//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+				async: true,
+				success: function(data, state) {
+					console.log(state);
+					console.log(data);
+					for(var i = 0; i < data.Comments.length; i++) {
+						var Ctext = $("<p></p>").text(data.Comments[i].authorname + ":" + data.Comments[i].brief);
+						var Ctime = $("<p></p>").text(data.Comments[i].time);
+						var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
+						div1.append(Ctext, Ctime, $("<hr>"));
+
+						div2 = $("<div class='row'></div>");
+						div2.append(div1);
+
+						$("#Comments").append(div2);
+
+					}
+				},
+				error: function(data, state) {
+					console.log(state);
+					console.log(data);
+				}
+
+			});
+		});
+	</script>-->
+	<script>
+		$(document).ready(function() {
+			/**********判断用户有无登录 start*********/
+			var userID = isSignIn(); //判断用户有没有登录进行页面变化
+			/**********判断用户有无登录 end*********/
+			$("#CommentsSubmit").click(function() {
+				var UserInfo = {
+					Userid=userID,
+                     Ctext=$("CommentsBrief").val(),
+                     Username="xiaodeng",
+                     Ctime="2017-12-22",
+				};
+				var dataJsonStr = JSON.stringify(UserInfo);
+				console.log(dataJsonStr);
+				$.ajax({
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
+					contentType: "application/json",
+					type: "POST",
+					data: dataJsonStr,
+					async: true,
+					error: function(data, state) {
+						//console.log(dataJsonStr);
+						console.log(data);
+						console.log(state);
+					},
+					success: function(data, state) {
+						console.log(state);
+						console.log(data);
+					}
+				});
+			});
+		});
+	</script>
 
 </html>
