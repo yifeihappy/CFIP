@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -306,12 +307,12 @@
 					</div>
 					<hr></hr>
 					<div class="form-group">
-							<input type="button" id="applyBtn" class=" form-control btn btn-block btn-primary" value="报名"></div>
-					</div>
-
+						<button  id="applyBtn" class=" form-control btn btn-block btn-primary" >报名</button></div>
 				</div>
-				<!--				<!--/.col-md-8 col-md-offset-2>-->
+
 			</div>
+			<!--				<!--/.col-md-8 col-md-offset-2>-->
+		</div>
 		</div>
 		<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -321,7 +322,14 @@
 				/**********判断用户有无登录 start*********/
 				var userID = isSignIn(); //判断用户有没有登录进行页面变化
 				/**********判断用户有无登录 end*********/
+				$("#applyBtn").click(function() {
+					if("" == userID) {
+						alert("请先登录");
+					}
 
+					var curTime = getFormatDate();
+
+				});
 				/*********获取并展示数据*********/
 				/***获取actID***/
 				var urlStr = decodeURI(window.location.href);
@@ -334,9 +342,9 @@
 						type: "get",
 						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + actID,
 						async: true,
-						success:function(data,state) {
+						success: function(data, state) {
 							$("#actName").text(data.actname);
-							$("#imgId").attr("src","http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + actID);
+							$("#imgId").attr("src", "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + actID);
 							$("#actStart").text(data.actstart);
 							$("#actEnd").text(data.actend);
 							$("#applystart").text(data.applystart);
@@ -346,9 +354,13 @@
 							$("#actAddress").text(data.actaddress);
 							$("#totalNumber").text(data.totalNumber);
 							$("#participantNumber").text(data.participantnumber);
+							
+							$("#applyBtn").attr("disabled", "disabled");
+							var curTime = getFormatDate();
+
 						},
-						error:function(data, state) {
-					
+						error: function(data, state) {
+
 						}
 					});
 				}
