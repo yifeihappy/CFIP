@@ -193,6 +193,37 @@ function userIDtianjia() {
 			});
 		}
 		
+		if($("#HRpinglun_topic").length > 0) {
+			$("#HRpinglun_topic").click(function() {
+				var hrefURL = encodeURI("mytopic_pinglun.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRapply_topic").length > 0) {
+			$("#HRapply_topic").click(function() {
+				var hrefURL = encodeURI("my topic.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -379,6 +410,36 @@ function userIDtianjia() {
 				return false;
 			});
 		}
+		
+		if($("#HRpinglun_topic").length > 0) {
+			$("#HRpinglun_topic").click(function() {
+				var hrefURL = encodeURI("mytopic_pinglun.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		if($("#HRapply_topic").length > 0) {
+			$("#HRapply_topic").click(function() {
+				var hrefURL = encodeURI("my topic.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
