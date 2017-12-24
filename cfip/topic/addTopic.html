@@ -303,24 +303,24 @@
 				/**********判断用户有无登录 end*********/
 				$("#addTopicSubmit").click(function() {
 
+					//		var topicObject = {
+					//			title: "This is Title",
+					//			brief: "This is breif.",
+					//			publishtime: "2017-12-22T12:00",
+					//			authorname: "小马哥",
+					//			authorid: 1513502243526,
+					//			commentnumber: 0,
+					//			topictype: "2"
+					//		};
 					var topicObject = {
-						title: "This is Title",
-						brief: "This is breif.",
-						publishtime: "2017-12-22T12:00",
-						authorname: "小马哥",
-						authorid: 1513417478927,
+						title: $("#title").val(),
+						brief: $("#brief").val(),
+						publishtime: getFormatDate(),
+						authorname: $("#authorname").val(),
+						authorid: parseInt(userID),
 						commentnumber: 0,
-						topictype: "2"
+						topictype: $("#topicType").val()
 					};
-					//					var topicObject = {
-					//						title: $("#title").val(),
-					//						brief: $("#brief").val(),
-					//						publishtime: getFormatDate(),
-					//						authorname: $("#authorname").val(),
-					//						authorid: 1513417478927,
-					//						commentnumber: 0,
-					//						topictype: $("#topicType").val()
-					//					}
 					var dataJsonStr = JSON.stringify(topicObject);
 					console.log(dataJsonStr);
 					$.ajax({

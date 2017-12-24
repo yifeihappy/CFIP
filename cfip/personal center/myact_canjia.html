@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 	<head>
@@ -204,10 +204,10 @@
 				</div>
 				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
-						<li role="presentation" class="active">
+						<li role="presentation">
 							<a href="" id="HRapply_act">我发布的活动</a>
 						</li>
-						<li role="presentation">
+						<li role="presentation" class="active">
 							<a href="" id="HRjoin_act">我参加的活动</a>
 						</li>
 					</ul>
@@ -283,61 +283,75 @@
 
 				$.ajax({
 					type: "get",
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-					//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Applicationform/",
 					async: true,
-					success: function(data, state) {
+					success: function(data,state) {
 						console.log(state);
 						console.log(data);
-						for(var i = data.Activity.length - 1; i >= 0; i--) {
-							if(data.Activity[i].userid == userID) {
+						console.log("asd");
+						for(var i = data.Applicationform.length-1; i >= 0; i--) {
+							if(userID == data.Applicationform[i].userid) {
+								var activityid = data.Applicationform[i].actid;
+								console.log(activityid);
+								$.ajax({
+									type: "get",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + activityid,
+									async: true,
+									success: function(data, state) {
+										console.log(state);
+										console.log(data);
+										var hTitle = $("<h3></h3>").text(data.actname);
+										var pAddr = $("<p></p>").text("活动地点：" + data.actaddress);
+										var pActTime = $("<p></p>").text("活动时间：" + data.actstart + "至" + data.actend);
+										var pSponser = $("<p></p>").text("主办单位：" + data.actsponser);
+										var pNumber = $("<p></p>").text("报名人数：" + data.participantnumber + "|" + data.totalnumber);
+										var pApplyEnd = $("<p></p>").text("报名截止：" + data.applyend);
+										var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
+										divCaption.append(hTitle, pAddr, pActTime, pSponser, pNumber, pApplyEnd);
 
-								var hTitle = $("<h3></h3>").text(data.Activity[i].actname);
-								var pAddr = $("<p></p>").text("活动地点：" + data.Activity[i].actaddress);
-								var pActTime = $("<p></p>").text("活动时间：" + data.Activity[i].actstart + "至" + data.Activity[i].actend);
-								var pSponser = $("<p></p>").text("主办单位：" + data.Activity[i].actsponser);
-								var pNumber = $("<p></p>").text("报名人数：" + data.Activity[i].participantnumber + "|" + data.Activity[i].totalnumber);
-								var pApplyEnd = $("<p></p>").text("报名截止：" + data.Activity[i].applyend);
-								var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
-								divCaption.append(hTitle, pAddr, pActTime, pSponser, pNumber, pApplyEnd);
+										var imgAct = $("<img></img>").attr({
+											"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + data.id,
+											"alt": "...."
+										});
+										var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
+										divThumbnail.append(imgAct);
 
-								var imgAct = $("<img></img>").attr({
-									"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + data.Activity[i].id,
-									"alt": "...."
+										var divRow1 = $("<div class='row'></div>");
+										divRow1.append(divThumbnail, divCaption);
+
+										var div1 = $("<div class='col-md-8'></div>");
+										div1.append(divRow1, $("<hr>"));
+
+										var actDetailUrl;
+										if("" == userID) {
+											actDetailUrl = "/CFIP/cfip/act/actDetail.html?actID=" + data.id;
+										} else {
+											actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.id + "userID=" + userID);
+										}
+
+										var actDetailA = $("<a></a>").attr("href", actDetailUrl);
+										actDetailA.append(div1);
+
+										var divRow2 = $("<div class='row'></div>");
+										divRow2.append(actDetailA);
+
+										$("#act-thumbnails").append(divRow2);
+									},
+									error:function(data,state){
+										console.log(state);
+										console.log(data);
+									}
 								});
-								var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
-								divThumbnail.append(imgAct);
-
-								var divRow1 = $("<div class='row'></div>");
-								divRow1.append(divThumbnail, divCaption);
-
-								var div1 = $("<div class='col-md-8'></div>");
-								div1.append(divRow1, $("<hr>"));
-
-								var actDetailUrl;
-								if("" == userID) {
-									actDetailUrl = "/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id;
-								} else {
-									actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id + "userID=" + userID);
-								}
-
-								var actDetailA = $("<a></a>").attr("href", actDetailUrl);
-								actDetailA.append(div1);
-
-								var divRow2 = $("<div class='row'></div>");
-								divRow2.append(actDetailA);
-
-								$("#act-thumbnails").append(divRow2);
 							}
-
 						}
-
 					},
-					error: function(data, state) {
+					error: function(data,state) {
 						console.log(state);
 						console.log(data);
 					}
 				});
+
+				
 
 			});
 		</script>

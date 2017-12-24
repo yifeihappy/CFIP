@@ -210,9 +210,6 @@
 						<li role="presentation">
 							<a href="#">我评论的话题</a>
 						</li>
-						<li role="presentation">
-							<a href="#">我收藏的话题</a>
-						</li>
 					</ul>
 					<div id="topic-thumbnails" class="container">
 
@@ -272,7 +269,8 @@
 						console.log(state);
 						console.log(data);
 						for(var i = data.Topic.length - 1; i >= 0; i++) {
-							if(data.Topic[i].autherid==userID) {
+							var authorID=data.Topic[i].authorid;
+							if(authorID==userID) {
 
 								var hTitle = $("<h3></h3>").text(data.Topic[i].title);
 								var ppers = $("<p></p>").text("发布人：" + data.Topic[i].authorname);
@@ -290,14 +288,14 @@
 								var divRow1 = $("<div class='row'></div>");
 								divRow1.append(divThumbnail, divCaption);
 
-								var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
+								var div1 = $("<div class='col-md-8'></div>");
 								div1.append(divRow1, $("<hr>"));
 
 								var topicDetailUrl;
 								if("" == userID) {
 									topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id;
 								} else {
-									topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id + "&userID=" + userID);
+									topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id + "userID=" + userID);
 								}
 
 								var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);

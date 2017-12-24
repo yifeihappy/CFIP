@@ -175,9 +175,23 @@ function userIDtianjia() {
 			});
 		}
 		
+		if($("#HRapply_act").length > 0) {
+			$("#HRapply_act").click(function() {
+				var hrefURL = encodeURI("my act.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
 		
-		
-		
+		if($("#HRjoin_act").length > 0) {
+			$("#HRjoin_act").click(function() {
+				var hrefURL = encodeURI("myact_canjia.html");
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
 		
 		
 		
@@ -348,9 +362,23 @@ function userIDtianjia() {
 			});
 		}
 		
+		if($("#HRapply_act").length > 0) {
+			$("#HRapply_act").click(function() {
+				var hrefURL = encodeURI("my act.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
 		
-		
-		
+		if($("#HRjoin_act").length > 0) {
+			$("#HRjoin_act").click(function() {
+				var hrefURL = encodeURI("myact_canjia.html?userID=" + userID);
+				console.log(hrefURL);
+				window.location.href = hrefURL;
+				return false;
+			});
+		}
 		
 		
 		
