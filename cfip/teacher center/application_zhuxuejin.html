@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>个人中心-我的活动</title>
+		<title></title>
 		<link rel="stylesheet" href="../../css/jh/template2.css" />
 		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 		<link href="../../css/dyf/signup.css" rel="stylesheet" />
@@ -173,73 +173,40 @@
 		</div>
 
 		<div class="container">
-			<div class="row">
+			<div class="row" id="sidebar">
 				<div class="col-md-2 sidebar">
 					<ul class="nav nav-pills nav-stacked">
 						<li>
-							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
+							<a href="basic information.html">基本信息</a>
+						</li>
+						<li>
+							<a href="#">我的消息</a>
 						</li>
 						<li class="active">
-							<a href="" target="_self" id="HRmyact">我的活动</a>
+							<a href="application.html">申请审批</a>
 						</li>
 						<li>
-							<a href="" target="_self" id="HRmytopic">我的话题</a>
-						</li>
-						<li>
-							<a href="" id="HRmyapply_zhuxuejin">我的申请</a>
-						</li>
-						<li>
-							<a href="" id="HRmywish">我的心愿</a>
-						</li>
-						<li>
-							<a href="" id="HRmyexpress">我的表白</a>
-						</li>
-						<li>
-							<a href="" id="HRmysparethings">我的闲物</a>
-						</li>
-						<li>
-							<a href="" target="_self" id="HRinformationupdate">个人设置</a>
+							<a href="settings.html" target="_self">个人设置</a>
 						</li>
 					</ul>
 				</div>
 				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
 						<li role="presentation" class="active">
-							<a href="#">我发布的活动</a>
+							<a href="" id="T_zhuxuejin">助学金申请</a>
 						</li>
 						<li role="presentation">
-							<a href="#">我参加的活动</a>
-						</li>
-						<li role="presentation">
-							<a href="#">我收藏的活动</a>
+							<a href="" id="T_jiangxuejin">奖学金申请</a>
 						</li>
 					</ul>
-					<div id="act-thumbnails" class="container">
-						<!--<div class="row">
-				<a href="/CFIP/index.html?userID=123345">
-					<div class="col-md-8 col-md-offset-2">
-						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-4 thumbnail">
-								<img src="../../img/Desert.jpg" alt="...">
-							</div>
-							<div class="col-md-8 col-sm-8 col-xs-8 caption">
-								<h3>Activiyty Name</h3>
-								<p>活动地点：菁菁堂</p>
-								<p>活动时间：8月1日至9月1日</p>
-								<p>主办单位：小雪</p>
-								<p>报名人数：6|100</p>
-								<p>报名截止：8月31日</p>
-							</div>
-						</div>
-						<hr />
+					<div id="applyzhanshi" class="container">
+
 					</div>
-				</a>
-			</div>-->
-					</div>
+
 				</div>
-				<div class="col-md-3 sidebar-offcanvas" id="sidebar">
+				<div class="col-md-3 sidebar-offcanvas">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<img src="../../img/logo.png" width="44px" height="44px" />
 							<span>猜你喜欢</span>
 						</div>
@@ -280,61 +247,151 @@
 
 		<script>
 			$(document).ready(function() {
-				var userID = isSignIn();
-				console.log(userID);
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
 				userIDtianjia();
 
 				$.ajax({
 					type: "get",
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
-					//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
-					async: true,
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/",
+					async: false,
 					success: function(data, state) {
+						console.log("adf");
 						console.log(state);
 						console.log(data);
-						for(var i = data.Activity.length - 1; i >= 0; i--) {
-							if(data.Activity[i].userid == userID) {
+						for(var i = data.Apply.length - 1; i >= 0; i--) {
 
-								var hTitle = $("<h3></h3>").text(data.Activity[i].actname);
-								var pAddr = $("<p></p>").text("活动地点：" + data.Activity[i].actaddress);
-								var pActTime = $("<p></p>").text("活动时间：" + data.Activity[i].actstart + "至" + data.Activity[i].actend);
-								var pSponser = $("<p></p>").text("主办单位：" + data.Activity[i].actsponser);
-								var pNumber = $("<p></p>").text("报名人数：" + data.Activity[i].participantnumber + "|" + data.Activity[i].totalnumber);
-								var pApplyEnd = $("<p></p>").text("报名截止：" + data.Activity[i].applyend);
-								var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
-								divCaption.append(hTitle, pAddr, pActTime, pSponser, pNumber, pApplyEnd);
+							var dType = data.Apply[i].type;
+							var dState = data.Apply[i].state;
+							if(dType == "1" && dState == "0") {
+								var PublisherName = $("<font size='3'></font>").text(data.Apply[i].userid);
+								var PersonalHomepageURL = "#"; //连接到“他的主页”
+								var PublisherHomepage = $("<a></a>").attr("href", PersonalHomepageURL);
+								PublisherHomepage.append(PublisherName);
+								var divPublisherName = $("<div class='col-md-1'></div>");
+								divPublisherName.append(PublisherHomepage);
 
-								var imgAct = $("<img></img>").attr({
-									"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + data.Activity[i].id,
-									"alt": "...."
-								});
-								var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
-								divThumbnail.append(imgAct);
+								var hTitle = $("<h3></h3>").text(data.Apply[i].title);
+								var pContent = $("<p></p>").text(data.Apply[i].content);
+								var divNeiRong = $("<div class='col-md-11'></div>");
+								divNeiRong.append(hTitle, pContent);
 
-								var divRow1 = $("<div class='row'></div>");
-								divRow1.append(divThumbnail, divCaption);
+								var divROW1 = $("<div class='row'></div>");
+								divROW1.append(divPublisherName, divNeiRong);
 
-								var div1 = $("<div class='col-md-8'></div>");
-								div1.append(divRow1, $("<hr>"));
+								var yesBtn = $("<button  type='button' class='btn btn-info'></button>").text("通过");
+								yesBtn.attr("id", "yesbtn" + data.Apply[i].id);
+								yesBtn.click(function() {
+									var applyID = this.id.substr(6);
+									console.log(applyID);
+									$.ajax({
+										type: "get",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+										async: true,
+										success: function(data, state) {
+											console.log(data);
+											console.log(state);
+											var ApplyInfo = {
+												userid: data.userid,
+												type: data.type,
+												title: data.title,
+												content: data.content,
+												publishtime: data.publishtime,
+												state: "1"
+											};
+											var dataJsonStr = JSON.stringify(ApplyInfo);
+											console.log(dataJsonStr);
+											$.ajax({
+												url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+												contentType: "application/json",
+												type: "PUT",
+												data: dataJsonStr,
+												async: true,
+												error: function(data, state) {
+													console.log(data);
+													console.log(state);
+												},
+												success: function(data, state) {
+													console.log(state);
+													console.log(data);
 
-								var actDetailUrl;
-								if("" == userID) {
-									actDetailUrl = "/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id;
-								} else {
-									actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id + "userID=" + userID);
-								}
+													var indexUrl = encodeURI("application_zhuxuejin.html?userID=" + userID);
+													console.log(indexUrl);
+													window.location.href = indexUrl;
+												}
+											});
+										},
+										error: function(data, state) {
+											console.log(data);
+											console.log(state);
+										}
+									});
 
-								var actDetailA = $("<a></a>").attr("href", actDetailUrl);
-								actDetailA.append(div1);
+								})
+								var noBtn = $("<button type='button' class='btn btn-info'></button>").text("不通过");
+								noBtn.attr("id", "nobtn" + data.Apply[i].id);
+								noBtn.click(function() {
+									var applyID = this.id.substr(5);
+									console.log(applyID);
+									$.ajax({
+										type: "get",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+										async: true,
+										success: function(data, state) {
+											console.log(data);
+											console.log(state);
+											var ApplyInfo = {
+												userid: data.userid,
+												type: data.type,
+												title: data.title,
+												content: data.content,
+												publishtime: data.publishtime,
+												state: "2"
+											};
+											var dataJsonStr = JSON.stringify(ApplyInfo);
+											console.log(dataJsonStr);
+											$.ajax({
+												url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+												contentType: "application/json",
+												type: "PUT",
+												data: dataJsonStr,
+												async: true,
+												error: function(data, state) {
+													console.log(data);
+													console.log(state);
+												},
+												success: function(data, state) {
+													console.log(state);
+													console.log(data);
 
-								var divRow2 = $("<div class='row'></div>");
-								divRow2.append(actDetailA);
+													var indexUrl = encodeURI("application_zhuxuejin.html?userID=" + userID);
+													console.log(indexUrl);
+													window.location.href = indexUrl;
+												}
+											});
+										},
+										error: function(data, state) {
+											console.log(data);
+											console.log(state);
+										}
+									});
 
-								$("#act-thumbnails").append(divRow2);
+								})
+
+								var divBtn = $("<div class='col-md-3 col-md-offset-5'></div>");
+								divBtn.append(yesBtn, noBtn);
+
+								var divROW2 = $("<div class='row'></div>");
+								divROW2.append(divBtn);
+
+								var divHr = $("<div class='col-md-12'></div>");
+								divHr.append($("<hr>"));
+
+								$("#applyzhanshi").append($("<br>"), divROW1, divROW2, divHr);
 							}
 
 						}
-
 					},
 					error: function(data, state) {
 						console.log(state);
@@ -344,6 +401,7 @@
 
 			});
 		</script>
+
 	</body>
 
 </html>

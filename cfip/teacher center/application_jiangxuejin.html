@@ -4,8 +4,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="../../css/jh/template2.css" />
 		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../../css/jh/template.css" />
+		<link href="../../css/dyf/signup.css" rel="stylesheet" />
+
+		<script src="../../jquery/jquery-3.2.1.min.js "></script>
+		<script src="../../js/bootstrap.min.js"></script>
+		<script src="../../js/dyf/user.js"></script>
+		<script src="/CFIP/js/qpj/userIDtianjia.js"></script>
 	</head>
 
 	<body>
@@ -168,9 +174,9 @@
 
 		<div class="container">
 			<div class="row" id="sidebar">
-				<div class="col-lg-2 sidebar">
+				<div class="col-md-2 sidebar">
 					<ul class="nav nav-pills nav-stacked">
-						<li >
+						<li>
 							<a href="basic information.html">基本信息</a>
 						</li>
 						<li>
@@ -184,18 +190,21 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-lg-4 sidebar">
+				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
+						<li role="presentation" >
+							<a href="" id="T_zhuxuejin">助学金申请</a>
+						</li>
 						<li role="presentation" class="active">
-							<a href="#">奖学金申请</a>
+							<a href="" id="T_jiangxuejin">奖学金申请</a>
 						</li>
-						<li role="presentation">
-							<a href="#">助学金申请</a>
-						</li>
-						
 					</ul>
+					<div id="applyzhanshi" class="container">
+
+					</div>
+
 				</div>
-				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+				<div class="col-md-3 sidebar-offcanvas">
 					<div class="row">
 						<div class="col-md-6">
 							<img src="../../img/logo.png" width="44px" height="44px" />
@@ -235,6 +244,163 @@
 
 			</div>
 		</div>
+
+		<script>
+			$(document).ready(function() {
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
+				userIDtianjia();
+
+				$.ajax({
+					type: "get",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/",
+					async: false,
+					success: function(data, state) {
+						console.log("adf");
+						console.log(state);
+						console.log(data);
+						for(var i = data.Apply.length - 1; i >= 0; i--) {
+
+							var dType = data.Apply[i].type;
+							var dState = data.Apply[i].state;
+							if(dType == "2" && dState == "0") {
+								var PublisherName = $("<font size='3'></font>").text(data.Apply[i].userid);
+								var PersonalHomepageURL = "#"; //连接到“他的主页”
+								var PublisherHomepage = $("<a></a>").attr("href", PersonalHomepageURL);
+								PublisherHomepage.append(PublisherName);
+								var divPublisherName = $("<div class='col-md-1'></div>");
+								divPublisherName.append(PublisherHomepage);
+
+								var hTitle = $("<h3></h3>").text(data.Apply[i].title);
+								var pContent = $("<p></p>").text(data.Apply[i].content);
+								var divNeiRong = $("<div class='col-md-11'></div>");
+								divNeiRong.append(hTitle, pContent);
+
+								var divROW1 = $("<div class='row'></div>");
+								divROW1.append(divPublisherName, divNeiRong);
+
+								var yesBtn = $("<button  type='button' class='btn btn-info'></button>").text("通过");
+								yesBtn.attr("id", "yesbtn" + data.Apply[i].id);
+								yesBtn.click(function() {
+									var applyID = this.id.substr(6);
+									console.log(applyID);
+									$.ajax({
+										type: "get",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+										async: true,
+										success: function(data, state) {
+											console.log(data);
+											console.log(state);
+											var ApplyInfo = {
+												userid: data.userid,
+												type: data.type,
+												title: data.title,
+												content: data.content,
+												publishtime: data.publishtime,
+												state: "1"
+											};
+											var dataJsonStr = JSON.stringify(ApplyInfo);
+											console.log(dataJsonStr);
+											$.ajax({
+												url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+												contentType: "application/json",
+												type: "PUT",
+												data: dataJsonStr,
+												async: true,
+												error: function(data, state) {
+													console.log(data);
+													console.log(state);
+												},
+												success: function(data, state) {
+													console.log(state);
+													console.log(data);
+
+													var indexUrl = encodeURI("application_zhuxuejin.html?userID=" + userID);
+													console.log(indexUrl);
+													window.location.href = indexUrl;
+												}
+											});
+										},
+										error: function(data, state) {
+											console.log(data);
+											console.log(state);
+										}
+									});
+
+								})
+								var noBtn = $("<button type='button' class='btn btn-info'></button>").text("不通过");
+								noBtn.attr("id", "nobtn" + data.Apply[i].id);
+								noBtn.click(function() {
+									var applyID = this.id.substr(5);
+									console.log(applyID);
+									$.ajax({
+										type: "get",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+										async: true,
+										success: function(data, state) {
+											console.log(data);
+											console.log(state);
+											var ApplyInfo = {
+												userid: data.userid,
+												type: data.type,
+												title: data.title,
+												content: data.content,
+												publishtime: data.publishtime,
+												state: "2"
+											};
+											var dataJsonStr = JSON.stringify(ApplyInfo);
+											console.log(dataJsonStr);
+											$.ajax({
+												url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/" + applyID,
+												contentType: "application/json",
+												type: "PUT",
+												data: dataJsonStr,
+												async: true,
+												error: function(data, state) {
+													console.log(data);
+													console.log(state);
+												},
+												success: function(data, state) {
+													console.log(state);
+													console.log(data);
+
+													var indexUrl = encodeURI("application_zhuxuejin.html?userID=" + userID);
+													console.log(indexUrl);
+													window.location.href = indexUrl;
+												}
+											});
+										},
+										error: function(data, state) {
+											console.log(data);
+											console.log(state);
+										}
+									});
+
+								})
+
+								var divBtn = $("<div class='col-md-3 col-md-offset-5'></div>");
+								divBtn.append(yesBtn, noBtn);
+
+								var divROW2 = $("<div class='row'></div>");
+								divROW2.append(divBtn);
+
+								var divHr = $("<div class='col-md-12'></div>");
+								divHr.append($("<hr>"));
+
+								$("#applyzhanshi").append($("<br>"), divROW1, divROW2, divHr);
+							}
+
+						}
+					},
+					error: function(data, state) {
+						console.log(state);
+						console.log(data);
+					}
+				});
+
+			});
+		</script>
 
 	</body>
 
