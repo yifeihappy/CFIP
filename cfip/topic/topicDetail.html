@@ -394,6 +394,7 @@
 			var Publishtime;
 			var Commentnumber;
 			var Topictype;
+			var Viewernumber;
 
 			$.ajax({
 				type: "get",
@@ -411,6 +412,36 @@
 					Publishtime = data.publishtime;
 					Commentnumber = data.commentnumber;
 					Topictype = data.topictype;
+					Viewernumber = data.viewernumber;
+
+					var Viewerinfo = {
+						title = Title,
+						authorname = Authorname,
+						authorid = Authorid,
+						brief = Brief,
+						publishtime = Publishtime,
+						commentnumber = Commentnumber,
+						topictype = Topictype,
+						viewernumber = Viewernumber + 1
+					};
+					var dataJsonStr = JSON.stringify(Viewerinfo);
+					console.log(dataJsonStr);
+					$.ajax({
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + "1513471613255",
+						contentType: "application/json",
+						type: "PUT",
+						data: dataJsonStr,
+						async: true,
+						error: function(data, state) {
+							//console.log(dataJsonStr);
+							console.log(data);
+							console.log(state);
+						},
+						success: function(data, state) {
+							console.log(state);
+							console.log(data);
+						}
+					});
 
 					var hTitle = $("<h3></h3>").text(data.title);
 					var pText = $("<p></p>").text(data.brief);
@@ -485,18 +516,20 @@
 				});
 
 				var Commentinfor = {
-					title=Title,
-					authorname=Authorname,
-					authorid=Authorid,
-					brief=Brief,
-					publishtime=Publishtime,
-					commentnumber=Commentnumber+1,
-					topictype=Topictype
+					title = Title,
+					authorname = Authorname,
+					authorid = Authorid,
+					brief = Brief,
+					publishtime = Publishtime,
+					commentnumber = Commentnumber + 1,
+					topictype = Topictype,
+					viewernumber = Viewernumber
+
 				};
 				var dataJsonStr = JSON.stringify(Commentinfor);
 				console.log(dataJsonStr);
 				$.ajax({
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/"+ "1513471613255",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + "1513471613255",
 					contentType: "application/json",
 					type: "PUT",
 					data: dataJsonStr,
@@ -511,10 +544,6 @@
 						console.log(data);
 					}
 				});
-				
-				
-				
-				
 
 			});
 		});
