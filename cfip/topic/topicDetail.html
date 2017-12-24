@@ -387,6 +387,13 @@
 			/**********判断用户有无登录 start*********/
 			var userID = isSignIn(); //判断用户有没有登录进行页面变化
 			/**********判断用户有无登录 end*********/
+			var Title;
+			var Authorname;
+			var Authorid;
+			var Brief;
+			var Publishtime;
+			var Commentnumber;
+			var Topictype;
 
 			$.ajax({
 				type: "get",
@@ -396,6 +403,14 @@
 				success: function(data, state) {
 					console.log(state);
 					console.log(data);
+
+					Title = data.title;
+					Authorname = data.authorname;
+					Authorid = data.authorid;
+					Brief = data.brief;
+					Publishtime = data.publishtime;
+					Commentnumber = data.commentnumber;
+					Topictype = data.topictype;
 
 					var hTitle = $("<h3></h3>").text(data.title);
 					var pText = $("<p></p>").text(data.brief);
@@ -441,7 +456,67 @@
 					console.log(data);
 				}
 			});
-			
+
+			$("#CommentsSubmit").click(function() {
+				var UserInfo = {
+					userid = parseInt(userID),
+					username = "xiaodeng",
+					brief = $("CommentsBrief").val(),
+					ctime = "2017-12-22",
+				};
+				var dataJsonStr = JSON.stringify(UserInfo);
+				console.log(dataJsonStr);
+				$.ajax({
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
+					contentType: "application/json",
+					type: "POST",
+					data: dataJsonStr,
+					async: true,
+					error: function(data, state) {
+						//console.log(dataJsonStr);
+						console.log(data);
+						console.log(state);
+					},
+					success: function(data, state) {
+						console.log(state);
+						console.log(data);
+						alert("评论成功！");
+					}
+				});
+
+				var Commentinfor = {
+					title=Title,
+					authorname=Authorname,
+					authorid=Authorid,
+					brief=Brief,
+					publishtime=Publishtime,
+					commentnumber=Commentnumber+1,
+					topictype=Topictype
+				};
+				var dataJsonStr = JSON.stringify(Commentinfor);
+				console.log(dataJsonStr);
+				$.ajax({
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/"+ "1513471613255",
+					contentType: "application/json",
+					type: "PUT",
+					data: dataJsonStr,
+					async: true,
+					error: function(data, state) {
+						//console.log(dataJsonStr);
+						console.log(data);
+						console.log(state);
+					},
+					success: function(data, state) {
+						console.log(state);
+						console.log(data);
+					}
+				});
+				
+				
+				
+				
+
+			});
 		});
 	</script>
 	<script>
@@ -486,10 +561,10 @@
 			/**********判断用户有无登录 end*********/
 			$("#CommentsSubmit").click(function() {
 				var UserInfo = {
-					userid=userID,
-					username="xiaodeng",
-                    brief=$("CommentsBrief").val(),
-                    ctime="2017-12-22",
+					userid = parseInt(userID),
+					username = "xiaodeng",
+					brief = $("CommentsBrief").val(),
+					ctime = "2017-12-22",
 				};
 				var dataJsonStr = JSON.stringify(UserInfo);
 				console.log(dataJsonStr);
@@ -507,6 +582,7 @@
 					success: function(data, state) {
 						console.log(state);
 						console.log(data);
+						alert("评论成功！");
 					}
 				});
 			});

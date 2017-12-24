@@ -346,12 +346,51 @@
 							$("#actBrief").text(data.actbrief);
 							$("#actSponser").text(data.actsponser);
 							$("#actAddress").text(data.actaddress);
-							$("#totalNumber").text(data.totalNumber);
+							$("#totalNumber").text(data.totalnumber);
 							$("#participantNumber").text(data.participantnumber);
+
+							//							var userid=data.userid;
+							//							var viewernumber=data.viewernumber;
+							var Actinfo = {
+								actname = data.actname,
+								actaddress = data.actaddress,
+								actsponser = data.actsponser,
+								userid = data.userid,
+								viewernumber = data.viewernumber,
+								acttype = data.acttype,
+								actstart = data.actstart,
+								actend = data.actend,
+								applystart = data.applystart,
+								applyend = data.applyend,
+								actbrief = data.actbrief,
+								totalnumber = data.totalnumber,
+								participantnumber = data.participantnumber,
+								viewernumber = data.viewernumber + 1
+							};
+
+							var dataJsonStr = JSON.stringify(Actinfo);
+							console.log(dataJsonStr);
+							$.ajax({
+								url: "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/",
+								contentType: "application/json",
+								type: "PUT",
+								data: dataJsonStr,
+								async: true,
+								error: function(data, state) {
+									//console.log(dataJsonStr);
+									console.log(data);
+									console.log(state);
+								},
+								success: function(data, state) {
+									console.log(state);
+									console.log(data);
+
+								}
+							});
 
 							totalNumber = data.totalnumber;
 							applyNumber = data.participantnumber;
-							
+
 							var currentTime = getFormatDate();
 
 							console.log("ct:" + currentTime);
