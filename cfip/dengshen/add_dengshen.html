@@ -310,6 +310,7 @@
 				userIDtianjia();
 
 				$("#adddengshenSubmit").click(function() {
+					window.event.returnValue = false; 
 
 					var dengshenObject = {
 						title: $("#dengshenTitle").val(),
