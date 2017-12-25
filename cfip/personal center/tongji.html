@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/jh/template2.css" />
+		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
+		<link href="../../css/dyf/signup.css" rel="stylesheet" />
+
+		<script src="../../jquery/jquery-3.2.1.min.js "></script>
+		<script src="../../js/bootstrap.min.js"></script>
+		<script src="../../js/dyf/user.js"></script>
+		<script src="/CFIP/js/qpj/userIDtianjia.js"></script>
+	</head>
+
+	<body>
+
+		<div class="row" id="top-nav">
+			<div class="col-md-12">
+				<nav class="navbar navbar-fixed-top navbar-inverse">
+					<div class="container">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+							<div class="nav navbar-nav navbar-header">
+								<li>
+									<img src="../../img/logo.png" width="44px" height="44px" />
+								</li>
+								<li>
+									<a href="" id="CFIP" style="text-decoration:none">CFIP</a>
+								</li>
+							</div>
+						</div>
+						<div id="navbar" class="collapse navbar-collapse">
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="#">Chat</a>
+								</li>
+								<li>
+									<a href="cfip/act/act.html">活动</a>
+								</li>
+								<!--<li class="dropdown">
+										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li>
+												<a href="#">比赛</a>
+											</li>
+											<li>
+												<a href="#">公益</a>
+											</li>
+											<li>
+												<a href="#">户外</a>
+											</li>
+											<li>
+												<a href="#">讲座</a>
+											</li>
+											<li>
+												<a href="#">艺术</a>
+											</li>
+											<li>
+												<a href="#">游学</a>
+											</li>
+											<li>
+												<a href="#">招聘</a>
+											</li>
+											<li>
+												<a href="#">招新</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a href="#">其它</a>
+											</li>
+										</ul>
+									</li>-->
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">明星</a>
+										</li>
+										<li>
+											<a href="#">搞笑</a>
+										</li>
+										<li>
+											<a href="#">情感</a>
+										</li>
+										<li>
+											<a href="#">时尚</a>
+										</li>
+										<li>
+											<a href="#">军事</a>
+										</li>
+										<li>
+											<a href="#">美女</a>
+										</li>
+										<li>
+											<a href="#">体育</a>
+										</li>
+										<li>
+											<a href="#">动漫</a>
+										</li>
+										<li role="separator" class="divider"></li>
+										<li>
+											<a href="#">其它</a>
+										</li>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">表白墙</a>
+										</li>
+										<li>
+											<a href="#">心愿墙</a>
+										</li>
+										<li>
+											<a href="#">闲物店</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+
+							<form class="navbar-form navbar-left">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="活动/话题">
+								</div>
+								<button type="submit" class="btn btn-default">搜索</button>
+							</form>
+
+							<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
+								<li>
+									<a href="/CFIP/cfip/user/signin.html">登录</a>
+								</li>
+								<li ng-hide="userService.isLogin">
+									<a href="/CFIP/cfip/user/signup.html">注册</a>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">活动</a>
+										</li>
+										<li>
+											<a href="#">话题</a>
+										</li>
+										<li role="separator" class="divider"></li>
+										<li>
+											<a href="#">心愿</a>
+										</li>
+										<li>
+											<a href="#">表白</a>
+										</li>
+										<li>
+											<a href="#">闲物</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<!-- /.nav-collapse -->
+					</div>
+					<!-- /.container -->
+				</nav>
+
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row" id="sidebar">
+				<div class="col-md-2 sidebar">
+					<ul class="nav nav-pills nav-stacked">
+						<li>
+							<a href="basic information.html">基本信息</a>
+						</li>
+						<li>
+							<a href="#">我的消息</a>
+						</li>
+						<li>
+							<a href="application.html">申请审批</a>
+						</li>
+						<li>
+							<a href="settings.html" target="_self">个人设置</a>
+						</li>
+						<li class="active">
+							<a href="">查看信息</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-7 sidebar">
+					<ul class="nav nav-tabs">
+						<li role="presentation" class="active">
+							<a href="" id="">查看信息</a>
+						</li>
+					</ul>
+					<div class="row">
+						<br />
+						<div class="col-md-6 col-md-offset-2">
+							<input type="text" class="form-control" id="chaxunID" placeholder="请输入想要查询信息的学生ID">
+							<button id="chaxunBtn" type="button" class="btn btn-info">查询</button>
+						</div>
+						<hr />
+					</div>
+
+					<div id="chaxunzhanshi" class="container">
+<!--						<div class="row">
+							<h2>活动参与次数分别为：</h2>
+							<p>1、招新：</p>
+							<p>2、讲座：</p>
+							<p>3、艺术：</p>
+							<p>4、户外：</p>
+							<p>5、招聘：</p>
+							<p>6、游学：</p>
+							<p>7、比赛：</p>
+							<p>8、公益：</p>
+							<p>9、其他：</p>
+							<p>10、共计：</p>
+							<hr />
+						</div>
+						<div class="row">
+							<h2>话题参与次数分别为：</h2>
+							<p>1、明星：</p>
+							<p>2、搞笑：</p>
+							<p>3、情感：</p>
+							<p>4、时尚：</p>
+							<p>5、军事：</p>
+							<p>6、美女：</p>
+							<p>7、体育：</p>
+							<p>8、动漫：</p>
+							<p>9、其他：</p>e
+							<p>10、共计：</p>
+							<hr />
+						</div> -->
+					</div>
+
+				</div>
+				<div class="col-md-3 sidebar-offcanvas">
+					<div class="row">
+						<div class="col-md-6">
+							<img src="../../img/logo.png" width="44px" height="44px" />
+							<span>猜你喜欢</span>
+						</div>
+					</div>
+					<div class="row list-group">
+						<a href="#" class="list-group-item active"></a>
+						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
+						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
+						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
+						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
+						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
+					</div>
+					<!--<div class="list-group">
+						<a href="#" class="list-group-item active">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+						<a href="#" class="list-group-item">Link</a>
+					</div>-->
+				</div>
+			</div>
+			<div>
+				<!--/row-->
+				offcanvas
+				<hr>
+
+				<footer>
+					<p>&copy; 2017 Company, Inc.</p>
+				</footer>
+
+			</div>
+		</div>
+
+		<script>
+			var actTimes1 = {
+						pAct1: 0,
+						pAct2: 0,
+						pAct3: 0,
+						pAct4: 0,
+						pAct5: 0,
+						pAct6: 0,
+						pAct7: 0,
+						pAct8: 0,
+						pAct9: 0,
+						pActTotal: 0
+					};
+					var actTimes2 = {
+						applyAct1: 0,
+						applyAct2: 0,
+						applyAct3: 0,
+						applyAct4: 0,
+						applyAct5: 0,
+						applyAct6: 0,
+						applyAct7: 0,
+						applyAct8: 0,
+						applyAct9: 0,
+						applyActTotal: 0
+					};
+
+					var topicTimes1 = {
+						pTopic1: 0,
+						pTopic2: 0,
+						pTopic3: 0,
+						pTopic4: 0,
+						pTopic5: 0,
+						pTopic6: 0,
+						pTopic7: 0,
+						pTopic8: 0,
+						pTopic9: 0,
+						pTopicTotal: 0
+					};
+					var topicTimes2 = {
+						cTopic1: 0,
+						cTopic2: 0,
+						cTopic3: 0,
+						cTopic4: 0,
+						cTopic5: 0,
+						cTopic6: 0,
+						cTopic7: 0,
+						cTopic8: 0,
+						cTopic9: 0,
+						cTopicTotal: 0
+					};
+
+			$(document).ready(function() {
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
+				userIDtianjia();
+
+				//				$("#adddengshenSubmit").click(function() {
+				//
+				//					var dengshenObject = {
+				//					title: $("#dengshenTitle").val(),
+				//						content: $("#dengshenContent").val(),
+				//						publishtime: getFormatDate(),
+				//						userid: parseInt(userID),
+				//						type: $("#dengshenType").val(),
+				//						state: "0"
+				//					};
+				$("#chaxunBtn").click(function() {
+					var chaxunID = $("#chaxunID").val();
+					console.log(chaxunID);
+					
+					$.ajax({
+						type: "get",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
+						async: false,
+						success: function(data, state) {
+							console.log(data);
+							console.log(state);
+							for(var i = 0; i < data.Activity.length; i++) {
+								if(chaxunID == data.Activity[i].userid) {
+									if(data.Activity[i].acttype == "1") {
+										actTimes1.pAct1 = actTimes1.pAct1 + 1;
+									}
+									if(data.Activity[i].acttype == "2") {
+										actTimes1.pAct2 = actTimes1.pAct2 + 1;
+									}
+									if(data.Activity[i].acttype == "3") {
+										actTimes1.pAct3 = actTimes1.pAct3 + 1;
+									}
+									if(data.Activity[i].acttype == "4") {
+										actTimes1.pAct4 = actTimes1.pAct4 + 1;
+									}
+									if(data.Activity[i].acttype == "5") {
+										actTimes1.pAct5 = actTimes1.pAct5 + 1;
+									}
+									if(data.Activity[i].acttype == "6") {
+										actTimes1.pAct6 = actTimes1.pAct6 + 1;
+									}
+									if(data.Activity[i].acttype == "7") {
+										actTimes1.pAct7 = actTimes1.pAct7 + 1;
+									}
+									if(data.Activity[i].acttype == "8") {
+										actTimes1.pAct8 = actTimes1.pAct8 + 1;
+									}
+									if(data.Activity[i].acttype == "9") {
+										actTimes1.pAct9 = actTimes1.pAct9 + 1;
+									}
+								}
+							}
+							actTimes1.pActTotal = actTimes1.pAct1 + actTimes1.pAct2 + actTimes1.pAct3 + actTimes1.pAct4 + actTimes1.pAct5 + actTimes1.pAct6 + actTimes1.pAct7 + actTimes1.pAct8 + actTimes1.pAct9;
+						},
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						}
+					});
+
+					$.ajax({
+						type: "get",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Applicationform/",
+						async: false,
+						success: function(data, state) {
+							console.log(data);
+							console.log(state);
+							for(var i = data.Applicationform.length - 1; i >= 0; i--) {
+								if(chaxunID == data.Applicationform[i].userid) {
+									var activityid = data.Applicationform[i].actid;
+									console.log(activityid);
+									$.ajax({
+										type: "get",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + activityid,
+										async: false,
+										success: function(data, state) {
+											console.log(data);
+											console.log(state);
+											if(data.acttype == "1") {
+												actTimes2.applyAct1 = actTimes2.applyAct1 + 1;
+											}
+											if(data.acttype =="2") {
+												actTimes2.applyAct2 = actTimes2.applyAct2 + 1;
+											}
+											if(data.acttype == "3") {
+												actTimes2.applyAct3 = actTimes2.applyAct3 + 1;
+											}
+											if(data.acttype == "4") {
+												actTimes2.applyAct4 = actTimes2.applyAct4 + 1;
+											}
+											if(data.acttype == "5") {
+												actTimes2.applyAct5 = actTimes2.applyAct5 + 1;
+											}
+											if(data.acttype == "6") {
+												actTimes2.applyAct6 = actTimes2.applyAct6 + 1;
+											}
+											if(data.acttype == "7") {
+												actTimes2.applyAct7 = actTimes2.applyAct7 + 1;
+											}
+											if(data.acttype == "8") {
+												actTimes2.applyAct8 = actTimes2.applyAct8 + 1;
+											}
+											if(data.acttype == "9") {
+												actTimes2.applyAct9 = actTimes2.applyAct9 + 1;
+											}
+										},
+										error: function(data, state) {
+											console.log(data);
+											console.log(state);
+										}
+									});
+								}
+							}
+							actTimes2.applyActTotal = actTimes2.applyAct1 + actTimes2.applyAct2 + actTimes2.applyAct3 + actTimes2.applyAct4 + actTimes2.applyAct5 + actTimes2.applyAct6 + actTimes2.applyAct7 + actTimes2.applyAct8 + actTimes2.applyAct9;
+						},
+
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						}
+					});
+
+					var actTimesAll = {
+						Act1: actTimes1.pAct1 + actTimes2.applyAct1,
+						Act2: actTimes1.pAct2 + actTimes2.applyAct2,
+						Act3: actTimes1.pAct3 + actTimes2.applyAct3,
+						Act4: actTimes1.pAct4 + actTimes2.applyAct4,
+						Act5: actTimes1.pAct5 + actTimes2.applyAct5,
+						Act6: actTimes1.pAct6 + actTimes2.applyAct6,
+						Act7: actTimes1.pAct7 + actTimes2.applyAct7,
+						Act8: actTimes1.pAct8 + actTimes2.applyAct8,
+						Act9: actTimes1.pAct9 + actTimes2.applyAct9,
+						ActTotal: actTimes1.pActTotal + actTimes2.applyActTotal
+					};
+
+					$.ajax({
+						type: "get",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/",
+						async: false,
+						success: function(data, state) {
+							console.log(data);
+							console.log(state);
+							for(var i = 0; i < data.Topic.length; i++) {
+								if(chaxunID == data.Topic[i].authorid) {
+									if(data.Topic[i].topictype == "1") {
+										topicTimes1.pTopic1 = topicTimes1.pTopic1 + 1;
+									}
+									if(data.Topic[i].topictype == "2") {
+										topicTimes1.pTopic2 = topicTimes1.pTopic2 + 1;
+									}
+									if(data.Topic[i].topictype == "3") {
+										topicTimes1.pTopic3 = topicTimes1.pTopic3 + 1;
+									}
+									if(data.Topic[i].topictype == "4") {
+										topicTimes1.pTopic4 = topicTimes1.pTopic4 + 1;
+									}
+									if(data.Topic[i].topictype == "5") {
+										topicTimes1.pTopic5 = topicTimes1.pTopic5 + 1;
+									}
+									if(data.Topic[i].topictype == "6") {
+										topicTimes1.pTopic6 = topicTimes1.pTopic6 + 1;
+									}
+									if(data.Topic[i].topictype == "7") {
+										topicTimes1.pTopic7 = topicTimes1.pTopic7 + 1;
+									}
+									if(data.Topic[i].topictype == "8") {
+										topicTimes1.pTopic8 = topicTimes1.pTopic8 + 1;
+									}
+									if(data.Topic[i].topictype == "9") {
+										topicTimes1.pTopic9 = topicTimes1.pTopic9 + 1;
+									}
+								}
+							}
+
+							topicTimes1.pTopicTotal = topicTimes1.pTopic1 + topicTimes1.pTopic2 + topicTimes1.pTopic3 + topicTimes1.pTopic4 + topicTimes1.pTopic5 + topicTimes1.pTopic6 + topicTimes1.pTopic7 + topicTimes1.pTopic8;
+							topicTimes1.pTopicTotal = topicTimes1.pTopicTotal + topicTimes1.pTopic9;
+						},
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						}
+					});
+
+					$.ajax({
+						type: "get",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
+						async: true,
+						success: function(data, state) {
+							console.log(data);
+							console.log(state);
+							for(var i = 0; i < data.Comments.length; i++) {
+								if(chaxunID == data.Comments[i].userid) {
+									var topicID = data.Comments[i].topicid;
+									$.ajax({
+										type: "get",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + topicID,
+										async: true,
+										success: function(data, state) {
+											console.log(data);
+											console.log(state);
+											if(data.topictype == "1") {
+												topicTimes2.cTopic1 = topicTimes2.cTopic1 + 1;
+											}
+										if(data.topictype == "2") {
+												topicTimes2.cTopic2 = topicTimes2.cTopic2 + 1;
+											}
+											if(data.topictype == "3") {
+												topicTimes2.cTopic3 = topicTimes2.cTopic3 + 1;
+											}
+										if(data.topictype == "4") {
+												topicTimes2.cTopic4 = topicTimes2.cTopic4 + 1;
+											}
+											if(data.topictype == "5") {
+												topicTimes2.cTopic5 = topicTimes2.cTopic5 + 1;
+											}
+											if(data.topictype == "6") {
+												topicTimes2.cTopic6 = topicTimes2.cTopic6 + 1;
+											}
+											if(data.topictype == "7") {
+												topicTimes2.cTopic7 = topicTimes2.cTopic7 + 1;
+											}
+											if(data.topictype == "8") {
+												topicTimes2.cTopic8 = topicTimes2.cTopic8 + 1;
+											}
+											if(data.topictype == "9") {
+												topicTimes2.cTopic9 = topicTimes2.cTopic9 + 1;
+											}
+										},
+										error: function(data, state) {
+											console.log(data);
+											console.log(state);
+										}
+
+									});
+								}
+							}
+							
+
+						},
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						}
+				});
+					var topicTimesAll = {
+						Topic1: topicTimes1.pTopic1 + topicTimes2.cTopic1,
+						Topic2: topicTimes1.pTopic2 + topicTimes2.cTopic2,
+						Topic3: topicTimes1.pTopic3 + topicTimes2.cTopic3,
+						Topic4: topicTimes1.pTopic4 + topicTimes2.cTopic4,
+						Topic5: topicTimes1.pTopic5 + topicTimes2.cTopic5,
+						Topic6: topicTimes1.pTopic6 + topicTimes2.cTopic6,
+						Topic7: topicTimes1.pTopic7 + topicTimes2.cTopic7,
+						Topic8: topicTimes1.pTopic8 + topicTimes2.cTopic8,
+						Topic9: topicTimes1.pTopic9 + topicTimes2.cTopic9,
+						TopicTotal: topicTimes1.pTopicTotal + topicTimes2.cTopicTotal
+					};
+
+					var Hact = $("<h2></h2>").text("活动参与的次数分别为：");
+					var Pact1 = $("<p></p>").text("1、招新:发布 " + actTimes1.pAct1 + "次，报名 " + actTimes2.applyAct1 + "次，共 " + actTimesAll.Act1 + "次；");
+					var Pact2 = $("<p></p>").text("2、讲座:发布 " + actTimes1.pAct2 + "次，报名 " + actTimes2.applyAct2 + "次，共 " + actTimesAll.Act2 + "次；");
+					var Pact3 = $("<p></p>").text("3、艺术:发布 " + actTimes1.pAct3 + "次，报名 " + actTimes2.applyAct3 + "次，共 " + actTimesAll.Act3 + "次；");
+					var Pact4 = $("<p></p>").text("4、户外:发布 " + actTimes1.pAct4 + "次，报名 " + actTimes2.applyAct4 + "次，共 " + actTimesAll.Act4 + "次；");
+					var Pact5 = $("<p></p>").text("5、招聘:发布 " + actTimes1.pAct5 + "次，报名 " + actTimes2.applyAct5 + "次，共 " + actTimesAll.Act5 + "次；");
+					var Pact6 = $("<p></p>").text("6、游学:发布 " + actTimes1.pAct6 + "次，报名 " + actTimes2.applyAct6 + "次，共 " + actTimesAll.Act6 + "次；");
+					var Pact7 = $("<p></p>").text("7、比赛:发布 " + actTimes1.pAct7 + "次，报名 " + actTimes2.applyAct7 + "次，共 " + actTimesAll.Act7 + "次；");
+					var Pact8 = $("<p></p>").text("8、公益:发布 " + actTimes1.pAct8 + "次，报名 " + actTimes2.applyAct8 + "次，共 " + actTimesAll.Act8 + "次；");
+					var Pact9 = $("<p></p>").text("9、其他:发布 " + actTimes1.pAct9 + "次，报名 " + actTimes2.applyAct9 + "次，共 " + actTimesAll.Act9 + "次；");
+					var PactTotal = $("<p></p>").text("10、共计:发布 " + actTimes1.pActTotal + "次，报名 " + actTimes2.applyActTotal + "次，共 " + actTimesAll.ActTotal + "次；");
+					var divRow1=$("<div class='row'></div>");
+					divRow1.append(Hact, Pact1, Pact2, Pact3, Pact4, Pact5, Pact6, Pact7, Pact8, Pact9, PactTotal, $("<hr>"));
+
+					var Htopic = $("<h2></h2>").text("话题参与的次数分别为：");
+					var Ptopic1 = $("<p></p>").text("1、明星：发布 " + topicTimes1.pTopic1 + "次，评论 " + topicTimes2.cTopic1 + " 次，共" + topicTimesAll.Topic1+"次；");
+					var Ptopic2 = $("<p></p>").text("2、搞笑：发布 " + topicTimes1.pTopic2 + "次，评论 " + topicTimes2.cTopic2 + " 次，共" + topicTimesAll.Topic2+"次；");
+					var Ptopic3 = $("<p></p>").text("3、情感：发布 " + topicTimes1.pTopic3 + "次，评论 " + topicTimes2.cTopic3 + " 次，共" + topicTimesAll.Topic3+"次；");
+					var Ptopic4 = $("<p></p>").text("4、时尚：发布 " + topicTimes1.pTopic4 + "次，评论 " + topicTimes2.cTopic4 + " 次，共" + topicTimesAll.Topic4+"次；");
+					var Ptopic5 = $("<p></p>").text("5、军事：发布 " + topicTimes1.pTopic5 + "次，评论 " + topicTimes2.cTopic5 + " 次，共" + topicTimesAll.Topic5+"次；");
+					var Ptopic6 = $("<p></p>").text("6、美女：发布 " + topicTimes1.pTopic6 + "次，评论 " + topicTimes2.cTopic6 + " 次，共" + topicTimesAll.Topic6+"次；");
+					var Ptopic7 = $("<p></p>").text("7、体育：发布 " + topicTimes1.pTopic7 + "次，评论 " + topicTimes2.cTopic7 + " 次，共" + topicTimesAll.Topic7+"次；");
+					var Ptopic8 = $("<p></p>").text("8、动漫：发布 " + topicTimes1.pTopic8 + "次，评论 " + topicTimes2.cTopic8 + " 次，共" + topicTimesAll.Topic8+"次；");
+					var Ptopic9 = $("<p></p>").text("9、其他：发布 " + topicTimes1.pTopic9 + "次，评论 " + topicTimes2.cTopic9 + " 次，共" + topicTimesAll.Topic9+"次；");
+					var PtopicTotal = $("<p></p>").text("10、共计：发布 " + topicTimes1.pTopicTotal + "次，评论 " + topicTimes2.cTopicTotal + " 次，共" + topicTimesAll.TopicTotal+"次；");
+					var divRow2=$("<div class='row'></div>");
+					divRow2.append(Htopic,Ptopic1,Ptopic2,Ptopic3,Ptopic4,Ptopic5,Ptopic6,Ptopic7,Ptopic8,Ptopic9,PtopicTotal,$("<hr>"));
+					
+					$("#chaxunzhanshi").append(divRow1,divRow2);
+
+				})
+
+			});
+		</script>
+
+	</body>
+
+</html>
