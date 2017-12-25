@@ -328,14 +328,22 @@
 
 				var urlStr = decodeURI(window.location.href);
 				urlStrArray1 = urlStr.split("actID=");
-				if(typeof(urlStrArray1[1]) != "undefined") {
+				if(userID == ""){
+					console.log("userID null");
+					actID = urlStrArray1[1];
+				} else {
+					console.log("userID:"+userID);
 					urlStrArray2 = urlStrArray1[1].split("userID=");
 					actID = urlStrArray2[0];
+				}
+				//if(typeof(urlStrArray1[1]) != "undefined") {
+					//urlStrArray2 = urlStrArray1[1].split("userID=");
+					//actID = urlStrArray2[0];
 					console.log(actID);
 					$.ajax({
 						type: "get",
 						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + actID,
-						async: true,
+						async: false,
 						success: function(data, state) {
 							$("#actName").text(data.actname);
 							$("#imgId").attr("src", "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + actID);
@@ -349,23 +357,24 @@
 							$("#totalNumber").text(data.totalnumber);
 							$("#participantNumber").text(data.participantnumber);
 
+							console.log(data);
 							//							var userid=data.userid;
 							//							var viewernumber=data.viewernumber;
 							var Actinfo = {
-								actname = data.actname,
-								actaddress = data.actaddress,
-								actsponser = data.actsponser,
-								userid = data.userid,
-								viewernumber = data.viewernumber,
-								acttype = data.acttype,
-								actstart = data.actstart,
-								actend = data.actend,
-								applystart = data.applystart,
-								applyend = data.applyend,
-								actbrief = data.actbrief,
-								totalnumber = data.totalnumber,
-								participantnumber = data.participantnumber,
-								viewernumber = data.viewernumber + 1
+								actname : data.actname,
+								actaddress : data.actaddress,
+								actsponser : data.actsponser,
+								userid : data.userid,
+								viewernumber : data.viewernumber,
+								acttype : data.acttype,
+								actstart : data.actstart,
+								actend : data.actend,
+								applystart : data.applystart,
+								applyend : data.applyend,
+								actbrief : data.actbrief,
+								totalnumber : data.totalnumber,
+								participantnumber : data.participantnumber,
+								viewernumber : data.viewernumber + 1
 							};
 
 							var dataJsonStr = JSON.stringify(Actinfo);
@@ -451,7 +460,7 @@
 
 						}
 					});
-				}
+				//}
 
 			});
 		</script>

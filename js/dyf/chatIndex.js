@@ -54,10 +54,12 @@ function creatContactList() {
 			continue;
 		}
 		var studentA = $("<a href=''></a>").text(studentArray[i].studentname + "\n" + studentArray[i].id);
-		var studentB = $("<div><div>").attr("id", "Li" + studentArray[i].id);
-		studentB.text("0");
+		studentA.attr("id", "Li" + studentArray[i].id);
+		//var studentB = $("<div><div>").attr("id", "Li" + studentArray[i].id);
+		//studentB.text("0");
 		var studentLi = $("<li></li>").attr("id", studentArray[i].id);
-		studentLi.append(studentA, studentB);
+		//studentLi.append(studentA, studentB);
+		studentLi.append(studentA);
 		$("#contactsUl").append(studentLi);
 
 		//点击用户列表
@@ -73,7 +75,8 @@ function creatContactList() {
 			curYIDMsgTriggerID = getMessageTrigger(curYID); //更新触当前聊天对象ID
 			$("#diaglogUser").text(curYID);
 			//消息数量设置为0
-			$("#Li" + this.id).text("0");
+			//$("#Li" + this.id).text("0");
+			$("#Li" + this.id).css("background-color", "#FFFFFF");
 			//还未创建对话
 			if(!(("Tr" + this.id) in msgPlaneMap)) {
 				var divTree = $("<div></div>").attr("id", "Tr" + this.id);
@@ -84,6 +87,47 @@ function creatContactList() {
 			msgPlaneMap["Tr" + this.id].show(); //展现当前会话
 		});
 	}
+
+	for(var i = 0; i < teacherArray.length; i++) {
+		if(teacherArray[i].id == "" + userID) {
+			continue;
+		}
+		var studentA = $("<a href=''></a>").text(teacherArray[i].teachername + "\n" + teacherArray[i].id);
+		studentA.attr("id", "Li" + studentArray[i].id);
+		//		var studentB = $("<div><div>").attr("id", "Li" + teacherArray[i].id);
+		//		studentB.text("0");
+		var studentLi = $("<li></li>").attr("id", teacherArray[i].id);
+		//		studentLi.append(studentA, studentB);
+		studentLi.append(studentA);
+		console.log("add Teacher:" + teacherArray[i].id);
+		$("#messageUl").append(studentLi);
+
+		//点击用户列表
+		$("#" + teacherArray[i].id).click(function() {
+			window.event.returnValue = false;
+			console.log("创建会话：" + this.id);
+			if(curYID != "") {
+				console.log("隐藏会话：" + curYID);
+				msgPlaneMap["Tr" + curYID].hide(); //隐藏旧会话
+			}
+
+			curYID = this.id;
+			curYIDMsgTriggerID = getMessageTrigger(curYID); //更新触当前聊天对象ID
+			$("#diaglogUser").text(curYID);
+			//消息数量设置为0
+			//$("#Li" + this.id).text("0");
+			$("#Li" + this.id).css("background-color", "#FFFFFF");
+			//还未创建对话
+			if(!(("Tr" + this.id) in msgPlaneMap)) {
+				var divTree = $("<div></div>").attr("id", "Tr" + this.id);
+				msgPlaneMap["Tr" + this.id] = divTree;
+				$("#allMessagePlane").append(divTree);
+			}
+
+			msgPlaneMap["Tr" + this.id].show(); //展现当前会话
+		});
+	}
+
 }
 
 //创建自己消息的ITem
@@ -296,7 +340,8 @@ function listenToMessageTrigger() {
 
 								msgPlaneMap["Tr" + data.Message[i].fromuserid].append(messageItem);
 								if(msgPlaneMap["Tr" + data.Message[i].fromuserid].is(":hidden")) {
-									$("#Li" + data.Message[i].fromuserid).text("1");
+									//									$("#Li" + data.Message[i].fromuserid).attr("style", "{background-color: red;}");
+									$("#Li" + data.Message[i].fromuserid).css("background-color", "red");
 								}
 
 								//更改消息为已读
@@ -409,7 +454,8 @@ function hasHistoryMessage() {
 
 							msgPlaneMap["Tr" + data.Message[i].fromuserid].append(messageItem);
 							if(msgPlaneMap["Tr" + data.Message[i].fromuserid].is(":hidden")) {
-								$("#Li" + data.Message[i].fromuserid).text("1");
+								//								$("#Li" + data.Message[i].fromuserid).attr("style", "{background-color: red;}");
+								$("#Li" + data.Message[i].fromuserid).css("background-color", "red");
 							}
 
 							//更改消息为已读

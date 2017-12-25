@@ -293,10 +293,10 @@
 							var ppers = $("<p></p>").text("发布人：" + data.Topic[i].authorname);
 							var pTopTime = $("<p></p>").text("发布时间：" + data.Topic[i].publishtime);
 							var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
-							divCaption.append(hTitle, ppers, pTopTime,);
+							divCaption.append(hTitle, ppers, pTopTime);
 
 							var imgTopic = $("<img></img>").attr({
-								"src": "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
+								"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
 								"alt": "...."
 							});
 							var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
@@ -312,7 +312,7 @@
 							if("" == userID) {
 								topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id;
 							} else {
-								topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id + "&userID=" + userID);
+								topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id + "userID=" + userID);
 							}
 
 							var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);

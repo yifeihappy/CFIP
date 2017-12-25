@@ -386,6 +386,7 @@
 		$(document).ready(function() {
 			/**********判断用户有无登录 start*********/
 			var userID = isSignIn(); //判断用户有没有登录进行页面变化
+			//userID = 1513502243526;
 			/**********判断用户有无登录 end*********/
 			var Title;
 			var Authorname;
@@ -395,12 +396,23 @@
 			var Commentnumber;
 			var Topictype;
 			var Viewernumber;
-
+			var urlStr = decodeURI(window.location.href);
+			urlStrArray1 = urlStr.split("topicID=");
+			if(userID == "") {
+				console.log("userID null");
+				topicID = urlStrArray1[1];
+			} else {
+				console.log("userID:" + userID);
+				urlStrArray2 = urlStrArray1[1].split("userID=");
+				topicID = urlStrArray2[0];
+			}
+			console.log(topicID);
+			//加载话题内容
 			$.ajax({
 				type: "get",
-				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + "1513471613255",
+				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + topicID,
 				//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
-				async: true,
+				async: false,
 				success: function(data, state) {
 					console.log(state);
 					console.log(data);
@@ -415,23 +427,24 @@
 					Viewernumber = data.viewernumber;
 
 					var Viewerinfo = {
-						title = Title,
-						authorname = Authorname,
-						authorid = Authorid,
-						brief = Brief,
-						publishtime = Publishtime,
-						commentnumber = Commentnumber,
-						topictype = Topictype,
-						viewernumber = Viewernumber + 1
+						title: Title,
+						authorname: Authorname,
+						authorid: Authorid,
+						brief: Brief,
+						publishtime: Publishtime,
+						commentnumber: Commentnumber,
+						topictype: Topictype,
+						viewernumber: Viewernumber + 1
 					};
 					var dataJsonStr = JSON.stringify(Viewerinfo);
 					console.log(dataJsonStr);
+					//浏览量+1
 					$.ajax({
-						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + "1513471613255",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + topicID,
 						contentType: "application/json",
 						type: "PUT",
 						data: dataJsonStr,
-						async: true,
+						async: false,
 						error: function(data, state) {
 							//console.log(dataJsonStr);
 							console.log(data);
@@ -442,6 +455,37 @@
 							console.log(data);
 						}
 					});
+					//加载评论
+					$.ajax({
+						type: "get",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/?Comments.topicid=" + topicID,
+						//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+						async: false,
+						success: function(data, state) {
+							console.log(state);
+							console.log(data);
+							if(JSON.stringify(data) != "{}") {
+								for(var i = 0; i < data.Comments.length; i++) {
+									var Ctext = $("<p></p>").text(data.Comments[i].username + ":" + data.Comments[i].brief);
+									var Ctime = $("<p></p>").text(data.Comments[i].commentstime);
+									var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
+									div1.append(Ctext, Ctime, $("<hr>"));
+
+									div2 = $("<div class='row'></div>");
+									div2.append(div1);
+
+									$("#Comments").append(div2);
+
+								}
+							}
+
+						},
+						error: function(data, state) {
+							console.log(state);
+							console.log(data);
+						}
+
+					});
 
 					var hTitle = $("<h3></h3>").text(data.title);
 					var pText = $("<p></p>").text(data.brief);
@@ -450,20 +494,20 @@
 					var divCaption = $("<div class='row'></div>");
 					divCaption.append(hTitle, pText, ppers, pTopTime, );
 
-					//												var imgTopic = $("<img></img>").attr({
-					//													"src": "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
-					//													"alt": "...."
-					//												});
+					var imgTopic = $("<img></img>").attr({
+						"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Topic/" + topicID,
+						"alt": "...."
+					});
 					var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
-					//												divThumbnail.append(imgTopic);
+					divThumbnail.append(imgTopic);
 
-					var div3 = $("<div class='col-md-8 col-sm-8 col-xs-8 caption'></div>")
+					var div3 = $("<div class='col-md-8 col-sm-8 col-xs-8 caption'></div>");
 					div3.append(divCaption);
 
 					var divRow1 = $("<div class='row'></div>");
 					divRow1.append(divThumbnail, div3);
 
-					var div1 = $("<div class='topic-detail col-md-8 col-md-offset-2'></div>");
+					var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
 					div1.append(divRow1);
 
 					//												var topicDetailUrl;
@@ -489,51 +533,79 @@
 			});
 
 			$("#CommentsSubmit").click(function() {
-				var UserInfo = {
-					userid = parseInt(userID),
-					username = "xiaodeng",
-					brief = $("CommentsBrief").val(),
-					ctime = "2017-12-22",
-				};
-				var dataJsonStr = JSON.stringify(UserInfo);
-				console.log(dataJsonStr);
+				window.event.returnValue = false;
+				
+				if(userID == "") {
+					alert("请先登录！");
+				}
+				//获取名字
 				$.ajax({
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
-					contentType: "application/json",
-					type: "POST",
-					data: dataJsonStr,
-					async: true,
-					error: function(data, state) {
-						//console.log(dataJsonStr);
-						console.log(data);
-						console.log(state);
-					},
+					type: "get",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + userID,
+					//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+					async: false,
 					success: function(data, state) {
 						console.log(state);
 						console.log(data);
-						alert("评论成功！");
+
+						var UserInfo = {
+							userid: parseInt(userID),
+							username: data.studentname,
+							brief: $("#CommentsBrief").val(),
+							commentstime: getFormatDate(),
+							topicid: parseInt(topicID)
+						};
+						var dataJsonStr = JSON.stringify(UserInfo);
+						console.log(dataJsonStr);
+						//增加评论
+						$.ajax({
+							url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
+							contentType: "application/json",
+							type: "POST",
+							data: dataJsonStr,
+							async: false,
+							error: function(data, state) {
+								//console.log(dataJsonStr);
+								console.log(data);
+								console.log(state);
+								alert("评论失败！");
+							},
+							success: function(data, state) {
+								console.log(state);
+								console.log(data);
+								//alert("评论成功！");
+								window.location.href = "/CFIP/cfip/topic/topicDetail.html?topicID=" +topicID+ "userID=" + userID;
+							}
+						});
+
+					},
+					error: function(data, state) {
+						console.log(state);
+						console.log(data);
 					}
+
 				});
 
 				var Commentinfor = {
-					title = Title,
-					authorname = Authorname,
-					authorid = Authorid,
-					brief = Brief,
-					publishtime = Publishtime,
-					commentnumber = Commentnumber + 1,
-					topictype = Topictype,
-					viewernumber = Viewernumber
+					title: Title,
+					authorname: Authorname,
+					authorid: Authorid,
+					brief: Brief,
+					publishtime: Publishtime,
+					commentnumber: Commentnumber + 1,
+					topictype: Topictype,
+					viewernumber: Viewernumber
 
 				};
 				var dataJsonStr = JSON.stringify(Commentinfor);
 				console.log(dataJsonStr);
+				//评论量+1
 				$.ajax({
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + "1513471613255",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + topicID,
 					contentType: "application/json",
 					type: "PUT",
 					data: dataJsonStr,
-					async: true,
+					async: false,
 					error: function(data, state) {
 						//console.log(dataJsonStr);
 						console.log(data);
@@ -548,74 +620,6 @@
 			});
 		});
 	</script>
-	<script>
-		$(document).ready(function() {
-			/**********判断用户有无登录 start*********/
-			var userID = isSignIn(); //判断用户有没有登录进行页面变化
-			/**********判断用户有无登录 end*********/
 
-			$.ajax({
-				type: "get",
-				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
-				//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
-				async: true,
-				success: function(data, state) {
-					console.log(state);
-					console.log(data);
-					for(var i = 0; i < data.Comments.length; i++) {
-						var Ctext = $("<p></p>").text(data.Comments[i].authorname + ":" + data.Comments[i].brief);
-						var Ctime = $("<p></p>").text(data.Comments[i].time);
-						var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
-						div1.append(Ctext, Ctime, $("<hr>"));
-
-						div2 = $("<div class='row'></div>");
-						div2.append(div1);
-
-						$("#Comments").append(div2);
-
-					}
-				},
-				error: function(data, state) {
-					console.log(state);
-					console.log(data);
-				}
-
-			});
-		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			/**********判断用户有无登录 start*********/
-			var userID = isSignIn(); //判断用户有没有登录进行页面变化
-			/**********判断用户有无登录 end*********/
-			$("#CommentsSubmit").click(function() {
-				var UserInfo = {
-					userid = parseInt(userID),
-					username = "xiaodeng",
-					brief = $("CommentsBrief").val(),
-					ctime = "2017-12-22",
-				};
-				var dataJsonStr = JSON.stringify(UserInfo);
-				console.log(dataJsonStr);
-				$.ajax({
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/",
-					contentType: "application/json",
-					type: "POST",
-					data: dataJsonStr,
-					async: true,
-					error: function(data, state) {
-						//console.log(dataJsonStr);
-						console.log(data);
-						console.log(state);
-					},
-					success: function(data, state) {
-						console.log(state);
-						console.log(data);
-						alert("评论成功！");
-					}
-				});
-			});
-		});
-	</script>
 
 </html>

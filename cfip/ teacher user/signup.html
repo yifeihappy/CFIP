@@ -93,8 +93,34 @@
 							console.log(state);
 						},
 						success: function(data, state) {
-							console.log(state);
+							console.log("Teacher:"+state);
 							console.log(data);
+							userID = data.id;
+							var msgListen = {
+								userid: data.id,
+								state: "0"
+							};
+							var jsonMsgListenStr = JSON.stringify(msgListen);
+							console.log(jsonMsgListenStr);
+							$.ajax({
+								type: "post",
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Messagetrigger/",
+								data: jsonMsgListenStr,
+								contentType: "application/json",
+								async: false,
+								success: function(data, state) {
+									console.log(data);
+									console.log("Messagetrigger:" + state);
+
+									var indexUrl = encodeURI("../../index.html?userID=" + userID);
+									console.log(indexUrl);
+									window.location.href = indexUrl;
+								},
+								error: function(data, state) {
+									console.log("Messagetrigger:" + state);
+								}
+							});
+
 						}
 					});
 					return false;

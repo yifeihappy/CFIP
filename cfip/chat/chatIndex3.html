@@ -251,7 +251,7 @@
 									<span class="glyphicon glyphicon-user i-glyphicon"></span>
 								</div>
 							</div>-->
-							
+
 							<!--<div id="messagePlane">
 								<div class="row">
 									<div class="col-sm-1 you-img">
@@ -449,14 +449,12 @@
 							console.log(files[0].name);
 							//console.log();
 							var currentTime = getFormatDate(); //获取当前时间
-							
+
 							var fileType = "0";
-							if(files[0].name.endsWith('jpg'))
-							{
+							if(files[0].name.endsWith('jpg')) {
 								console.log("你选择的是一张jpg图片");
 								fileType = "2"
-							} else if(files[0].name.endsWith("mp4"))
-							{
+							} else if(files[0].name.endsWith("mp4")) {
 								console.log("你选择的是个mp4视频");
 								fileType = "3";
 							} else {
@@ -487,8 +485,7 @@
 									} else if(data.type == "3") {
 										myNewItem = createIVedioItem(userID, data.msgtime, data.msgcontent, data.id); //自身页面添加文件
 									}
-									
-									
+
 									msgPlaneMap["Tr" + curYID].append(myNewItem);
 									//发生文件
 									$.ajax({
