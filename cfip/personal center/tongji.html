@@ -202,6 +202,10 @@
 					<div class="row">
 						<br />
 						<div class="col-md-6 col-md-offset-2">
+							<h3>刷新所有用户活动信息</h3>
+							<button id="allchaxunBtn" type="button" class="btn btn-info">刷新</button>
+						</div>
+						<div class="col-md-6 col-md-offset-2">
 							<input type="text" class="form-control" id="chaxunID" placeholder="请输入想要查询信息的学生ID">
 							<button id="chaxunBtn" type="button" class="btn btn-info">查询</button>
 						</div>
@@ -209,7 +213,7 @@
 					</div>
 
 					<div id="chaxunzhanshi" class="container">
-<!--						<div class="row">
+						<!--						<div class="row">
 							<h2>活动参与次数分别为：</h2>
 							<p>1、招新：</p>
 							<p>2、讲座：</p>
@@ -282,7 +286,347 @@
 		</div>
 
 		<script>
-			var actTimes1 = {
+			$(document).ready(function() {
+				/**********判断用户有无登录 start*********/
+				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				/**********判断用户有无登录 end*********/
+				userIDtianjia();
+
+				$("#allchaxunBtn").click(function() {
+					var actTimes1 = {
+						pAct1: 0,
+						pAct2: 0,
+						pAct3: 0,
+						pAct4: 0,
+						pAct5: 0,
+						pAct6: 0,
+						pAct7: 0,
+						pAct8: 0,
+						pAct9: 0,
+						pActTotal: 0
+					};
+					var actTimes2 = {
+						applyAct1: 0,
+						applyAct2: 0,
+						applyAct3: 0,
+						applyAct4: 0,
+						applyAct5: 0,
+						applyAct6: 0,
+						applyAct7: 0,
+						applyAct8: 0,
+						applyAct9: 0,
+						applyActTotal: 0
+					};
+
+					var topicTimes1 = {
+						pTopic1: 0,
+						pTopic2: 0,
+						pTopic3: 0,
+						pTopic4: 0,
+						pTopic5: 0,
+						pTopic6: 0,
+						pTopic7: 0,
+						pTopic8: 0,
+						pTopic9: 0,
+						pTopicTotal: 0
+					};
+					var topicTimes2 = {
+						cTopic1: 0,
+						cTopic2: 0,
+						cTopic3: 0,
+						cTopic4: 0,
+						cTopic5: 0,
+						cTopic6: 0,
+						cTopic7: 0,
+						cTopic8: 0,
+						cTopic9: 0,
+						cTopicTotal: 0
+					};
+					$.ajax({
+						type: "get",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/",
+						async: false,
+						success: function(data, state) {
+							console.log(data);
+							console.log(state);
+							for(var i = 0; i < data.Student.length; i++) {
+								var shuaxinID = data.Student[i].userid;
+								$.ajax({
+									type: "get",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/?Activity.userid=" + shuaxinID,
+									async: false,
+									success: function(data, state) {
+										console.log(data);
+										console.log(state);
+										for(i = 0; i < data.Activity.length; i++) {
+
+											if(data.Activity[i].acttype == "1") {
+												actTimes1.pAct1 = actTimes1.pAct1 + 1;
+											}
+											if(data.Activity[i].acttype == "2") {
+												actTimes1.pAct2 = actTimes1.pAct2 + 1;
+											}
+											if(data.Activity[i].acttype == "3") {
+												actTimes1.pAct3 = actTimes1.pAct3 + 1;
+											}
+											if(data.Activity[i].acttype == "4") {
+												actTimes1.pAct4 = actTimes1.pAct4 + 1;
+											}
+											if(data.Activity[i].acttype == "5") {
+												actTimes1.pAct5 = actTimes1.pAct5 + 1;
+											}
+											if(data.Activity[i].acttype == "6") {
+												actTimes1.pAct6 = actTimes1.pAct6 + 1;
+											}
+											if(data.Activity[i].acttype == "7") {
+												actTimes1.pAct7 = actTimes1.pAct7 + 1;
+											}
+											if(data.Activity[i].acttype == "8") {
+												actTimes1.pAct8 = actTimes1.pAct8 + 1;
+											}
+											if(data.Activity[i].acttype == "9") {
+												actTimes1.pAct9 = actTimes1.pAct9 + 1;
+											}
+										}
+										actTimes1.pActTotal = actTimes1.pAct1 + actTimes1.pAct2 + actTimes1.pAct3 + actTimes1.pAct4 + actTimes1.pAct5 + actTimes1.pAct6 + actTimes1.pAct7 + actTimes1.pAct8 + actTimes1.pAct9;
+
+									},
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									}
+								});
+
+								$.ajax({
+									type: "get",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Applicationform/?Applicationform.userid=" + shuaxinID,
+									async: false,
+									success: function(data, state) {
+										console.log(data);
+										console.log(state);
+										for(i = 0; i < data.Applicationform.length; i++) {
+											var activityid = data.Applicationform[i].actid;
+											console.log(activityid);
+											$.ajax({
+												type: "get",
+												url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + activityid,
+												async: false,
+												success: function(data, state) {
+													console.log(data);
+													console.log(state);
+													if(data.acttype == "1") {
+														actTimes2.applyAct1 = actTimes2.applyAct1 + 1;
+													}
+													if(data.acttype == "2") {
+														actTimes2.applyAct2 = actTimes2.applyAct2 + 1;
+													}
+													if(data.acttype == "3") {
+														actTimes2.applyAct3 = actTimes2.applyAct3 + 1;
+													}
+													if(data.acttype == "4") {
+														actTimes2.applyAct4 = actTimes2.applyAct4 + 1;
+													}
+													if(data.acttype == "5") {
+														actTimes2.applyAct5 = actTimes2.applyAct5 + 1;
+													}
+													if(data.acttype == "6") {
+														actTimes2.applyAct6 = actTimes2.applyAct6 + 1;
+													}
+													if(data.acttype == "7") {
+														actTimes2.applyAct7 = actTimes2.applyAct7 + 1;
+													}
+													if(data.acttype == "8") {
+														actTimes2.applyAct8 = actTimes2.applyAct8 + 1;
+													}
+													if(data.acttype == "9") {
+														actTimes2.applyAct9 = actTimes2.applyAct9 + 1;
+													}
+												},
+												error: function(data, state) {
+													console.log(data);
+													console.log(state);
+												}
+											});
+
+										}
+										actTimes2.applyActTotal = actTimes2.applyAct1 + actTimes2.applyAct2 + actTimes2.applyAct3 + actTimes2.applyAct4 + actTimes2.applyAct5 + actTimes2.applyAct6 + actTimes2.applyAct7 + actTimes2.applyAct8 + actTimes2.applyAct9;
+
+									},
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									}
+								});
+
+								$.ajax({
+									type: "get",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/?Topic.authorid=" + shuaxinID,
+									async: false,
+									success: function(data, state) {
+										console.log(data);
+										console.log(state);
+										for(i = 0; i < data.Topic.length; i++) {
+											if(data.Topic[i].topictype == "1") {
+												topicTimes1.pTopic1 = topicTimes1.pTopic1 + 1;
+											}
+											if(data.Topic[i].topictype == "2") {
+												topicTimes1.pTopic2 = topicTimes1.pTopic2 + 1;
+											}
+											if(data.Topic[i].topictype == "3") {
+												topicTimes1.pTopic3 = topicTimes1.pTopic3 + 1;
+											}
+											if(data.Topic[i].topictype == "4") {
+												topicTimes1.pTopic4 = topicTimes1.pTopic4 + 1;
+											}
+											if(data.Topic[i].topictype == "5") {
+												topicTimes1.pTopic5 = topicTimes1.pTopic5 + 1;
+											}
+											if(data.Topic[i].topictype == "6") {
+												topicTimes1.pTopic6 = topicTimes1.pTopic6 + 1;
+											}
+											if(data.Topic[i].topictype == "7") {
+												topicTimes1.pTopic7 = topicTimes1.pTopic7 + 1;
+											}
+											if(data.Topic[i].topictype == "8") {
+												topicTimes1.pTopic8 = topicTimes1.pTopic8 + 1;
+											}
+											if(data.Topic[i].topictype == "9") {
+												topicTimes1.pTopic9 = topicTimes1.pTopic9 + 1;
+											}
+										}
+										topicTimes1.pTopicTotal = topicTimes1.pTopic1 + topicTimes1.pTopic2 + topicTimes1.pTopic3 + topicTimes1.pTopic4 + topicTimes1.pTopic5 + topicTimes1.pTopic6 + topicTimes1.pTopic7 + topicTimes1.pTopic8;
+										topicTimes1.pTopicTotal = topicTimes1.pTopicTotal + topicTimes1.pTopic9;
+
+									},
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									}
+								});
+
+								$.ajax({
+									type: "get",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Comments/?Comments.userid=" + shuaxinID,
+									async: false,
+									success: function(data, state) {
+										console.log(data);
+										console.log(state);
+										for(i = 0; i < data.Comments.length; i++) {
+											var topicID = data.Comments[i].topicid;
+											$.ajax({
+												type: "get",
+												url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + topicID,
+												async: false,
+												success: function(data, state) {
+													console.log(data);
+													console.log(state);
+													if(data.topictype == "1") {
+														topicTimes2.cTopic1 = topicTimes2.cTopic1 + 1;
+													}
+													if(data.topictype == "2") {
+														topicTimes2.cTopic2 = topicTimes2.cTopic2 + 1;
+													}
+													if(data.topictype == "3") {
+														topicTimes2.cTopic3 = topicTimes2.cTopic3 + 1;
+													}
+													if(data.topictype == "4") {
+														topicTimes2.cTopic4 = topicTimes2.cTopic4 + 1;
+													}
+													if(data.topictype == "5") {
+														topicTimes2.cTopic5 = topicTimes2.cTopic5 + 1;
+													}
+													if(data.topictype == "6") {
+														topicTimes2.cTopic6 = topicTimes2.cTopic6 + 1;
+													}
+													if(data.topictype == "7") {
+														topicTimes2.cTopic7 = topicTimes2.cTopic7 + 1;
+													}
+													if(data.topictype == "8") {
+														topicTimes2.cTopic8 = topicTimes2.cTopic8 + 1;
+													}
+													if(data.topictype == "9") {
+														topicTimes2.cTopic9 = topicTimes2.cTopic9 + 1;
+													}
+												},
+												error: function(data, state) {
+													console.log(data);
+													console.log(state);
+												}
+
+											});
+										}
+										topicTimes2.cTopicTotal = topicTimes2.cTopic1 + topicTimes2.cTopic2 + topicTimes2.cTopic3 + topicTimes2.cTopic4 + topicTimes2.cTopic5 + topicTimes2.cTopic6 + topicTimes2.cTopic7 + topicTimes2.cTopic8 + topicTimes2.cTopic9;
+
+									},
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									}
+								});
+
+								var Footprint_actInfo = {
+									userid: shuaxinID,
+									pact1: pAct1,
+									pact2: pAct2,
+									pact3: pAct3,
+									pact4: pAct4,
+									pact5: pAct5,
+									pact6: pAct6,
+									pact7: pAct7,
+									pact8: pAct8,
+									pact9: pAct9,
+									pacttotal: pActTotal,
+									aact1: applyAct1,
+									aact2: applyAct2,
+									aact3: applyAct3,
+									aact4: applyAct4,
+									aact5: applyAct5,
+									aact6: applyAct6,
+									aact7: applyAct7,
+									aact8: applyAct8,
+									aact9: applyAct9,
+									aacttotal: applyActTotal0
+								};
+
+								var dataJsonStr = JSON.stringify(Footprint_actInfo);
+								console.log(dataJsonStr);
+								$.ajax({
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Footprint_act/?Footprint_act.userid+" + shuaxinID,
+									contentType: "application/json",
+									type: "PUT",
+									data: dataJsonStr,
+									async: true,
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									},
+									success: function(data, state) {
+										console.log(state);
+										console.log(data);
+									}
+								});
+								
+								
+								var Footprint_topicInfo=
+								
+								
+								
+								
+
+							}
+						},
+						error: function(data, state) {
+							console.log(data);
+							console.log(state);
+						}
+					});
+
+				});
+
+				$("#chaxunBtn").click(function() {
+					var chaxunID = $("#chaxunID").val();
+					console.log(chaxunID);
+					var actTimes1 = {
 						pAct1: 0,
 						pAct2: 0,
 						pAct3: 0,
@@ -332,26 +676,6 @@
 						cTopicTotal: 0
 					};
 
-			$(document).ready(function() {
-				/**********判断用户有无登录 start*********/
-				var userID = isSignIn(); //判断用户有没有登录进行页面变化
-				/**********判断用户有无登录 end*********/
-				userIDtianjia();
-
-				//				$("#adddengshenSubmit").click(function() {
-				//
-				//					var dengshenObject = {
-				//					title: $("#dengshenTitle").val(),
-				//						content: $("#dengshenContent").val(),
-				//						publishtime: getFormatDate(),
-				//						userid: parseInt(userID),
-				//						type: $("#dengshenType").val(),
-				//						state: "0"
-				//					};
-				$("#chaxunBtn").click(function() {
-					var chaxunID = $("#chaxunID").val();
-					console.log(chaxunID);
-					
 					$.ajax({
 						type: "get",
 						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
@@ -419,7 +743,7 @@
 											if(data.acttype == "1") {
 												actTimes2.applyAct1 = actTimes2.applyAct1 + 1;
 											}
-											if(data.acttype =="2") {
+											if(data.acttype == "2") {
 												actTimes2.applyAct2 = actTimes2.applyAct2 + 1;
 											}
 											if(data.acttype == "3") {
@@ -541,13 +865,13 @@
 											if(data.topictype == "1") {
 												topicTimes2.cTopic1 = topicTimes2.cTopic1 + 1;
 											}
-										if(data.topictype == "2") {
+											if(data.topictype == "2") {
 												topicTimes2.cTopic2 = topicTimes2.cTopic2 + 1;
 											}
 											if(data.topictype == "3") {
 												topicTimes2.cTopic3 = topicTimes2.cTopic3 + 1;
 											}
-										if(data.topictype == "4") {
+											if(data.topictype == "4") {
 												topicTimes2.cTopic4 = topicTimes2.cTopic4 + 1;
 											}
 											if(data.topictype == "5") {
@@ -574,14 +898,14 @@
 									});
 								}
 							}
-							
+							topicTimes2.cTopicTotal = topicTimes2.cTopic1 + topicTimes2.cTopic2 + topicTimes2.cTopic3 + topicTimes2.cTopic4 + topicTimes2.cTopic5 + topicTimes2.cTopic6 + topicTimes2.cTopic7 + topicTimes2.cTopic8 + topicTimes2.cTopic9;
 
 						},
 						error: function(data, state) {
 							console.log(data);
 							console.log(state);
 						}
-				});
+					});
 					var topicTimesAll = {
 						Topic1: topicTimes1.pTopic1 + topicTimes2.cTopic1,
 						Topic2: topicTimes1.pTopic2 + topicTimes2.cTopic2,
@@ -606,24 +930,24 @@
 					var Pact8 = $("<p></p>").text("8、公益:发布 " + actTimes1.pAct8 + "次，报名 " + actTimes2.applyAct8 + "次，共 " + actTimesAll.Act8 + "次；");
 					var Pact9 = $("<p></p>").text("9、其他:发布 " + actTimes1.pAct9 + "次，报名 " + actTimes2.applyAct9 + "次，共 " + actTimesAll.Act9 + "次；");
 					var PactTotal = $("<p></p>").text("10、共计:发布 " + actTimes1.pActTotal + "次，报名 " + actTimes2.applyActTotal + "次，共 " + actTimesAll.ActTotal + "次；");
-					var divRow1=$("<div class='row'></div>");
+					var divRow1 = $("<div class='row'></div>");
 					divRow1.append(Hact, Pact1, Pact2, Pact3, Pact4, Pact5, Pact6, Pact7, Pact8, Pact9, PactTotal, $("<hr>"));
 
 					var Htopic = $("<h2></h2>").text("话题参与的次数分别为：");
-					var Ptopic1 = $("<p></p>").text("1、明星：发布 " + topicTimes1.pTopic1 + "次，评论 " + topicTimes2.cTopic1 + " 次，共" + topicTimesAll.Topic1+"次；");
-					var Ptopic2 = $("<p></p>").text("2、搞笑：发布 " + topicTimes1.pTopic2 + "次，评论 " + topicTimes2.cTopic2 + " 次，共" + topicTimesAll.Topic2+"次；");
-					var Ptopic3 = $("<p></p>").text("3、情感：发布 " + topicTimes1.pTopic3 + "次，评论 " + topicTimes2.cTopic3 + " 次，共" + topicTimesAll.Topic3+"次；");
-					var Ptopic4 = $("<p></p>").text("4、时尚：发布 " + topicTimes1.pTopic4 + "次，评论 " + topicTimes2.cTopic4 + " 次，共" + topicTimesAll.Topic4+"次；");
-					var Ptopic5 = $("<p></p>").text("5、军事：发布 " + topicTimes1.pTopic5 + "次，评论 " + topicTimes2.cTopic5 + " 次，共" + topicTimesAll.Topic5+"次；");
-					var Ptopic6 = $("<p></p>").text("6、美女：发布 " + topicTimes1.pTopic6 + "次，评论 " + topicTimes2.cTopic6 + " 次，共" + topicTimesAll.Topic6+"次；");
-					var Ptopic7 = $("<p></p>").text("7、体育：发布 " + topicTimes1.pTopic7 + "次，评论 " + topicTimes2.cTopic7 + " 次，共" + topicTimesAll.Topic7+"次；");
-					var Ptopic8 = $("<p></p>").text("8、动漫：发布 " + topicTimes1.pTopic8 + "次，评论 " + topicTimes2.cTopic8 + " 次，共" + topicTimesAll.Topic8+"次；");
-					var Ptopic9 = $("<p></p>").text("9、其他：发布 " + topicTimes1.pTopic9 + "次，评论 " + topicTimes2.cTopic9 + " 次，共" + topicTimesAll.Topic9+"次；");
-					var PtopicTotal = $("<p></p>").text("10、共计：发布 " + topicTimes1.pTopicTotal + "次，评论 " + topicTimes2.cTopicTotal + " 次，共" + topicTimesAll.TopicTotal+"次；");
-					var divRow2=$("<div class='row'></div>");
-					divRow2.append(Htopic,Ptopic1,Ptopic2,Ptopic3,Ptopic4,Ptopic5,Ptopic6,Ptopic7,Ptopic8,Ptopic9,PtopicTotal,$("<hr>"));
-					
-					$("#chaxunzhanshi").append(divRow1,divRow2);
+					var Ptopic1 = $("<p></p>").text("1、明星：发布 " + topicTimes1.pTopic1 + "次，评论 " + topicTimes2.cTopic1 + " 次，共" + topicTimesAll.Topic1 + "次；");
+					var Ptopic2 = $("<p></p>").text("2、搞笑：发布 " + topicTimes1.pTopic2 + "次，评论 " + topicTimes2.cTopic2 + " 次，共" + topicTimesAll.Topic2 + "次；");
+					var Ptopic3 = $("<p></p>").text("3、情感：发布 " + topicTimes1.pTopic3 + "次，评论 " + topicTimes2.cTopic3 + " 次，共" + topicTimesAll.Topic3 + "次；");
+					var Ptopic4 = $("<p></p>").text("4、时尚：发布 " + topicTimes1.pTopic4 + "次，评论 " + topicTimes2.cTopic4 + " 次，共" + topicTimesAll.Topic4 + "次；");
+					var Ptopic5 = $("<p></p>").text("5、军事：发布 " + topicTimes1.pTopic5 + "次，评论 " + topicTimes2.cTopic5 + " 次，共" + topicTimesAll.Topic5 + "次；");
+					var Ptopic6 = $("<p></p>").text("6、美女：发布 " + topicTimes1.pTopic6 + "次，评论 " + topicTimes2.cTopic6 + " 次，共" + topicTimesAll.Topic6 + "次；");
+					var Ptopic7 = $("<p></p>").text("7、体育：发布 " + topicTimes1.pTopic7 + "次，评论 " + topicTimes2.cTopic7 + " 次，共" + topicTimesAll.Topic7 + "次；");
+					var Ptopic8 = $("<p></p>").text("8、动漫：发布 " + topicTimes1.pTopic8 + "次，评论 " + topicTimes2.cTopic8 + " 次，共" + topicTimesAll.Topic8 + "次；");
+					var Ptopic9 = $("<p></p>").text("9、其他：发布 " + topicTimes1.pTopic9 + "次，评论 " + topicTimes2.cTopic9 + " 次，共" + topicTimesAll.Topic9 + "次；");
+					var PtopicTotal = $("<p></p>").text("10、共计：发布 " + topicTimes1.pTopicTotal + "次，评论 " + topicTimes2.cTopicTotal + " 次，共" + topicTimesAll.TopicTotal + "次；");
+					var divRow2 = $("<div class='row'></div>");
+					divRow2.append(Htopic, Ptopic1, Ptopic2, Ptopic3, Ptopic4, Ptopic5, Ptopic6, Ptopic7, Ptopic8, Ptopic9, PtopicTotal, $("<hr>"));
+
+					$("#chaxunzhanshi").append(divRow1, divRow2);
 
 				})
 
