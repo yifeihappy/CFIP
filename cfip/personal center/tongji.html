@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>教师中心——学生参与活动查询</title>
 		<link rel="stylesheet" href="../../css/jh/template2.css" />
 		<link rel="stylesheet" href="../../css/bootstrap.min.css" />
 		<link href="../../css/dyf/signup.css" rel="stylesheet" />
@@ -350,7 +350,96 @@
 							console.log(data);
 							console.log(state);
 							for(var i = 0; i < data.Student.length; i++) {
+
 								var shuaxinID = data.Student[i].userid;
+
+								var Footprint_actObject = {
+									userid: parseInt(shuaxinID),
+									pact1: 0,
+									pact2: 0,
+									pact3: 0,
+									pact4: 0,
+									pact5: 0,
+									pact6: 0,
+									pact7: 0,
+									pact8: 0,
+									pact9: 0,
+									pacttotal: 0,
+									aact1: 0,
+									aact2: 0,
+									aact3: 0,
+									aact4: 0,
+									aact5: 0,
+									aact6: 0,
+									aact7: 0,
+									aact8: 0,
+									aact9: 0,
+									aacttotal: 0
+
+								};
+								var dataJsonStrAct = JSON.stringify(Footprint_actObject);
+								console.log(dataJsonStrAct);
+								$.ajax({
+									type: "POST",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Footprint_act/",
+									contentType: "application/json",
+									data: dataJsonStrAct,
+									async: true,
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									},
+									success: function(data, state) {
+										console.log(state);
+										console.log(data);
+									}
+								});
+								
+								
+								
+								var Footprint_topicObject={
+									userid: parseInt(shuaxinID),
+									ptopic1: 0,
+									ptopic2: 0,
+									ptopic3: 0,
+									ptopic4: 0,
+									ptopic5: 0,
+									ptopic6: 0,
+									ptopic7: 0,
+									ptopic8: 0,
+									ptopic9: 0,
+									ptopictotal: 0,
+									ctopic1: 0,
+									ctopic2: 0,
+									ctopic3: 0,
+									ctopic4: 0,
+									ctopic5: 0,
+									ctopic6: 0,
+									ctopic7: 0,
+									ctopic8: 0,
+									ctopic9: 0,
+									ctopictotal: 0
+								}
+								
+								var dataJsonStrTopic = JSON.stringify(Footprint_topicObject);
+								console.log(dataJsonStrTopic);
+								$.ajax({
+									type: "POST",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Footprint_topic/",
+									contentType: "application/json",
+									data: dataJsonStrTopic,
+									async: true,
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									},
+									success: function(data, state) {
+										console.log(state);
+										console.log(data);
+									}
+								});
+								
+
 								$.ajax({
 									type: "get",
 									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/?Activity.userid=" + shuaxinID,
@@ -565,36 +654,36 @@
 								});
 
 								var Footprint_actInfo = {
-									userid: shuaxinID,
-									pact1: pAct1,
-									pact2: pAct2,
-									pact3: pAct3,
-									pact4: pAct4,
-									pact5: pAct5,
-									pact6: pAct6,
-									pact7: pAct7,
-									pact8: pAct8,
-									pact9: pAct9,
-									pacttotal: pActTotal,
-									aact1: applyAct1,
-									aact2: applyAct2,
-									aact3: applyAct3,
-									aact4: applyAct4,
-									aact5: applyAct5,
-									aact6: applyAct6,
-									aact7: applyAct7,
-									aact8: applyAct8,
-									aact9: applyAct9,
-									aacttotal: applyActTotal0
+									userid: parseInt(shuaxinID),
+									pact1: actTimes1.pAct1,
+									pact2: actTimes1.pAct2,
+									pact3: actTimes1.pAct3,
+									pact4: actTimes1.pAct4,
+									pact5: actTimes1.pAct5,
+									pact6: actTimes1.pAct6,
+									pact7: actTimes1.pAct7,
+									pact8: actTimes1.pAct8,
+									pact9: actTimes1.pAct9,
+									pacttotal: actTimes1.pActTotal,
+									aact1: actTimes2.applyAct1,
+									aact2: actTimes2.applyAct2,
+									aact3: actTimes2.applyAct3,
+									aact4: actTimes2.applyAct4,
+									aact5: actTimes2.applyAct5,
+									aact6: actTimes2.applyAct6,
+									aact7: actTimes2.applyAct7,
+									aact8: actTimes2.applyAct8,
+									aact9: actTimes2.applyAct9,
+									aacttotal: actTimes2.applyActTotal
 								};
 
-								var dataJsonStr = JSON.stringify(Footprint_actInfo);
-								console.log(dataJsonStr);
+								var dataJsonStr1 = JSON.stringify(Footprint_actInfo);
+								console.log(dataJsonStr1);
 								$.ajax({
 									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Footprint_act/?Footprint_act.userid+" + shuaxinID,
 									contentType: "application/json",
 									type: "PUT",
-									data: dataJsonStr,
+									data: dataJsonStr1,
 									async: true,
 									error: function(data, state) {
 										console.log(data);
@@ -605,16 +694,53 @@
 										console.log(data);
 									}
 								});
-								
-								
-								var Footprint_topicInfo=
-								
-								
-								
-								
 
+								var Footprint_topicInfo = {
+									userid: parseInt(shuaxinID),
+									ptopic1: topicTimes1.pTopic1,
+									ptopic2: topicTimes1.pTopic2,
+									ptopic3: topicTimes1.pTopic3,
+									ptopic4: topicTimes1.pTopic4,
+									ptopic5: topicTimes1.pTopic5,
+									ptopic6: topicTimes1.pTopic6,
+									ptopic7: topicTimes1.pTopic7,
+									ptopic8: topicTimes1.pTopic8,
+									ptopic9: topicTimes1.pTopic9,
+									ptopictotal: topicTimes1.pTopicTotal,
+									ctopic1: topicTimes2.cTopic1,
+									ctopic2: topicTimes2.cTopic2,
+									ctopic3: topicTimes2.cTopic3,
+									ctopic4: topicTimes2.cTopic4,
+									ctopic5: topicTimes2.cTopic5,
+									ctopic6: topicTimes2.cTopic6,
+									ctopic7: topicTimes2.cTopic7,
+									ctopic8: topicTimes2.cTopic8,
+									ctopic9: topicTimes2.cTopic9,
+									ctopictotal: topicTimes2.cTopicTotal
+								};
+								var dataJsonStr2 = JSON.stringify(Footprint_topicInfo);
+								console.log(dataJsonStr2);
+								$.ajax({
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Footprint_topic/?Footprint_topic.userid+" + shuaxinID,
+									contentType: "application/json",
+									type: "PUT",
+									data: dataJsonStr2,
+									async: true,
+									error: function(data, state) {
+										console.log(data);
+										console.log(state);
+									},
+									success: function(data, state) {
+										console.log(state);
+										console.log(data);
+									}
+								});
 							}
+							var indexUrl = encodeURI("127.0.0.1:8020/CFIP/cfip/teacher%20center/basic%20information.html");
+							console.log(indexUrl);
+							window.location.href = indexUrl;
 						},
+
 						error: function(data, state) {
 							console.log(data);
 							console.log(state);

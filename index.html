@@ -514,7 +514,7 @@
 				success: function(data, state) {
 					console.log(state);
 					console.log(data);
-					for(var i = 6; i<9; i++) {
+					for(var i = 9; i<12; i++) {
 						var hTitle = $("<h3></h3>").text(data.Topic[i].title);
 						var ppers = $("<p></p>").text("发布人：" + data.Topic[i].authorname);
 						var pTopTime = $("<p></p>").text("发布时间：" + data.Topic[i].publishtime);
