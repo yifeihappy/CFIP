@@ -44,7 +44,7 @@
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-							<a id="chat">Chat</a>
+							<a href="" id="chat">Chat</a>
 						</li>
 						<li>
 							<a href="" id="act">活动</a>
@@ -53,7 +53,7 @@
 							<a href="" id="topic">话题</a>
 						</li>
 						<li>
-							<a id="dengShen">灯神</a>
+							<a href="" id="dengShen">灯神</a>
 						</li>
 						<!--<li class="dropdown">
 										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
@@ -139,9 +139,9 @@
 
 					<form class="navbar-form navbar-left">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="活动/话题">
+							<input type="text" id="searchInput" class="form-control" placeholder="活动/话题">
 						</div>
-						<button type="submit" class="btn btn-default">搜索</button>
+						<button type="submit" id="searchBtn" class="btn btn-default">搜索</button>
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
@@ -157,11 +157,11 @@
 						<!--</div>-->
 						<!--<div id="userCenterDiv" hidden=true>-->
 						<li id="userCenterLI" class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a herf="" id="userCenterID">个人中心</a>
+									<a herf="" style="cursor:pointer" id="userCenterID">个人中心</a>
 								</li>
 								<li>
 									<a href="/CFIP/index.html">退出</a>
@@ -175,14 +175,14 @@
 								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
-									<a herf="" id="addAct">活动</a>
+									<a herf="" style="cursor:pointer" id="addAct">活动</a>
 								</li>
 								<li>
-									<a herf="" id="addTopic">话题</a>
+									<a herf="" style="cursor:pointer" id="addTopic">话题</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
-									<a herf="" id="addWall">上墙</a>
+									<a herf="" style="cursor:pointer" id="addWall">上墙</a>
 								</li>
 							</ul>
 						</li>
@@ -247,15 +247,8 @@
 							<span>猜你喜欢</span>
 						</div>
 					</div>
-					<div class="row list-group">
-						<a href="#" class="list-group-item active"></a>
-						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
-						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
-						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
-						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
-						<a href="#" class="list-group-item">吃鲸电子科技招募实习生</a>
+					<div class="row list-group" id="guessList">
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -266,90 +259,11 @@
 					<span>热门活动</span>
 				</div>
 				<div class="col-md-2 col-md-offset-2">
-					<a href="#">更多</a>
+					<a href="" id="actMore">更多</a>
 				</div>
 			</div>
 			<div class="container">
 				<div id="actthumbnails" class="row">
-					<!--<div  class="col-xs-6 col-lg-4">-->
-					<!--<div class="thumbnail">
-								<img src="img/Desert.jpg" alt="...">-->
-					<!--<div class="caption">
-									<h3>Thumbnail label</h3>
-									<p>...</p>
-									<p>
-										<a href="#" class="btn btn-primary" role="button">Button</a>
-										<a href="#" class="btn btn-default" role="button">Button</a>
-									</p>
-								</div>-->
-
-					<!--</div>-->
-					<!--<a href="/CFIP/index.html?userID=123345">
-							<div class="thumbnail">
-								<img src="img/Desert.jpg" alt="...">
-							</div>
-							<div class="caption">
-								<h3>Activiyty Name</h3>
-								<p>活动地点：菁菁堂</p>
-								<p>活动时间：8月1日至9月1日</p>
-								<p>主办单位：小雪</p>
-								<p>报名人数：6|100</p>
-								<p>报名截止：8月31日</p>
-							</div>
-						</div>-->
-					<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<div class="thumbnail">
-								<img src="img/Desert.jpg" alt="...">
-								<div class="caption">
-									<h3>Thumbnail label</h3>
-									<p>...</p>
-									<p>
-										<a href="#" class="btn btn-primary" role="button">Button</a>
-										<a href="#" class="btn btn-default" role="button">Button</a>
-									</p>
-								</div>
-							</div>
-						</div>-->
-					<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<div class="thumbnail">
-								<img src="img/Desert.jpg" alt="...">
-								<div class="caption">
-									<h3>Thumbnail label</h3>
-									<p>...</p>
-									<p>
-										<a href="#" class="btn btn-primary" role="button">Button</a>
-										<a href="#" class="btn btn-default" role="button">Button</a>
-									</p>
-								</div>
-							</div>
-						</div>-->
-					<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<h2>Heading</h2>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
-							</p>
-						</div>
-						<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<h2>Heading</h2>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
-							</p>
-						</div>
-						<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<h2>Heading</h2>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
-							</p>
-						</div>-->
-					<!--/.col-xs-6.col-lg-4-->
 				</div>
 			</div>
 			<!--/row-->
@@ -360,81 +274,13 @@
 					<span>热门话题</span>
 				</div>
 				<div class="col-md-2 col-md-offset-2">
-					<a href="#">更多</a>
+					<a href="" id="topicMore">更多</a>
 				</div>
 			</div>
 
-			<div class="container">
+			<div class="container" id="contanier-topicThumbnails">
 				<div id="topicthumbnails" class="row">
-					<!--<div class="col-xs-6 col-lg-4">
-							
-							<div class="thumbnail">
-								<img src="img/Desert.jpg" alt="...">
-								<div class="caption">
-									<h3>Thumbnail label</h3>
-									<p>...</p>
-									<p>
-										<a href="#" class="btn btn-primary" role="button">Button</a>
-										<a href="#" class="btn btn-default" role="button">Button</a>
-									</p>
-								</div>
-							</div>
-						</div>
-						<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<div class="thumbnail">
-								<img src="img/Desert.jpg" alt="...">
-								<div class="caption">
-									<h3>Thumbnail label</h3>
-									<p>...</p>
-									<p>
-										<a href="#" class="btn btn-primary" role="button">Button</a>
-										<a href="#" class="btn btn-default" role="button">Button</a>
-									</p>
-								</div>
-							</div>
-						</div>-->
-					<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<div class="thumbnail">
-								<img src="img/Desert.jpg" alt="...">
-								<div class="caption">
-									<h3>Thumbnail label</h3>
-									<p>...</p>
-									<p>
-										<a href="#" class="btn btn-primary" role="button">Button</a>
-										<a href="#" class="btn btn-default" role="button">Button</a>
-									</p>
-								</div>
-							</div>
-						</div>-->
-					<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<h2>Heading</h2>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
-							</p>
-						</div>
-						<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<h2>Heading</h2>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
-							</p>
-						</div>-->
-					<!--/.col-xs-6.col-lg-4-->
-					<!--<div class="col-xs-6 col-lg-4">
-							<h2>Heading</h2>
-							<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-							<p>
-								<a class="btn btn-default" href="#" role="button">View details &raquo;</a>
-							</p>
-						</div>
-						<!--/.col-xs-6.col-lg-4-->
-					<!--	</div>
--->
+
 				</div>
 			</div>
 
@@ -443,7 +289,7 @@
 		<script>
 			$(document).ready(function() {
 				/**********判断用户有无登录 start*********/
-				var userID = isSignIn();
+				userID = isSignIn();
 				console.log(userID);
 				//判断用户有没有登录进行页面变化
 				/**********判断用户有无登录 end*********/
@@ -452,10 +298,24 @@
 					type: "get",
 					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/",
 					//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
-					async: true,
+					async: false,
 					success: function(data, state) {
 						console.log(state);
 						console.log(data);
+
+						var hotActivityArry = data.Activity;
+
+						function compare(property) {
+							return function(a, b) {
+								var value1 = a[property];
+								var value2 = b[property];
+								return value2 - value1;
+							}
+						}
+
+						hotActivityArry = hotActivityArry.sort(compare("viewernumber"));
+						console.log(hotActivityArry);
+
 						for(var i = 0; i < 3; i++) {
 							var hTitle = $("<h3></h3>").text(data.Activity[i].actname);
 							var pAddr = $("<p></p>").text("活动地点：" + data.Activity[i].actaddress);
@@ -493,7 +353,74 @@
 							//							var divRow2 = $("<div class='row'></div>");
 							//							divRow2.append(actDetailA);
 
-							//							$("#act-thumbnails").append(divRow2);
+							//							$("#actthumbnails").append(divRow2);
+
+						}
+					},
+					error: function(data, state) {
+						console.log(state);
+						console.log(data);
+					}
+				});
+				$.ajax({
+					type: "get",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/",
+					//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+					async: false,
+					success: function(data, state) {
+						console.log(state);
+						console.log(data);
+
+						var hotTopicArry = data.Topic;
+
+						function compare(property) {
+							return function(a, b) {
+								var value1 = a[property];
+								var value2 = b[property];
+								return value2 - value1;
+							}
+						}
+
+						hotTopicArry = hotTopicArry.sort(compare("viewernumber"));
+						console.log(hotTopicArry);
+
+						for(var i = 0; i < 3; i++) {
+							var hTitle = $("<h3></h3>").text(data.Topic[i].title);
+							var topicBrief = $("<p></p>").text("内容：" + data.Topic[i].brief);
+							var ppers = $("<p></p>").text("发布人：" + data.Topic[i].authorname);
+							var pTopTime = $("<p></p>").text("发布时间：" + data.Topic[i].publishtime);
+							var divCaption = $("<div class='caption'></div>");
+							divCaption.append(hTitle, topicBrief, ppers, pTopTime);
+
+							var imgTopic = $("<img></img>").attr({
+								"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
+								"alt": "...."
+							});
+							var divThumbnail = $("<div class='thumbnail'></div>");
+							divThumbnail.append(imgTopic);
+
+							//							var divRow1 = $("<div class='row'></div>");
+							//							divRow1.append(divThumbnail, divCaption);
+							//							var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
+							//							div1.append(divRow1, $("<hr>"));
+
+							var topicDetailUrl;
+							if("" == userID) {
+								topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id;
+							} else {
+								topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id + "userID=" + userID);
+							}
+
+							var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);
+							topicDetailA.append(divThumbnail, divCaption);
+
+							var divRow2 = $("<div class='col-md-3'></div>");
+							divRow2.append(topicDetailA);
+
+							//							var divRow2 = $("<div class='col-xs-6 col-lg-4'></div>");
+							//							divRow2.append(actDetailA);
+
+							$("#topicthumbnails").append(divRow2);
 
 						}
 
@@ -503,63 +430,242 @@
 						console.log(data);
 					}
 				});
-			});
 
-			userID = isSignIn();
-			$.ajax({
-				type: "get",
-				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/",
-				//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
-				async: true,
-				success: function(data, state) {
-					console.log(state);
-					console.log(data);
-					for(var i = 9; i<12; i++) {
-						var hTitle = $("<h3></h3>").text(data.Topic[i].title);
-						var ppers = $("<p></p>").text("发布人：" + data.Topic[i].authorname);
-						var pTopTime = $("<p></p>").text("发布时间：" + data.Topic[i].publishtime);
-						var divCaption = $("<div class='caption'></div>");
-						divCaption.append(hTitle, ppers, pTopTime);
+				if("" != userID) {
+					$.ajax({
+						type: "get",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Userprofile/?Userprofile.userid=" + userID,
+						async: true,
+						success: function(data, state) {
+							if("{}" != JSON.stringify(data)) {
+								console.log("查询Userprofile成功");
+								//根据历史推荐活动
+								actUserArr = new Array();
+								for(var i = 0; i < 9; i++) {
+									var actObj = {
+										type: i + 1,
+										num: data.Userprofile[0]["act" + (i + 1)]
+									}
+									actUserArr[i] = actObj;
 
-						var imgTopic = $("<img></img>").attr({
-							"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
-							"alt": "...."
-						});
-						var divThumbnail = $("<div class='thumbnail'></div>");
-						divThumbnail.append(imgTopic);
+								}
+								actUserArr.sort(sortUserAct);
+								console.log(actUserArr);
 
-						//							var divRow1 = $("<div class='row'></div>");
-						//							divRow1.append(divThumbnail, divCaption);
+								$.ajax({
+									type: "get",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/?Activity.acttype=" + actUserArr[0].type,
+									//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+									async: false,
+									success: function(data, state) {
+										console.log("搜索特定类型的对象成功！");
+										console.log(data);
+										if("{}" != JSON.stringify(data)) {
+											console.log("搜索特定类型的对象成功！")
+											var actArr = data.Activity;
+											actArr.sort(sortAct);
+											console.log("通过viewNumber排序后");
+											console.log(actArr);
+											console.log(actArr[0].actname);
+											var actGuessA = $('<a class="list-group-item"></a>').text(actArr[0].actname);
+											actGuessA.attr("href", encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + actArr[0].id + "userID=" + userID));
+											$("#guessList").append(actGuessA);
+										}
+									},
+									error: function(data, state) {
 
-						//							var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
-						//							div1.append(divRow1, $("<hr>"));
+									}
+								});
+								//根据历史推荐话题
+								topicUserArr = new Array();
+								for(var i = 0; i < 9; i++) {
+									var topicObj = {
+										type: i + 1,
+										num: data.Userprofile[0]["topic" + (i + 1)]
+									}
+									topicUserArr[i] = topicObj;
 
-						var topicDetailUrl;
-						if("" == userID) {
-							topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id;
-						} else {
-							topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id + "userID=" + userID);
+								}
+								topicUserArr.sort(sortUserTopic);
+								console.log(topicUserArr);
+
+								$.ajax({
+									type: "get",
+									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/?Topic.topictype=" + topicUserArr[0].type,
+									//url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/?Student.",
+									async: false,
+									success: function(data, state) {
+										console.log("搜索特定类型的对象成功！");
+										console.log(data);
+										if("{}" != JSON.stringify(data)) {
+											console.log("搜索特定类型的对象成功！")
+											var topicArr = data.Topic;
+											topicArr.sort(sortTopic);
+											console.log("通过viewNumber排序后");
+											console.log(topicArr);
+											console.log(topicArr[0].title);
+											var actGuessA = $('<a class="list-group-item"></a>').text(topicArr[0].title);
+											actGuessA.attr("href", encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + topicArr[0].id + "userID=" + userID));
+											$("#guessList").append(actGuessA);
+										} else {
+											console.log("没找到对应的话题内容");
+										}
+									},
+									error: function(data, state) {
+
+									}
+								});
+
+							} else {
+								console.log("userProfile == {}");
+							}
+						},
+						error: function(data, state) {
+
 						}
+					});
+				}
 
-						var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);
-						topicDetailA.append(divThumbnail, divCaption);
+				$("#searchBtn").click(function() {
+					window.event.returnValue = false;
+					if("" != $("#searchInput").val()) {
+						//查询话题
+						var searchName = $("#searchInput").val();
+						console.log("search");
+						$("#topicthumbnails").empty();
+						$.ajax({
+							type: "get",
+							url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/?Topic.title=(like)" + searchName,
+							async: true,
+							success: function(data, state) {
+								console.log(state);
+								console.log(data);
+								if("{}" != JSON.stringify(data)) {
+									for(var i = 0; i < data.Topic.length; i++) {
+										var hTitle = $("<h3></h3>").text(data.Topic[i].title);
+										var topicBrief = $("<p></p>").text("内容：" + data.Topic[i].brief);
+										var ppers = $("<p></p>").text("发布人：" + data.Topic[i].authorname);
+										var pTopTime = $("<p></p>").text("发布时间：" + data.Topic[i].publishtime);
+										var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
+										divCaption.append(hTitle, topicBrief, ppers, pTopTime);
 
-						var divRow2 = $("<div class='col-md-3'></div>");
-						divRow2.append(topicDetailA);
+										var imgTopic = $("<img></img>").attr({
+											"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
+											"alt": "...."
+										});
+										var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
+										divThumbnail.append(imgTopic);
 
-						//							var divRow2 = $("<div class='col-xs-6 col-lg-4'></div>");
-						//							divRow2.append(actDetailA);
+										var divRow1 = $("<div class='row'></div>");
+										divRow1.append(divThumbnail, divCaption);
 
-						$("#topicthumbnails").append(divRow2);
+										var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
+										div1.append(divRow1, $("<hr>"));
 
+										var topicDetailUrl;
+										if("" == userID) {
+											topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id;
+										} else {
+											topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.Topic[i].id + "userID=" + userID);
+										}
+
+										var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);
+										topicDetailA.append(div1);
+
+										var divRow2 = $("<div class='row'></div>");
+										divRow2.append(topicDetailA);
+
+										$("#topicthumbnails").append(divRow2);
+									}
+								}
+							},
+							error: function(data, state) {
+								console.log(state);
+								console.log(data);
+							}
+						});
+						//查询活动
+						var searchName = $("#searchInput").val();
+						console.log("search");
+						$.ajax({
+							type: "get",
+							url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/?Activity.actname=(like)" + searchName,
+							async: true,
+							success: function(data, state) {
+								console.log(state);
+								console.log(data);
+								$("#actthumbnails").empty();
+								if("{}" != JSON.stringify(data)) {
+
+									for(var i = 0; i < data.Activity.length; i++) {
+										var hTitle = $("<h3></h3>").text(data.Activity[i].actname);
+										var pAddr = $("<p></p>").text("活动地点：" + data.Activity[i].actaddress);
+										var pActTime = $("<p></p>").text("活动时间：" + data.Activity[i].actstart + "至" + data.Activity[i].actend);
+										var pSponser = $("<p></p>").text("主办单位：" + data.Activity[i].actsponser);
+										var pNumber = $("<p></p>").text("报名人数：" + data.Activity[i].participantnumber + "|" + data.Activity[i].totalnumber);
+										var pApplyEnd = $("<p></p>").text("报名截止：" + data.Activity[i].applyend);
+										var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
+										divCaption.append(hTitle, pAddr, pActTime, pSponser, pNumber, pApplyEnd);
+
+										var imgAct = $("<img></img>").attr({
+											"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/" + data.Activity[i].id,
+											"alt": "...."
+										});
+										var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
+										divThumbnail.append(imgAct);
+
+										var divRow1 = $("<div class='row'></div>");
+										divRow1.append(divThumbnail, divCaption);
+
+										var div1 = $("<div class='col-md-8 col-md-offset-2'></div>");
+										div1.append(divRow1, $("<hr>"));
+
+										var actDetailUrl;
+										if("" == userID) {
+											actDetailUrl = "/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id;
+										} else {
+											actDetailUrl = encodeURI("/CFIP/cfip/act/actDetail.html?actID=" + data.Activity[i].id + "userID=" + userID);
+										}
+
+										var actDetailA = $("<a></a>").attr("href", actDetailUrl);
+										actDetailA.append(div1);
+
+										var divRow2 = $("<div class='row'></div>");
+										divRow2.append(actDetailA);
+
+										$("#actthumbnails").append(divRow2);
+									}
+
+								}
+
+							},
+							error: function(data, state) {
+								console.log(state);
+								console.log(data);
+							}
+						});
 					}
 
-				},
-				error: function(data, state) {
-					console.log(state);
-					console.log(data);
-				}
+				});
+
 			});
+
+			function sortUserAct(a, b) {
+				return b.num - a.num;
+			}
+
+			function sortUserTopic(a, b) {
+				return b.num - a.num;
+			}
+
+			function sortAct(a, b) {
+				return b.viewernumber - a.viewernumber;
+			}
+
+			function sortTopic(a, b) {
+				return b.viewernumber - a.viewernumber;
+			}
+			//			userID = isSignIn();
 		</script>
 	</body>
 

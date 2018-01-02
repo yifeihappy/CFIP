@@ -182,7 +182,8 @@ function createIVedioItem(userID, currentTime1, Icontent, msgID) {
 	var divRow = $("<div class='row'></div>");
 	var divCol8 = $('<div class="col-sm-8 col-sm-offset-3 i-msg"></div>');
 	var divRowVedio = $('<div class="row vedio"></div>');
-	var vedioI = $('<video class="you-video" width="320" height="240"  controls="controls" autoplay="autoplay"></vedio>').attr("src", "../../vedio/testvideo.mp4");
+	//var vedioI = $('<video class="you-video" width="320" height="240"  controls="controls" autoplay="autoplay"></vedio>').attr("src", "../../vedio/testvideo.mp4");
+	var vedioI = $('<video class="you-video" width="320" height="240"  controls="controls" autoplay="autoplay"></vedio>').attr("src", "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Message/"+msgID);
 	divRowVedio.append(vedioI);
 	divCol8.append(divRowVedio);
 
@@ -258,7 +259,8 @@ function createYVedioItem(userID, currentTime1, Icontent, msgID) {
 
 	var divCol8 = $('<div class="col-sm-8 you-msg"></div>');
 	var divVedio = $('<div class="row vedio"></div>');
-	var vedioY = $('<video class="you-video" width="320" height="240" controls="controls" autoplay="autoplay">').attr("src", "../../vedio/testvideo.mp4");
+	//var vedioY = $('<video class="you-video" width="320" height="240" controls="controls" autoplay="autoplay">').attr("src", "../../vedio/testvideo.mp4");
+	var vedioY = $('<video class="you-video" width="320" height="240" controls="controls" autoplay="autoplay">').attr("src",'http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Message/' + msgID );
 	divVedio.append(vedioY);
 	divCol8.append(divVedio);
 	divCol1.append(spanY);
@@ -401,6 +403,7 @@ function listenToMessageTrigger() {
 //判断有无历史未读数据
 function hasHistoryMessage() {
 	{
+		console.log("开始判断有无历史数据");
 		$.ajax({
 			type: "get",
 			url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Message/?Message.touserid=" + userID,
@@ -410,6 +413,7 @@ function hasHistoryMessage() {
 					//遍历所有消息
 					for(var i = 0; i < data.Message.length; i++) {
 						if(data.Message[i].state == "1") { //找出未读消息
+							console.log("有未读消息");
 							//还未创建对话
 							if(!(("Tr" + data.Message[i].fromuserid) in msgPlaneMap)) {
 								var divTree = $("<div style='display:none'></div>").attr("id", "Tr" + data.Message[i].fromuserid);

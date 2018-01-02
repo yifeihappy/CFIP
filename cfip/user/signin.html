@@ -47,11 +47,12 @@
 			</form>
 		</div>
 		<!-- /container -->
-		<script>	
+		<script>
 			$(document).ready(function() {
 				$("#submitBtn").click(function() {
 					if($("#userNumber").val() != "" && $("#password").val() != "") {
 						var userType = $("input:radio:checked").val();
+						console.log(userType);
 						var userArray;
 						var userURL;
 						switch(userType) {
@@ -62,7 +63,7 @@
 								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Teacher/?Teacher.teachernumber=" + $("#userNumber").val();
 								break;
 							case "Admin":
-								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Admin/?Admin.adminnumber=" + $("#userNumber").val(), userArray = getByAdminNumber($("#userNumber").val());
+								userURL = "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Admin/?Admin.number=" + $("#userNumber").val();
 								break;
 						}
 						//作为记录ajax内部执行结果的变量
@@ -78,22 +79,24 @@
 								if(JSON.stringify(data) == "{}") {
 									resultFlag = false;
 								} else {
-									userID = data.Student[0].id;
+									
 									switch(userType) {
 										case "Student":
 											if($("#password").val() == data.Student[0].password) {
 												resultFlag = true;
-
+												userID = data.Student[0].id;
 											}
 											break;
 										case "Teacher":
 											if($("#password").val() == data.Teacher[0].password) {
 												resultFlag = true;
+												userID = data.Teacher[0].id;
 											}
 											break;
 										case "Admin":
 											if($("#password").val() == data.Admin[0].password) {
 												resultFlag = true;
+												userID = data.Admin[0].id;
 											}
 											break;
 									}
@@ -106,8 +109,19 @@
 						});
 
 						if(resultFlag) {
-							console.log("T");
-							var indexUrl = encodeURI("../../index.html?userID=" + userID);
+							var indexUrl;
+							switch($("input:radio:checked").val()) {
+								case "Student":
+									indexUrl = encodeURI("../../index.html?userID=" + userID);
+									break;
+								case "Teacher":
+									indexUrl = encodeURI("../../index.html?userID=" + userID);
+									break;
+								case "Admin":
+									indexUrl = encodeURI("/CFIP/cfip/admin/adminIndex.html?userID=" + userID);
+									break;
+							}
+							//var indexUrl = encodeURI("../../index.html?userID=" + userID);
 							console.log(indexUrl);
 							window.location.href = indexUrl;
 							//window.event.returnValue = false;

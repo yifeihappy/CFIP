@@ -135,11 +135,27 @@
 							</form>
 
 							<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-								<li>
+								<li id="signinLI">
 									<a href="/CFIP/cfip/user/signin.html">登录</a>
 								</li>
-								<li ng-hide="userService.isLogin">
+								<!--</div>-->
+								<!--<div id="signupDiv" hidden=true>-->
+								<li id="signupLI" ng-hide="userService.isLogin">
 									<a href="/CFIP/cfip/user/signup.html">注册</a>
+								</li>
+								<!--</div>-->
+								<!--<div id="userCenterDiv" hidden=true>-->
+								<li id="userCenterLI" class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a herf="" id="userCenterID">个人中心</a>
+										</li>
+										<li>
+											<a href="/CFIP/index.html">退出</a>
+										</li>
+									</ul>
 								</li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -181,10 +197,10 @@
 							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
 						</li>
 						<li>
-							<a href=""  target="_self" id="HRmyact">我的活动</a>
+							<a href="" target="_self" id="HRmyact">我的活动</a>
 						</li>
 						<li>
-							<a href=""  target="_self" id="HRmytopic">我的话题</a>
+							<a href="" target="_self" id="HRmytopic">我的话题</a>
 						</li>
 						<li>
 							<a href="" id="HRmyapply_zhuxuejin">我的申请</a>
@@ -257,12 +273,10 @@
 						console.log(state);
 						console.log(data);
 						for(var i = data.Dengshen.length - 1; i >= 0; i--) {
-							if(userID == data.Dengshen[i].userid) 
-							{
+							if(userID == data.Dengshen[i].userid) {
 								var dType = data.Dengshen[i].type;
 
-								if(dType == "1") 
-								{
+								if(dType == "1") {
 									var PublisherName = $("<font size='3'></font>").text(data.Dengshen[i].userid);
 									var PersonalHomepageURL = "#"; //连接到“他的主页”
 									var PublisherHomepage = $("<a></a>").attr("href", PersonalHomepageURL);

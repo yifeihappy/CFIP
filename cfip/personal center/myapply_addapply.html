@@ -133,11 +133,27 @@
 							</form>
 
 							<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-								<li>
+								<li id="signinLI">
 									<a href="/CFIP/cfip/user/signin.html">登录</a>
 								</li>
-								<li ng-hide="userService.isLogin">
+								<!--</div>-->
+								<!--<div id="signupDiv" hidden=true>-->
+								<li id="signupLI" ng-hide="userService.isLogin">
 									<a href="/CFIP/cfip/user/signup.html">注册</a>
+								</li>
+								<!--</div>-->
+								<!--<div id="userCenterDiv" hidden=true>-->
+								<li id="userCenterLI" class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a herf="" id="userCenterID">个人中心</a>
+										</li>
+										<li>
+											<a href="/CFIP/index.html">退出</a>
+										</li>
+									</ul>
 								</li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -178,7 +194,7 @@
 						<li>
 							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
 						</li>
-						<li >
+						<li>
 							<a href="" target="_self" id="HRmyact">我的活动</a>
 						</li>
 						<li>
@@ -203,7 +219,7 @@
 				</div>
 				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
-						<li role="presentation" >
+						<li role="presentation">
 							<a herf="" id="HRzhuxuejin">我的助学金申请</a>
 						</li>
 						<li role="presentation">
@@ -279,15 +295,14 @@
 
 			</div>
 		</div>
-		
-		
+
 		<script>
 			$(document).ready(function() {
 				/**********判断用户有无登录 start*********/
 				var userID = isSignIn(); //判断用户有没有登录进行页面变化
 				/**********判断用户有无登录 end*********/
 				userIDtianjia();
-				
+
 				$("#applySubmit_qpj").click(function() {
 
 					var apply_qpjObject = {
@@ -322,7 +337,7 @@
 						success: function(data, state) {
 							console.log(state);
 							console.log(data);
-							
+
 							var indexUrl = encodeURI("/CFIP/cfip/personal center/myapply_zhuxuejin.html?userID=" + userID);
 							console.log(indexUrl);
 							window.location.href = indexUrl;
@@ -347,13 +362,6 @@
 			}
 		</script>
 
-
-
-
-
-
-
-
-
 	</body>
+
 </html>

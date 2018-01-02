@@ -134,11 +134,27 @@
 							</form>
 
 							<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-								<li>
+								<li id="signinLI">
 									<a href="/CFIP/cfip/user/signin.html">登录</a>
 								</li>
-								<li ng-hide="userService.isLogin">
+								<!--</div>-->
+								<!--<div id="signupDiv" hidden=true>-->
+								<li id="signupLI" ng-hide="userService.isLogin">
 									<a href="/CFIP/cfip/user/signup.html">注册</a>
+								</li>
+								<!--</div>-->
+								<!--<div id="userCenterDiv" hidden=true>-->
+								<li id="userCenterLI" class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a herf="" id="userCenterID">个人中心</a>
+										</li>
+										<li>
+											<a href="/CFIP/index.html">退出</a>
+										</li>
+									</ul>
 								</li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -269,60 +285,63 @@
 					success: function(data, state) {
 						console.log(state);
 						console.log(data);
-						for(var i = data.Comments.length - 1; i >= 0; i--) {
-							if(userID == data.Comments[i].userid) {
-								var topicid = data.Comments[i].topicid;
-								console.log(topicid);
-								$.ajax({
-									type: "get",
-									url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + topicid,
-									async: true,
-									success: function(data,state) {
-										console.log(data);
-										console.log(state);
-										var hTitle = $("<h3></h3>").text(data.title);
-										var ppers = $("<p></p>").text("发布人：" + data.authorname);
-										var pTopTime = $("<p></p>").text("发布时间：" + data.publishtime);
-										var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
-										divCaption.append(hTitle, ppers, pTopTime);
+						if("{}" != JSON.stringify(data)) {
+							for(var i = 0; i < data.Comments.length; i++) {
+								if(parseInt(userID) == data.Comments[i].userid) {
+									var topicid = data.Comments[i].topicid + "";
+									console.log(topicid);
+									$.ajax({
+										type: "get",
+										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + topicid,
+										async: true,
+										success: function(data, state) {
+											console.log(data);
+											console.log(state);
+											var hTitle = $("<h3></h3>").text(data.title);
+											var ppers = $("<p></p>").text("发布人：" + data.authorname);
+											var pTopTime = $("<p></p>").text("发布时间：" + data.publishtime);
+											var divCaption = $("<div class='col-md-8 col-sm-8 col-xs-8  caption'></div>");
+											divCaption.append(hTitle, ppers, pTopTime);
 
-										var imgTopic = $("<img></img>").attr({
-											"src": "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + data.id,
-											"alt": "...."
-										});
-										var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
-										divThumbnail.append(imgTopic);
+											var imgTopic = $("<img></img>").attr({
+												"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Topic/" + data.id,
+												"alt": "...."
+											});
+											var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");
+											divThumbnail.append(imgTopic);
 
-										var divRow1 = $("<div class='row'></div>");
-										divRow1.append(divThumbnail, divCaption);
+											var divRow1 = $("<div class='row'></div>");
+											divRow1.append(divThumbnail, divCaption);
 
-										var div1 = $("<div class='col-md-8'></div>");
-										div1.append(divRow1, $("<hr>"));
+											var div1 = $("<div class='col-md-8'></div>");
+											div1.append(divRow1, $("<hr>"));
 
-										var topicDetailUrl;
-										if("" == userID) {
-											topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?topicID=" + data.id;
-										} else {
-											topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.id + "userID=" + userID);
+											var topicDetailUrl;
+											if("" == userID) {
+												topicDetailUrl = "/CFIP/cfip/topic/topicDetail.html?topicID=" + data.id;
+											} else {
+												topicDetailUrl = encodeURI("/CFIP/cfip/topic/topicDetail.html?topicID=" + data.id + "userID=" + userID);
+											}
+
+											var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);
+											topicDetailA.append(div1);
+
+											var divRow2 = $("<div class='row'></div>");
+											divRow2.append(topicDetailA);
+
+											$("#topic-thumbnails").append(divRow2);
+										},
+										error: function(data, state) {
+											console.log(data);
+											console.log(state);
 										}
+									});
 
-										var topicDetailA = $("<a></a>").attr("href", topicDetailUrl);
-										topicDetailA.append(div1);
-
-										var divRow2 = $("<div class='row'></div>");
-										divRow2.append(topicDetailA);
-
-										$("#topic-thumbnails").append(divRow2);
-									},
-									error:function(data,state){
-										console.log(data);
-										console.log(state);
-									}
-								});
+								}
 
 							}
-
 						}
+
 					}
 
 				});

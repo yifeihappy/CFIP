@@ -37,8 +37,25 @@ function isSignIn() {
 				return false;
 			});
 		}
+		if($("#actMore").length > 0) {
+			$("#actMore").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
 		if($("#topic").length > 0) {
 			$("#topic").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html");
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+
+			});
+		}
+		if($("#topicMore").length > 0) {
+			$("#topicMore").click(function() {
 				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html");
 				console.log(indexUrl);
 				window.location.href = indexUrl;
@@ -100,8 +117,9 @@ function isSignIn() {
 		});
 
 		if($("#chat").length > 0) {
-			$("#chact").click(function() {
-				var indexUrl = encodeURI("/CFIP/cfip/chat/chat.html?userID=" + userID);
+			$("#chat").click(function() {
+
+				var indexUrl = encodeURI("/CFIP/cfip/chat/chatIndex.html?userID=" + userID);
 				console.log(indexUrl);
 				window.location.href = indexUrl;
 				return false;
@@ -115,8 +133,24 @@ function isSignIn() {
 				return false;
 			});
 		}
+		if($("#actMore").length > 0) {
+			$("#actMore").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
 		if($("#topic").length > 0) {
 			$("#topic").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			});
+		}
+		if($("#topicMore").length > 0) {
+			$("#topicMore").click(function() {
 				var indexUrl = encodeURI("/CFIP/cfip/topic/topic.html?userID=" + userID);
 				console.log(indexUrl);
 				window.location.href = indexUrl;
@@ -142,6 +176,14 @@ function isSignIn() {
 
 		if($("#userCenterID").length > 0) {
 			$("#userCenterID").click(function() {
+				var indexUrl = encodeURI("/CFIP/cfip/personal center/personal information.html?userID=" + userID);
+				console.log(indexUrl);
+				window.location.href = indexUrl;
+				return false;
+			})
+		}
+		if($("#personalCenter").length > 0) {
+			$("#personalCenter").click(function() {
 				var indexUrl = encodeURI("/CFIP/cfip/personal center/personal information.html?userID=" + userID);
 				console.log(indexUrl);
 				window.location.href = indexUrl;

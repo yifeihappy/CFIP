@@ -139,11 +139,27 @@
 							</form>
 
 							<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-								<li>
+								<li id="signinLI">
 									<a href="/CFIP/cfip/user/signin.html">登录</a>
 								</li>
-								<li ng-hide="userService.isLogin">
+								<!--</div>-->
+								<!--<div id="signupDiv" hidden=true>-->
+								<li id="signupLI" ng-hide="userService.isLogin">
 									<a href="/CFIP/cfip/user/signup.html">注册</a>
+								</li>
+								<!--</div>-->
+								<!--<div id="userCenterDiv" hidden=true>-->
+								<li id="userCenterLI" class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a herf="" id="userCenterID">个人中心</a>
+										</li>
+										<li>
+											<a href="/CFIP/index.html">退出</a>
+										</li>
+									</ul>
 								</li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -374,7 +390,7 @@
 			var originalpassword;
 			$.ajax({
 				type: "get",
-				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513502243526",
+				url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + userID ,
 				async: true,
 				success: function(data, state) {
 					console.log(state);
@@ -439,7 +455,7 @@
 				var dataJsonStr = JSON.stringify(UserInfo);
 				console.log(dataJsonStr);
 				$.ajax({
-					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + "1513502243526",
+					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + userID ,
 					contentType: "application/json",
 					type: "PUT",
 					data: dataJsonStr,
@@ -457,7 +473,7 @@
 			});
 
 			$('#updateCancel').click(function() {
-				var indexUrl = encodeURI("information update.html?userID=" + "1513502243526");
+				var indexUrl = encodeURI("information update.html?userID=" + userID );
 				console.log(indexUrl);
 				window.location.href = indexUrl;
 

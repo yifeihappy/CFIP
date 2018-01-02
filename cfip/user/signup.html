@@ -19,8 +19,18 @@
 	</head>
 
 	<body>
+
 		<div class="container">
 			<form class="form-signup">
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active">
+						<a href="">Student</a>
+					</li>
+					<li role="presentation">
+						<a href="/CFIP/cfip/teacher user/signup.html">Teacher</a>
+					</li>
+				</ul>
+
 				<h2 class="form-signup-heading">Please sign up</h2>
 				<label for="studentName" class="sr-only">User Name</label>
 				<input type="text" id="studentName" class="form-control" placeholder="Student Name" required autofocus>
@@ -241,14 +251,49 @@
 														console.log(data);
 														console.log("Messagetrigger:" + state);
 
+													},
+													error: function(data, state) {
+														console.log("Messagetrigger:" + state);
+													}
+												});
+												var ActTopicJson = {
+													userid: userID,
+													act1: 0,
+													act2: 0,
+													act3: 0,
+													act4: 0,
+													act5: 0,
+													act6: 0,
+													act7: 0,
+													act8: 0,
+													act9: 0,
+													topic1: 0,
+													topic2: 0,
+													topic3: 0,
+													topic4: 0,
+													topic5: 0,
+													topic6: 0,
+													topic7: 0,
+													topic8: 0,
+													topic9: 0
+												};
+												$.ajax({
+													type: "post",
+													url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Userprofile/",
+													async: false,
+													contentType: "application/json",
+													data: JSON.stringify(ActTopicJson),
+													success: function(data, state) {
+														console.log("创建Userprofile成功");
+														console.log(data);
 														var indexUrl = encodeURI("../../index.html?userID=" + userID);
 														console.log(indexUrl);
 														window.location.href = indexUrl;
 													},
 													error: function(data, state) {
-														console.log("Messagetrigger:" + state);
+														console.log("put Userprofile failed!");
 													}
-												})
+												});
 											}
 										});
 										return false;

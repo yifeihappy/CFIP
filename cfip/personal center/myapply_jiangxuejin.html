@@ -133,11 +133,27 @@
 							</form>
 
 							<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
-								<li>
+								<li id="signinLI">
 									<a href="/CFIP/cfip/user/signin.html">登录</a>
 								</li>
-								<li ng-hide="userService.isLogin">
+								<!--</div>-->
+								<!--<div id="signupDiv" hidden=true>-->
+								<li id="signupLI" ng-hide="userService.isLogin">
 									<a href="/CFIP/cfip/user/signup.html">注册</a>
+								</li>
+								<!--</div>-->
+								<!--<div id="userCenterDiv" hidden=true>-->
+								<li id="userCenterLI" class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a herf="" id="userCenterID">个人中心</a>
+										</li>
+										<li>
+											<a href="/CFIP/index.html">退出</a>
+										</li>
+									</ul>
 								</li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -178,7 +194,7 @@
 						<li>
 							<a href="" target="_self" id="HRpersonalinformation">基本信息</a>
 						</li>
-						<li >
+						<li>
 							<a href="" target="_self" id="HRmyact">我的活动</a>
 						</li>
 						<li>
@@ -203,7 +219,7 @@
 				</div>
 				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
-						<li role="presentation" >
+						<li role="presentation">
 							<a herf="" id="HRzhuxuejin">我的助学金申请</a>
 						</li>
 						<li role="presentation" class="active">
@@ -276,14 +292,14 @@
 
 			</div>
 		</div>
-		
+
 		<script>
 			$(document).ready(function() {
 				/**********判断用户有无登录 start*********/
 				var userID = isSignIn(); //判断用户有没有登录进行页面变化
 				/**********判断用户有无登录 end*********/
 				userIDtianjia();
-				
+
 				$.ajax({
 					type: "get",
 					url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Apply/",
@@ -293,15 +309,12 @@
 						console.log(state);
 						console.log(data);
 						for(var i = data.Apply.length - 1; i >= 0; i--) {
-							if(userID == data.Apply[i].userid) 
-							{
+							if(userID == data.Apply[i].userid) {
 								var dType = data.Apply[i].type;
 
-								if(dType == "2") 
-								{
+								if(dType == "2") {
 									var dState = data.Apply[i].state;
-									
-									
+
 									var PublisherName = $("<font size='3'></font>").text(data.Apply[i].userid);
 									var PersonalHomepageURL = "#"; //连接到“他的主页”
 									var PublisherHomepage = $("<a></a>").attr("href", PersonalHomepageURL);
@@ -313,27 +326,26 @@
 									var pContent = $("<p></p>").text(data.Apply[i].content);
 									var divNeiRong = $("<div class='col-md-11'></div>");
 									divNeiRong.append(hTitle, pContent);
-									
-									var divState =$("<div class='col-md-12'></div>");
-									var divApplyState=$("<div class='row' col-md-offset-10></div>");
-									if (dState=="0"){
-										var zhuangtai=$("<font size='5'></font>").text("正在审核");
+
+									var divState = $("<div class='col-md-12'></div>");
+									var divApplyState = $("<div class='row' col-md-offset-10></div>");
+									if(dState == "0") {
+										var zhuangtai = $("<font size='5'></font>").text("正在审核");
 									}
-									if (dState=="1"){
-										var zhuangtai=$("<font size='5'></font>").text("通过审核");
+									if(dState == "1") {
+										var zhuangtai = $("<font size='5'></font>").text("通过审核");
 									}
-									
-									if (dState=="2"){
-										var zhuangtai=$("<font size='5'></font>").text("未通过审核");
+
+									if(dState == "2") {
+										var zhuangtai = $("<font size='5'></font>").text("未通过审核");
 									}
 									divApplyState.append(zhuangtai);
 									divState.append(divApplyState);
-									
 
 									var divHr = $("<div class='col-md-12'></div>");
 									divHr.append($("<hr>"));
 
-									$("#applyzhanshi").append($("<br>"),divPublisherName,divNeiRong,divState,divHr);
+									$("#applyzhanshi").append($("<br>"), divPublisherName, divNeiRong, divState, divHr);
 
 								}
 
@@ -346,19 +358,10 @@
 						console.log(data);
 					}
 				});
-				
-				
-				
-				});
-				
-				
-				
-				
-				
-				
-				
-			
+
+			});
 		</script>
 
 	</body>
+
 </html>

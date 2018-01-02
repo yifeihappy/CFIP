@@ -311,7 +311,7 @@
 					</div>-->
 					<div id="applynumber">
 
-						<p align="center">小邓 已报名</p>
+						<!--<p align="center">小邓 已报名</p>-->
 
 					</div>
 
@@ -359,32 +359,31 @@
 					});
 					$.ajax({
 						type: "get",
-						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Applicationform/",
+						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Applicationform/?Applicationform.actid=" + actID,
 						async: true,
 						success: function(data, state) {
-							for(var i = 0; i < data.Applicationform.length; i++) {
+							if("{}" != JSON.stringify(data)) {
+								for(var i = 0; i < data.Applicationform.length; i++) {
 
-								if(actID == data.Applicationform[i].actid) {
-									var userid = Applicationform[i].userid + "";
-									$.ajax({
-										type: "get",
-										url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + userid,
-										async: true,
-										success: function(data, state) {
-                                               var ApplyPerson=$("<p align='center'></p>").text(data.studentname+"     已报名");
-                                               $("#applynumber").append(ApplyPerson);
-                                               
-                                               
-                                               
-                                               
-										},
-										error: function(data, state) {
+									//if(parseInt(actID) == data.Applicationform[i].actid) {
+										var userid = data.Applicationform[i].userid + "";
+										$.ajax({
+											type: "get",
+											url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Student/" + userid,
+											async: true,
+											success: function(data, state) {
+												var ApplyPerson = $("<p align='center'></p>").text(data.studentname + "     已报名");
+												$("#applynumber").append(ApplyPerson);
 
-										}
-									});
+											},
+											error: function(data, state) {
+
+											}
+										});
+
+									//}
 
 								}
-
 							}
 
 						},

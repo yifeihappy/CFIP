@@ -45,41 +45,8 @@
 						<li>
 							<a href="" id="chat">Chat</a>
 						</li>
-						<!--<li>
-							<a href="../act/act.html">活动</a>
-						</li>-->
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">比赛</a>
-								</li>
-								<li>
-									<a href="#">公益</a>
-								</li>
-								<li>
-									<a href="#">户外</a>
-								</li>
-								<li>
-									<a href="#">讲座</a>
-								</li>
-								<li>
-									<a href="#">艺术</a>
-								</li>
-								<li>
-									<a href="#">游学</a>
-								</li>
-								<li>
-									<a href="#">招聘</a>
-								</li>
-								<li>
-									<a href="#">招新</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li>
-									<a href="#">其它</a>
-								</li>
-							</ul>
+						<li>
+							<a href="" id="act">活动</a>
 						</li>
 						<li>
 							<a href="" id="topic">话题</a>
@@ -87,93 +54,13 @@
 						<li>
 							<a href="" id="dengShen">灯神</a>
 						</li>
-						<!--<li class="dropdown">
-										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<a href="#">比赛</a>
-											</li>
-											<li>
-												<a href="#">公益</a>
-											</li>
-											<li>
-												<a href="#">户外</a>
-											</li>
-											<li>
-												<a href="#">讲座</a>
-											</li>
-											<li>
-												<a href="#">艺术</a>
-											</li>
-											<li>
-												<a href="#">游学</a>
-											</li>
-											<li>
-												<a href="#">招聘</a>
-											</li>
-											<li>
-												<a href="#">招新</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a href="#">其它</a>
-											</li>
-										</ul>
-									</li>-->
-						<!--<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">明星</a>
-								</li>
-								<li>
-									<a href="#">搞笑</a>
-								</li>
-								<li>
-									<a href="#">情感</a>
-								</li>
-								<li>
-									<a href="#">时尚</a>
-								</li>
-								<li>
-									<a href="#">军事</a>
-								</li>
-								<li>
-									<a href="#">美女</a>
-								</li>
-								<li>
-									<a href="#">体育</a>
-								</li>
-								<li>
-									<a href="#">动漫</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li>
-									<a href="#">其它</a>
-								</li>
-							</ul>
-						</li>-->
-						<!--<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">表白墙</a>
-								</li>
-								<li>
-									<a href="#">心愿墙</a>
-								</li>
-								<li>
-									<a href="#">闲物店</a>
-								</li>
-							</ul>
-						</li>-->
 					</ul>
 
 					<form class="navbar-form navbar-left">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="活动/话题">
 						</div>
-						<button type="submit" class="btn btn-default">搜索</button>
+						<button type="submit" class="btn btn-default" disabled="true">搜索</button>
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
@@ -324,38 +211,41 @@
 				/**********判断用户有无登录 start*********/
 				var userID = isSignIn(); //判断用户有没有登录进行页面变化
 				/**********判断用户有无登录 end*********/
-
+				if("" == userID){
+					alert("请先登录");
+				}
 				$("#addActSubmit").click(function() {
-					var actObject = {
-						actname: "Duang Duang Duang",
-						actaddress: "JingJingTang",
-						userid: 1513502243526,
-						actsponser: "KangKang",
-						acttype: "1",
-						actstart: "2017-12-26T12:00",
-						actend: "2017-12-27T17:00",
-						applystart: "2017-12-22T12:00",
-						applyend: "2017-12-26T12:00",
-						actbrief: "关于AI，他们要说——\n霍金： 全面人工智能化会导致人类灭亡。\n马斯克： 人工智能是人类生存最大威胁。\n比尔 ? 盖茨： 人类需要敬畏AI的崛起。\n关于AI， 我们想问——\nAlpha Go是如何打败柯杰的？\nsiri是如何一步步“ 沦落” 至任人调戏？\nI程序员们内心究竟寄居着怎样的小怪兽？\n这一次\n我们聚集了行业大神， 学术大牛\n试图为你提供最全面的答案 ",
-						totalnumber: 100,
-						participantnumber: 1,
-						viewernumber: 2
-					}
 //					var actObject = {
-//						actname: $("#actName").val(),
-//						actaddress: $("#actAddress").val(),
-//						userid: 1513417478927,
-//						actsponser: $("#actSponser").val(),
-//						acttype: $("#actType").val(),
-//						actstart: $("#actStart").val(),
-//						actend: $("#actEnd").val(),
-//						applystart: $("#applystart").val(),
-//						applyend: $("#applyEnd").val(),
-//						actbrief: $("#actBrief").val(),
-//						totalnumber: parseInt($("#totalNumber").val()),
+//						actname: "狂欢夜",
+//						actaddress: "JingJingTang",
+//						userid: 1513502243526,
+//						actsponser: "KangKang",
+//						acttype: "1",
+//						actstart: "2017-12-30T12:00",
+//						actend: "2017-12-31T17:00",
+//						applystart: "2017-12-22T12:00",
+//						applyend: "2017-12-30T12:00",
+//						//actbrief: "关于AI，他们要说——\n霍金： 全面人工智能化会导致人类灭亡。\n马斯克： 人工智能是人类生存最大威胁。\n比尔 ? 盖茨： 人类需要敬畏AI的崛起。\n关于AI， 我们想问——\nAlpha Go是如何打败柯杰的？\nsiri是如何一步步“ 沦落” 至任人调戏？\nI程序员们内心究竟寄居着怎样的小怪兽？\n这一次\n我们聚集了行业大神， 学术大牛\n试图为你提供最全面的答案 ",
+//						actbrief: "新年好呀 新年好呀 祝福大家新年好我们唱歌 我们跳舞 祝福大家新年好另类歌词：小小姑娘 清早起床 提着花蓝上市场 穿过大街 走过小巷 卖花卖花声声唱 花儿虽美 花儿虽香 没人来卖怎么样 满满花蓝 空空小囊 如何回去见爹娘 ",
+//						totalnumber: 100,
 //						participantnumber: 0,
 //						viewernumber: 0
-//					};
+//					}
+					var actObject = {
+						actname: $("#actName").val(),
+						actaddress: $("#actAddress").val(),
+						userid: 1513417478927,
+						actsponser: $("#actSponser").val(),
+						acttype: $("#actType").val(),
+						actstart: $("#actStart").val(),
+						actend: $("#actEnd").val(),
+						applystart: $("#applystart").val(),
+						applyend: $("#applyEnd").val(),
+						actbrief: $("#actBrief").val(),
+						totalnumber: parseInt($("#totalNumber").val()),
+						participantnumber: 0,
+						viewernumber: 0
+					};
 					var dataJsonStr = JSON.stringify(actObject);
 					//console.log(dataJsonStr);
 					$.ajax({
@@ -390,6 +280,8 @@
 									console.log("上传文件成功！");
 									console.log(stateImg);
 									console.log(dataImg);
+									
+									window.location.href = "/CFIP/cfip/act/act.html?userID=" + userID;
 								}
 							});
 						},

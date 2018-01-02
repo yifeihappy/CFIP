@@ -52,41 +52,8 @@
 						<li>
 							<a href="" id="chat">Chat</a>
 						</li>
-						<!--<li>
-							<a href="../act/act.html">活动</a>
-						</li>-->
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">比赛</a>
-								</li>
-								<li>
-									<a href="#">公益</a>
-								</li>
-								<li>
-									<a href="#">户外</a>
-								</li>
-								<li>
-									<a href="#">讲座</a>
-								</li>
-								<li>
-									<a href="#">艺术</a>
-								</li>
-								<li>
-									<a href="#">游学</a>
-								</li>
-								<li>
-									<a href="#">招聘</a>
-								</li>
-								<li>
-									<a href="#">招新</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li>
-									<a href="#">其它</a>
-								</li>
-							</ul>
+						<li>
+							<a href="" id="act">活动</a>
 						</li>
 						<li>
 							<a href="" id="topic">话题</a>
@@ -94,93 +61,14 @@
 						<li>
 							<a href="" id="dengShen">灯神</a>
 						</li>
-						<!--<li class="dropdown">
-										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<a href="#">比赛</a>
-											</li>
-											<li>
-												<a href="#">公益</a>
-											</li>
-											<li>
-												<a href="#">户外</a>
-											</li>
-											<li>
-												<a href="#">讲座</a>
-											</li>
-											<li>
-												<a href="#">艺术</a>
-											</li>
-											<li>
-												<a href="#">游学</a>
-											</li>
-											<li>
-												<a href="#">招聘</a>
-											</li>
-											<li>
-												<a href="#">招新</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a href="#">其它</a>
-											</li>
-										</ul>
-									</li>-->
-						<!--<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">明星</a>
-								</li>
-								<li>
-									<a href="#">搞笑</a>
-								</li>
-								<li>
-									<a href="#">情感</a>
-								</li>
-								<li>
-									<a href="#">时尚</a>
-								</li>
-								<li>
-									<a href="#">军事</a>
-								</li>
-								<li>
-									<a href="#">美女</a>
-								</li>
-								<li>
-									<a href="#">体育</a>
-								</li>
-								<li>
-									<a href="#">动漫</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li>
-									<a href="#">其它</a>
-								</li>
-							</ul>
-						</li>-->
-						<!--<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">表白墙</a>
-								</li>
-								<li>
-									<a href="#">心愿墙</a>
-								</li>
-								<li>
-									<a href="#">闲物店</a>
-								</li>
-							</ul>
-						</li>-->
+
 					</ul>
 
 					<form class="navbar-form navbar-left">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="活动/话题">
 						</div>
-						<button type="submit" class="btn btn-default">搜索</button>
+						<button type="submit" class="btn btn-default" disabled="true">搜索</button>
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
@@ -319,27 +207,29 @@
 		<script>
 			var totalNumber = 0;
 			var applyNumber = 0;
+
 			$(document).ready(function() {
 				/**********判断用户有无登录 start*********/
 				var userID = isSignIn(); //判断用户有没有登录进行页面变化
 				/**********判断用户有无登录 end*********/
 
 				/*********获取并展示数据*********/
-
 				var urlStr = decodeURI(window.location.href);
 				urlStrArray1 = urlStr.split("actID=");
-				if(userID == ""){
+				actID = "";
+				if(userID == "") {
 					console.log("userID null");
 					actID = urlStrArray1[1];
 				} else {
-					console.log("userID:"+userID);
+					console.log("userID:" + userID);
 					urlStrArray2 = urlStrArray1[1].split("userID=");
 					actID = urlStrArray2[0];
 				}
 				//if(typeof(urlStrArray1[1]) != "undefined") {
-					//urlStrArray2 = urlStrArray1[1].split("userID=");
-					//actID = urlStrArray2[0];
-					console.log(actID);
+				//urlStrArray2 = urlStrArray1[1].split("userID=");
+				//actID = urlStrArray2[0];
+				console.log(actID);
+				if("" != actID) {
 					$.ajax({
 						type: "get",
 						url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + actID,
@@ -360,27 +250,27 @@
 							console.log(data);
 							//							var userid=data.userid;
 							//							var viewernumber=data.viewernumber;
-							var Actinfo = {
-								actname : data.actname,
-								actaddress : data.actaddress,
-								actsponser : data.actsponser,
-								userid : data.userid,
-								viewernumber : data.viewernumber,
-								acttype : data.acttype,
-								actstart : data.actstart,
-								actend : data.actend,
-								applystart : data.applystart,
-								applyend : data.applyend,
-								actbrief : data.actbrief,
-								totalnumber : data.totalnumber,
-								participantnumber : data.participantnumber,
-								viewernumber : data.viewernumber + 1
+							Actinfo = {
+								actname: data.actname,
+								actaddress: data.actaddress,
+								actsponser: data.actsponser,
+								userid: data.userid,
+								viewernumber: data.viewernumber,
+								acttype: data.acttype,
+								actstart: data.actstart,
+								actend: data.actend,
+								applystart: data.applystart,
+								applyend: data.applyend,
+								actbrief: data.actbrief,
+								totalnumber: data.totalnumber,
+								participantnumber: data.participantnumber,
+								viewernumber: data.viewernumber + 1
 							};
-
+							actType = data.acttype;
 							var dataJsonStr = JSON.stringify(Actinfo);
 							console.log(dataJsonStr);
 							$.ajax({
-								url: "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Activity/",
+								url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + actID,
 								contentType: "application/json",
 								type: "PUT",
 								data: dataJsonStr,
@@ -391,6 +281,7 @@
 									console.log(state);
 								},
 								success: function(data, state) {
+									console.log("Viewnumber + 1");
 									console.log(state);
 									console.log(data);
 
@@ -424,7 +315,8 @@
 												var Applyinfo = {
 													userid: parseInt(userID),
 													actid: parseInt(actID),
-													applytime: currentTime
+													applytime: currentTime,
+													acttype: actType
 												};
 
 												var dataJsonStr = JSON.stringify(Applyinfo);
@@ -434,7 +326,7 @@
 													contentType: "application/json",
 													type: "POST",
 													data: dataJsonStr,
-													async: true,
+													async: false,
 													error: function(data, state) {
 														//console.log(dataJsonStr);
 														console.log(data);
@@ -444,13 +336,33 @@
 														console.log(state);
 														console.log(data);
 														alert("报名成功！");
+														$("#applyBtn").attr("disabled", "disabled");
+
+														Actinfo.participantnumber = Actinfo.participantnumber+1;
+														var dataJsonStr = JSON.stringify(Actinfo);
+														console.log(dataJsonStr);
+														$.ajax({
+															url: "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Activity/" + actID,
+															contentType: "application/json",
+															type: "PUT",
+															data: dataJsonStr,
+															async: true,
+															error: function(data, state) {
+																//console.log(dataJsonStr);
+																console.log(data);
+																console.log(state);
+															},
+															success: function(data, state) {
+																console.log("Viewnumber + 1");
+																console.log(state);
+																console.log(data);
+
+															}
+														});
 													}
 												});
-
 											}
-
 										}
-
 									});
 
 								}
@@ -460,7 +372,9 @@
 
 						}
 					});
-				//}
+					//}
+
+				}
 
 			});
 		</script>

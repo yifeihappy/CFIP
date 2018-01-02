@@ -60,7 +60,7 @@ function userIDtianjia() {
 		
 		if($("#HRmytopic").length > 0) {
 			$("#HRmytopic").click(function() {
-				var hrefURL = encodeURI("my topic.html");
+				var hrefURL = encodeURI("mytopic_fabu.html");
 				console.log(hrefURL);
 				window.location.href = hrefURL;
 				return false;
@@ -278,7 +278,7 @@ function userIDtianjia() {
 		
 		if($("#HRmytopic").length > 0) {
 			$("#HRmytopic").click(function() {
-				var hrefURL = encodeURI("my topic.html?userID=" + userID);
+				var hrefURL = encodeURI("mytopic_fabu.html?userID=" + userID);
 				console.log(hrefURL);
 				window.location.href = hrefURL;
 				return false;
@@ -422,7 +422,7 @@ function userIDtianjia() {
 		
 		if($("#HRapply_topic").length > 0) {
 			$("#HRapply_topic").click(function() {
-				var hrefURL = encodeURI("my topic.html?userID=" + userID);
+				var hrefURL = encodeURI("mytopic_fabu.html?userID=" + userID);
 				console.log(hrefURL);
 				window.location.href = hrefURL;
 				return false;

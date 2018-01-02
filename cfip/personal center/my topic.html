@@ -205,10 +205,10 @@
 				<div class="col-md-7 sidebar">
 					<ul class="nav nav-tabs">
 						<li role="presentation" class="active">
-							<a href="#">我发布的话题</a>
+							<a href="" id="HRapply_topic">我发布的话题</a>
 						</li>
 						<li role="presentation">
-							<a href="#">我评论的话题</a>
+							<a href="" id="HRpinglun_topic">我评论的话题</a>
 						</li>
 					</ul>
 					<div id="topic-thumbnails" class="container">
@@ -279,7 +279,7 @@
 								divCaption.append(hTitle, ppers, pTopTime);
 
 								var imgTopic = $("<img></img>").attr({
-									"src": "http://112.74.35.75:8080/Entity/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
+									"src": "http://112.74.35.75:8080/file/U3d616b41047817/CFIP/Topic/" + data.Topic[i].id,
 									"alt": "...."
 								});
 								var divThumbnail = $("<div class='col-md-4 col-sm-4 col-xs-4 thumbnail'></div>");

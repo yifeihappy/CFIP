@@ -48,132 +48,19 @@
 						<li>
 							<a href="" id="act">活动</a>
 						</li>
-						<!--<li>
-							<a href="cfip/topic/topic.html">话题</a>
-						</li>-->
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">明星</a>
-								</li>
-								<li>
-									<a href="#">搞笑</a>
-								</li>
-								<li>
-									<a href="#">情感</a>
-								</li>
-								<li>
-									<a href="#">时尚</a>
-								</li>
-								<li>
-									<a href="#">军事</a>
-								</li>
-								<li>
-									<a href="#">美女</a>
-								</li>
-								<li>
-									<a href="#">体育</a>
-								</li>
-								<li>
-									<a href="#">动漫</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li>
-									<a href="#">其它</a>
-								</li>
-							</ul>
+						<li>
+							<a href="" id="topic">话题</a>
 						</li>
 						<li>
 							<a href="" id="dengShen">灯神</a>
 						</li>
-						<!--<li class="dropdown">
-										<a href="act.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动 <span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li>
-												<a href="#">比赛</a>
-											</li>
-											<li>
-												<a href="#">公益</a>
-											</li>
-											<li>
-												<a href="#">户外</a>
-											</li>
-											<li>
-												<a href="#">讲座</a>
-											</li>
-											<li>
-												<a href="#">艺术</a>
-											</li>
-											<li>
-												<a href="#">游学</a>
-											</li>
-											<li>
-												<a href="#">招聘</a>
-											</li>
-											<li>
-												<a href="#">招新</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a href="#">其它</a>
-											</li>
-										</ul>
-									</li>-->
-						<!--<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">话题<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">明星</a>
-								</li>
-								<li>
-									<a href="#">搞笑</a>
-								</li>
-								<li>
-									<a href="#">情感</a>
-								</li>
-								<li>
-									<a href="#">时尚</a>
-								</li>
-								<li>
-									<a href="#">军事</a>
-								</li>
-								<li>
-									<a href="#">美女</a>
-								</li>
-								<li>
-									<a href="#">体育</a>
-								</li>
-								<li>
-									<a href="#">动漫</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li>
-									<a href="#">其它</a>
-								</li>
-							</ul>
-						</li>-->
-						<!--<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">灯神<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">表白墙</a>
-								</li>
-								<li>
-									<a href="#">心愿墙</a>
-								</li>
-								<li>
-									<a href="#">闲物店</a>
-								</li>
-							</ul>
-						</li>-->
 					</ul>
 
 					<form class="navbar-form navbar-left">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="活动/话题">
 						</div>
-						<button type="submit" class="btn btn-default">搜索</button>
+						<button type="submit" class="btn btn-default" disabled="true">搜索</button>
 					</form>
 
 					<ul class="nav navbar-nav navbar-right " ng-if="!userService.isLogin">
@@ -304,6 +191,7 @@
 
 				/**********判断用户有无登录 start*********/
 				var userID = isSignIn(); //判断用户有没有登录进行页面变化
+				userID = 1513502243526;
 				/**********判断用户有无登录 end*********/
 				$("#addTopicSubmit").click(function() {
 					window.event.returnValue = false;
@@ -311,25 +199,26 @@
 						alert("请先登录！");
 						return false;
 					}
-					//		var topicObject = {
-					//			title: "This is Title",
-					//			brief: "This is breif.",
-					//			publishtime: "2017-12-22T12:00",
-					//			authorname: "小马哥",
-					//			authorid: 1513502243526,
-					//			commentnumber: 0,
-					//			topictype: "2"
-					//		};
 					var topicObject = {
-						title: $("#title").val(),
-						brief: $("#brief").val(),
-						publishtime: getFormatDate(),
-						authorname: $("#authorname").val(),
-						authorid: parseInt(userID),
+						title: "A18",
+						brief: "90后都进来说说你现在单身的理由",
+						publishtime: "2017-12-02T12:00",
+						authorname: "小马哥",
+						authorid: 1513502243526,
 						commentnumber: 0,
-						topictype: $("#topicType").val(),
+						topictype: "2",
 						viewernumber: 0
 					};
+					//					var topicObject = {
+					//						title: $("#title").val(),
+					//						brief: $("#brief").val(),
+					//						publishtime: getFormatDate(),
+					//						authorname: $("#authorname").val(),
+					//						authorid: parseInt(userID),
+					//						commentnumber: 0,
+					//						topictype: $("#topicType").val(),
+					//						viewernumber: 0
+					//					};
 					var dataJsonStr = JSON.stringify(topicObject);
 					console.log(dataJsonStr);
 					$.ajax({

@@ -57,3 +57,8 @@ footer {
     width: 50%; /* 6 columns */
   }
 }
+
+
+#contanier-topicThumbnails {
+    margin-bottom: 150px;
+}
